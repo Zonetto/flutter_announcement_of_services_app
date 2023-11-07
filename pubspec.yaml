@@ -20,5 +20,4 @@ flutter:
   assets:
     - assets/images/clients_home_appliance.jpg
     - assets/images/clients_home_appliance1.png
-flutter_intl:
-  enabled: true
+
