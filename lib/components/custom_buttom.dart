@@ -1,5 +1,6 @@
 import 'package:announcement_of_services/components/custom_text.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
+import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ class CustomButton extends StatelessWidget {
           shape: const StadiumBorder(),
         ),
         child: CustomText(
-          size: Dimensions.fontSize(context, 2.5),
+          size: FontSize.buttonText,
           title: title,
           color: textColor,
           fontWeight: FontWeight.bold,

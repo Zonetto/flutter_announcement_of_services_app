@@ -1,3 +1,4 @@
+import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -9,7 +10,7 @@ class CustomText extends StatelessWidget {
   const CustomText({
     super.key,
     required this.title,
-    required this.size,
+    this.size = 18,
     this.fontWeight,
     this.color = Colors.black,
   });
@@ -21,7 +22,7 @@ class CustomText extends StatelessWidget {
       style: TextStyle(
         fontWeight: fontWeight,
         color: color,
-        fontSize: size,
+        fontSize: Dimensions.fontSize(context, size),
       ),
     );
   }
