@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: null
+  flutter_localizations:
+    sdk: flutter  
 
 dev_dependencies:
   flutter_test:
@@ -20,4 +23,5 @@ flutter:
   assets:
     - assets/images/clients_home_appliance.jpg
     - assets/images/clients_home_appliance1.png
-
+flutter_intl:
+  enabled: true
