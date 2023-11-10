@@ -1,31 +1,35 @@
+import 'package:announcement_of_services/components/form/create_account_form.dart';
+import 'package:announcement_of_services/components/form/sign_in_form.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
-import 'package:announcement_of_services/view/custom_buttom.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+import '../components/custom_buttom.dart';
+
+class RegistrationOptionScreen extends StatefulWidget {
+  const RegistrationOptionScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<RegistrationOptionScreen> createState() =>
+      _RegistrationOptionScreenState();
 }
 
 bool isSignIn = false;
 bool isLogOut = true;
 
-class _SignInScreenState extends State<SignInScreen> {
+class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.horizontalMargin,
-                vertical: AppSize.verticalMargin,
-              ),
-              child: Row(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSize.horizontalMargin,
+            vertical: AppSize.verticalMargin,
+          ),
+          child: Column(
+            children: [
+              Row(
                 children: [
                   Expanded(
                     child: CustomButton(
@@ -41,6 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         setState(() {
                           isSignIn = false;
                         });
+                        // print('object');
                         // checkSignIn();
                       },
                       isSmall: true,
@@ -70,8 +75,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ],
               ),
-            )
-          ],
+              Expanded(
+                child:
+                    isSignIn ? const CreateAccountForm() : const SignInForm(),
+              )
+            ],
+          ),
         ),
       ),
     );
