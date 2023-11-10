@@ -1,12 +1,13 @@
 import 'package:announcement_of_services/components/custom_text.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
+import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_buttom.dart';
-import 'sign_in_screen.dart';
+import '../components/custom_buttom.dart';
+import 'registration_option_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -37,7 +38,7 @@ class StartScreen extends StatelessWidget {
               ),
               //height: 250,
               width: double.infinity,
-      
+
               margin: const EdgeInsets.symmetric(
                 horizontal: AppSize.horizontalMargin,
                 // vertical: 10,
@@ -60,7 +61,7 @@ class StartScreen extends StatelessWidget {
                 children: [
                   const CustomText(
                     title: 'مرحباً بك في تطبيق السهولة هُنا',
-                    size: 27,
+                    size: FontSize.headline,
                     fontWeight: FontWeight.bold,
                   ),
                   Container(
@@ -72,7 +73,7 @@ class StartScreen extends StatelessWidget {
                     child: const CustomText(
                       title:
                           'مرحباً بك في تطبيق السهولة هُنا سنتنشستنش شنتسشن سنشست شنستشنست شنتسنش سنشتسنشتسنشتس شنس تشنست نشتسنش سنشتسنشتسنش تسشسنتش سنشتس شنتسنش تسنشتس شنتسشنست نشسنشتس نشسنشتس نش تس',
-                      size: 14.0,
+                      size: FontSize.plainText,
                     ),
                   ),
                   const SizedBox(height: 10.0),
@@ -81,7 +82,9 @@ class StartScreen extends StatelessWidget {
                     title: 'أبدء',
                     onPressed: () {
                       navigatePushScreen(
-                          context: context, screen: const SignInScreen());
+                        context: context,
+                        screen: const RegistrationOptionScreen(),
+                      );
                     },
                     isSmall: false,
                   ),
