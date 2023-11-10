@@ -50,7 +50,7 @@ class StartScreen extends StatelessWidget {
                 ),
                 shadows: const [
                   BoxShadow(
-                    color: Colors.grey,
+                    color: AppColor.shadowColor,
                     blurRadius: 4,
                     offset: Offset(0, 4),
                     spreadRadius: 0,

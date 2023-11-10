@@ -1,6 +1,8 @@
+import 'package:announcement_of_services/components/custom_text.dart';
 import 'package:announcement_of_services/components/form/create_account_form.dart';
 import 'package:announcement_of_services/components/form/sign_in_form.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
+import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,6 @@ class RegistrationOptionScreen extends StatefulWidget {
 }
 
 bool isSignIn = false;
-bool isLogOut = true;
 
 class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
   @override
@@ -74,6 +75,15 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                     ),
                   ),
                 ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                alignment: Alignment.centerRight,
+                child: CustomText(
+                  title: isSignIn ? 'سجل الأن' : 'مرحباً بعودتك',
+                  fontWeight: FontWeight.bold,
+                  size: FontSize.headline,
+                ),
               ),
               Expanded(
                 child:
