@@ -1,6 +1,7 @@
 import 'package:announcement_of_services/components/custom_text.dart';
 import 'package:announcement_of_services/components/custom_text_form_field.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
+import 'package:announcement_of_services/utils/date_picker.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/view/add_photo_screen.dart';
 import 'package:announcement_of_services/components/custom_buttom.dart';
@@ -59,7 +60,9 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                 textInputType: TextInputType.number,
                 readOnly: true,
                 valid: (val) {},
-                onTab: () {},
+                onTab: () {
+                  datePicker(context: context);
+                },
                 icon: const Icon(Icons.date_range_outlined),
               ),
               CustomTextFormFiled(
