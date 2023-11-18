@@ -5,7 +5,10 @@ import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/components/custom_buttom.dart';
+import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:flutter/material.dart';
+
+import 'complex_screen.dart';
 
 class AddPhotoScreen extends StatefulWidget {
   const AddPhotoScreen({super.key});
@@ -81,13 +84,23 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
               CustomButton(
                 context: context,
                 title: 'أستمر',
-                onPressed: () {},
+                onPressed: () {
+                  navigatePushScreen(
+                    context: context,
+                    screen: const ComplexScreen(),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               CustomButton(
                 context: context,
                 title: 'تخطي',
-                onPressed: () {},
+                onPressed: () {
+                  navigatePushScreen(
+                    context: context,
+                    screen: const ComplexScreen(),
+                  );
+                },
                 textColor: AppColor.colorTextButtonGreen,
                 backGroundColor: AppColor.buttonColorGrey,
               ),

@@ -48,14 +48,7 @@ class StartScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                shadows: const [
-                  BoxShadow(
-                    color: AppColor.shadowColor,
-                    blurRadius: 4,
-                    offset: Offset(0, 4),
-                    spreadRadius: 0,
-                  )
-                ],
+                shadows: const [AppColor.shadow],
               ),
               child: Column(
                 children: [
