@@ -19,6 +19,7 @@ class CustomTextFormFiled extends StatelessWidget {
   final int minLines;
   final bool readOnly;
   final double width;
+  final bool isWithoutText;
 
   const CustomTextFormFiled({
     super.key,
@@ -35,6 +36,7 @@ class CustomTextFormFiled extends StatelessWidget {
     this.minLines = 1,
     this.readOnly = false,
     this.width = 0.7,
+    this.isWithoutText = false,
   });
 
   @override
@@ -45,14 +47,18 @@ class CustomTextFormFiled extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(
-            title: headline,
-            size: FontSize.subtitle,
-            fontWeight: FontWeight.w600,
-          ),
-          const SizedBox(
-            height: 4.0,
-          ),
+          !isWithoutText
+              ? CustomText(
+                  title: headline,
+                  size: FontSize.subtitle,
+                  fontWeight: FontWeight.w600,
+                )
+              : const SizedBox.shrink(),
+          !isWithoutText
+              ? const SizedBox(
+                  height: 4.0,
+                )
+              : const SizedBox.shrink(),
           TextFormField(
             validator: valid,
             controller: controller,
