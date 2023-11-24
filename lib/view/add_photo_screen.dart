@@ -30,10 +30,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.horizontalMargin,
-            vertical: AppSize.verticalMargin,
-          ),
+          padding: AppSize.padding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
