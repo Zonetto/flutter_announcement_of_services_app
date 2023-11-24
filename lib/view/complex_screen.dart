@@ -28,10 +28,7 @@ class _ComplexScreenState extends State<ComplexScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.horizontalMargin,
-            vertical: AppSize.verticalMargin,
-          ),
+          padding: AppSize.padding,
           child: screenlst[index],
         ),
       ),
