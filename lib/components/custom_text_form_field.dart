@@ -43,7 +43,7 @@ class CustomTextFormFiled extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Dimensions.screenWidth(context),
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
