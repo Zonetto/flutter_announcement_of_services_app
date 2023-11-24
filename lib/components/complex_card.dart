@@ -25,7 +25,7 @@ class ComplexCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      padding: const EdgeInsets.only(bottom: 2.0),
       child: Column(
         children: [
           Card(
