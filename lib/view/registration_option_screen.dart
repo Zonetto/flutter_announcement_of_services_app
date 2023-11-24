@@ -24,10 +24,7 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.horizontalMargin,
-            vertical: AppSize.verticalMargin,
-          ),
+          padding: AppSize.padding,
           child: Column(
             children: [
               Row(
