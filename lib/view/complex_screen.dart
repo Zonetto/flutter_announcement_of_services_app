@@ -1,7 +1,9 @@
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/view/categories_creen.dart';
 import 'package:announcement_of_services/view/search_screen.dart';
+import 'package:announcement_of_services/view_model/view_model_fetch.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'advertisement_for_service_screen.dart';
 import 'home_screen.dart';
@@ -23,6 +25,12 @@ class _ComplexScreenState extends State<ComplexScreen> {
     const AdvertisementForServiceScreen(),
     const ProfileScreen(),
   ];
+  @override
+  void initState() {
+    Provider.of<ViewModelFetch>(context, listen: false).fetchUserDetailsData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,13 +69,11 @@ class _ComplexScreenState extends State<ComplexScreen> {
             label: "الفئات",
           ),
           NavigationDestination(
-            icon:
-                Icon(Icons.ads_click_outlined, size: 30, color: Colors.black),
+            icon: Icon(Icons.ads_click_outlined, size: 30, color: Colors.black),
             label: "إعلان",
           ),
           NavigationDestination(
-            icon:
-                Icon(Icons.person_2_outlined, size: 30, color: Colors.black),
+            icon: Icon(Icons.person_2_outlined, size: 30, color: Colors.black),
             label: "الملف الشخصي",
           ),
         ],
