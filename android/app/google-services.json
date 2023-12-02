@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "173236485210",
+    "firebase_url": "https://flutterhomeservice-73056-default-rtdb.firebaseio.com",
+    "project_id": "flutterhomeservice-73056",
+    "storage_bucket": "flutterhomeservice-73056.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173236485210:android:95e8fab76659b783faac63",
+        "android_client_info": {
+          "package_name": "com.example.announcement_of_services"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnSlXad2dN_lYXEjg15uuY8C18L2hchqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
