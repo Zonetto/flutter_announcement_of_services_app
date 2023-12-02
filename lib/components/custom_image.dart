@@ -1,8 +1,8 @@
-import 'package:announcement_of_services/utils/constant/color.dart';
-import 'package:flutter/widgets.dart';
+
+import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
-  final String imagePath;
+  final String? imagePath;
   final double width;
   final double height;
   final bool isCircular;
@@ -17,23 +17,57 @@ class CustomImage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: ShapeDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            imagePath,
-          ),
-          fit: BoxFit.cover,
-        ),
-        shape: isCircular
-            ? const OvalBorder()
-            : RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+    return Column(
+      children: [
+        imagePath == null
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(150),
+                child: Image.asset(
+                  'assets/images/clients_home_appliance1.png',
+                  height: 140,
+                  width: 140,
+                  fit: BoxFit.cover,
+                ),
+              )
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(150),
+                child: Image.network(
+                  imagePath!,
+                  height: 140,
+                  width: 140,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const CircularProgressIndicator();
+                  },
+                ),
               ),
-        shadows: isShadows ? const [AppColor.shadow] : null,
-      ),
+        // const CustomText(
+        //   title: 'ضع صورة',
+        //   size: FontSize.subtitle,
+        // ),
+      ],
     );
+    // return Container(
+    //   width: width,
+    //   height: height,
+    //   decoration: ShapeDecoration(
+    //     image: DecorationImage(
+    //       image: NetworkImage(imagePath),
+    //       // image: imagePath == null
+    //       //     ? AssetImage(
+    //       //         imagePath,
+    //       //       )
+    //       //     : NetworkImage(imagePath),
+    //       fit: BoxFit.cover,
+    //     ),
+    //     shape: isCircular
+    //         ? const OvalBorder()
+    //         : RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(15),
+    //           ),
+    //     shadows: isShadows ? const [AppColor.shadow] : null,
+    //   ),
+    // );
   }
 }
