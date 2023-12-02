@@ -7,20 +7,36 @@ environment:
   sdk: '>=3.1.2 <4.0.0'
 
 dependencies:
+  cloud_firestore: ^4.13.2
+  firebase_app_check: ^0.2.1+6
+  firebase_auth: ^4.14.1
+  firebase_core: ^2.23.0
+  firebase_phone_auth_handler: ^1.0.8
+  firebase_storage: null
   flutter:
     sdk: flutter
-  intl: null
   flutter_localizations:
-    sdk: flutter  
+    sdk: flutter
+  flutterfire_cli: ^0.2.7
+  http: ^0.13.6
+  image_picker: ^1.0.4
+  intl: null
+  path: ^1.8.3
+  provider: ^6.1.1
+  shared_preferences: ^2.2.2
+  uuid: ^4.2.1
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/clients_home_appliance1.png
+    - assets/images/repairing-computer.jpg
+    - assets/images/woman.jpg
+    - assets/images/cleaning.png
 flutter_intl:
   enabled: true
