@@ -1,9 +1,6 @@
 import 'dart:io';
-
-import 'package:announcement_of_services/components/custom_text.dart';
 import 'package:announcement_of_services/components/custom_text_form_field.dart';
 import 'package:announcement_of_services/module/user_model.dart';
-import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/date_picker.dart';
 import 'package:announcement_of_services/components/custom_buttom.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
@@ -51,59 +48,41 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     children: [
                       Column(
                         children: [
-                          _selectedImage == null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(150),
-                                  child: Image(
-                                    image: const AssetImage(
-                                      'assets/images/clients_home_appliance1.png',
+                          Stack(
+                            children: [
+                              _selectedImage == null
+                                  ? const CircleAvatar(
+                                      radius: 60,
+                                      backgroundColor: Colors.white,
+                                      child: Icon(
+                                        Icons.person,
+                                        size: 60,
+                                        color: Colors.black,
+                                      ),
+                                    )
+                                  : CircleAvatar(
+                                      radius: 60,
+                                      backgroundColor: Colors.white,
+                                      backgroundImage: FileImage(
+                                        _selectedImage!,
+                                      ),
                                     ),
-                                    height: 140,
-                                    width: 140,
-                                    fit: BoxFit.cover,
-                                    loadingBuilder:
-                                        (context, child, loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                  ),
-                                )
-                              : ClipRRect(
-                                  borderRadius: BorderRadius.circular(150),
-                                  child: Image.file(
-                                    _selectedImage!,
-                                    height: 140,
-                                    width: 140,
-                                    fit: BoxFit.cover,
-                                  ),
+                              Positioned(
+                                bottom: -10,
+                                left: 80,
+                                child: IconButton(
+                                  onPressed: () async {
+                                    final XFile? selectedImage =
+                                        await pickImage(ImageSource.gallery);
+                                    setState(() {
+                                      _selectedImage =
+                                          File(selectedImage!.path);
+                                    });
+                                  },
+                                  icon: const Icon(Icons.camera_alt_rounded),
                                 ),
-                          GestureDetector(
-                            onTap: () async {
-                              // getImage(ImageSource.gallery);
-                              // Navigator.of(context).pop();
-
-                              // Map<Permission, PermissionStatus> statuses = await [
-                              //   Permission.storage,
-                              //   Permission.camera
-                              // ].request();
-                              // if (statuses[Permission.storage]!.isGranted &&
-                              //     statuses[Permission.camera]!.isGranted) {
-
-                              final XFile? selectedImage =
-                                  await pickImage(ImageSource.gallery);
-                              setState(() {
-                                _selectedImage = File(selectedImage!.path);
-                              });
-                              // } else {
-                              //   print('No');
-                              // }
-                            },
-                            child: const CustomText(
-                              title: 'إضافة صورة',
-                              size: FontSize.subtitle,
-                            ),
+                              )
+                            ],
                           ),
                         ],
                       ),
