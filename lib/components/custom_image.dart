@@ -1,19 +1,21 @@
-
 import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
   final String? imagePath;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
+  final EdgeInsets? margin;
+  final double? radius;
   final bool isCircular;
   final bool isShadows;
   const CustomImage({
     super.key,
     required this.imagePath,
-    required this.width,
-    required this.height,
+    this.width = 140,
+    this.height = 140,
     this.isCircular = true,
     this.isShadows = true,
+    this.radius = 150,
   });
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class CustomImage extends StatelessWidget {
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(150),
                 child: Image.asset(
-                  'assets/images/clients_home_appliance1.png',
-                  height: 140,
-                  width: 140,
+                  'assets/images/repairing-computer.jpg',
+                  height: height,
+                  width: width,
                   fit: BoxFit.cover,
                 ),
               )
@@ -33,8 +35,8 @@ class CustomImage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(150),
                 child: Image.network(
                   imagePath!,
-                  height: 140,
-                  width: 140,
+                  height: height,
+                  width: width,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -42,10 +44,20 @@ class CustomImage extends StatelessWidget {
                   },
                 ),
               ),
-        // const CustomText(
-        //   title: 'ضع صورة',
-        //   size: FontSize.subtitle,
-        // ),
+                Container(
+          //  decoration: CustomShapeDecoration.shapeDecoration,
+          height: height,
+          margin:margin ,
+          width: width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(150),
+            image: const DecorationImage(
+              image: AssetImage('assets/images/repairing-computer.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+
+        ),
       ],
     );
     // return Container(
