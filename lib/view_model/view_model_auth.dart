@@ -64,9 +64,10 @@ class ViewModelAuth extends Token with ChangeNotifier {
       _autoLogout();
       if (urlSegment == "signUp") {
         fireStorageServises.init();
-        fireStorageServises.upload(photo!);
+        await fireStorageServises.upload(photo!);
         String? downloadUrl = await fireStorageServises.getImageUrl();
-
+        // String? downloadUrl =
+        //     await fireStorageServises.uploadImageToFirebaseStorage(photo!);
         user!.image = downloadUrl;
         user.userId = resData['localId'];
         FireDatabaseServises().addUserInfoDB(_userId!, user.toJson());
