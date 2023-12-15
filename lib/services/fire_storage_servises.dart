@@ -4,17 +4,22 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
 
 class FireStorageServises {
-  Reference? reference;
+  Reference? referenceRoot;
+  // Reference? referenceImageaToUpload;
 
   init() {
-    reference = FirebaseStorage.instanceFor(
+    referenceRoot = FirebaseStorage.instanceFor(
       bucket: 'gs://flutterhomeservice-73056.appspot.com',
     ).ref().child('Images').child("${const Uuid().v1()}.png");
+    // referenceRoot = FirebaseStorage.instance.ref();
+    // Reference referenceDireImages = referenceRoot!.child('images');
+    // referenceImageaToUpload =
+    //     referenceDireImages.child("${const Uuid().v1()}.png");
   }
 
   Future<void> upload(File selectedImage) async {
     try {
-      UploadTask uploadTask = reference!.putFile(selectedImage);
+      UploadTask uploadTask = referenceRoot!.putFile(selectedImage);
       await uploadTask;
       print("Upload successful");
     } catch (e) {
@@ -24,9 +29,9 @@ class FireStorageServises {
   }
 
   Future<String?> getImageUrl() async {
-    await Future.delayed(const Duration(seconds: 3));
+    // await Future.delayed(const Duration(seconds: 3));
     try {
-      String downloadUrl = await reference!.getDownloadURL();
+      String downloadUrl = await referenceRoot!.getDownloadURL();
       print("convertUrl successful");
       print("downloadUrl: $downloadUrl");
       return downloadUrl;
@@ -34,5 +39,12 @@ class FireStorageServises {
       print("Error getting download URL: $e");
       return null;
     }
+  }
+
+  Future<String?> uploadImageToFirebaseStorage(File selectedImage) async {
+    init();
+    upload(selectedImage);
+    await Future.delayed(const Duration(seconds: 3));
+    return getImageUrl();
   }
 }
