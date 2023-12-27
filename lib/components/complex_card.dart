@@ -1,19 +1,25 @@
+import 'package:announcement_of_services/components/custom_buttom.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
-import 'package:announcement_of_services/utils/navigate_utils.dart';
-import 'package:announcement_of_services/view/service_details_screen.dart';
+import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_image.dart';
 import 'custom_text.dart';
 
 class ComplexCard extends StatelessWidget {
-  final String backgroundImagePath;
-  final String profileImagePath;
+  final String? backgroundImagePath;
+  final String? profileImagePath;
+  final VoidCallback? onTap;
+  final VoidCallback? onPressedRejection;
+  final VoidCallback? onPressedAccept;
+  final VoidCallback? onPressedWait;
   final String name;
-  final double star;
-  final int price;
+  final String star;
+  final String price;
   final String title;
+  final bool isAdmin;
   const ComplexCard({
     super.key,
     required this.backgroundImagePath,
@@ -22,6 +28,11 @@ class ComplexCard extends StatelessWidget {
     required this.star,
     required this.price,
     required this.title,
+    this.onTap,
+    this.isAdmin = true,
+    this.onPressedRejection,
+    this.onPressedAccept,
+    this.onPressedWait,
   });
 
   @override
@@ -29,40 +40,29 @@ class ComplexCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 2.0),
       child: GestureDetector(
-        onTap: () {
-          navigatePushScreen(context: context, screen: ServiceDetailsScreen());
-        },
-        child: Column(
-          children: [
-            Card(
-              color: AppColor.screenBackGroundColor,
-              elevation: 10.0,
-              // margin: const EdgeInsets.symmetric(vertical: 14.0),
+        onTap: onTap,
+        child: Card(
+          color: AppColor.screenBackGroundColor,
+          elevation: 10.0,
+          // margin: const EdgeInsets.symmetric(vertical: 14.0),
 
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 120,
-                    width: Dimensions.screenWidth(context),
-                    decoration: ShapeDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          backgroundImagePath,
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ),
-                  ListTile(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: SizedBox(
+            height: isAdmin ? 300 : 250,
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              // mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CustomImage(
+                  imagePathNetwork: backgroundImagePath,
+                  width: Dimensions.screenWidth(context),
+                  height: 120,
+                  radius: 15,
+                ),
+                Expanded(
+                  child: ListTile(
                     title: CustomText(
                       title: title,
                       size: FontSize.subtitle,
@@ -87,35 +87,31 @@ class ComplexCard extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                width: Dimensions.screenWidth(context) * 0.11,
-                                height: Dimensions.screenWidth(context) * 0.11,
-                                decoration: ShapeDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      profileImagePath,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  shape: const OvalBorder(),
-                                  shadows: [AppColor.shadow],
-                                ),
+                              CustomImage(
+                                imagePathNetwork: profileImagePath,
+                                height: AppSize.imageSizeSmall(context),
+                                width: AppSize.imageSizeSmall(context),
                               ),
                               const SizedBox(
                                 width: 10,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: [
-                                  CustomText(
-                                    title: name,
-                                    size: FontSize.plainText,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  const CustomText(
-                                    title: 'متوفر',
-                                    size: FontSize.plainText,
-                                    color: AppColor.colorTextButtonGreen,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                        title: name,
+                                        size: FontSize.plainText,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      const CustomText(
+                                        title: 'متوفر',
+                                        size: FontSize.plainText,
+                                        color: AppColor.colorTextButtonGreen,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -124,28 +120,65 @@ class ComplexCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    trailing: Container(
-                      width: Dimensions.screenWidth(context) * 0.2,
-                      height: 25,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFF539165),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                      ),
-                      child: Center(
-                        child: CustomText(
-                          title: '$price ألف',
-                          color: AppColor.colorTextButtonWhite,
-                          size: FontSize.plainText,
-                        ),
-                      ),
-                    ),
+                    trailing: isAdmin
+                        ? const SizedBox.shrink()
+                        : Container(
+                            width: Dimensions.screenWidth(context) * 0.2,
+                            height: 25,
+                            decoration: ShapeDecoration(
+                              color: const Color(0xFF539165),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(35),
+                              ),
+                            ),
+                            child: Center(
+                              child: CustomText(
+                                title: '$price ألف',
+                                color: AppColor.colorTextButtonWhite,
+                                size: FontSize.plainText,
+                              ),
+                            ),
+                          ),
                   ),
-                ],
-              ),
+                ),
+                isAdmin
+                    ? Row(
+                        children: [
+                          Expanded(
+                            child: CustomButton(
+                              context: context,
+                              title: 'قبول',
+                              onPressed: onPressedAccept,
+                              width: Dimensions.screenWidth(context) / 2,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: CustomButton(
+                              context: context,
+                              backGroundColor: AppColor.buttonColorRed,
+                              title: 'رفض',
+                              onPressed: onPressedRejection,
+                              width: Dimensions.screenWidth(context) / 2,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: CustomButton(
+                              context: context,
+                              backGroundColor: Colors.blueAccent.withOpacity(0.8),
+                              title: 'إنتظار',
+                              onPressed: onPressedWait,
+                              width: Dimensions.screenWidth(context) / 2,
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+                const SizedBox(height: 10),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

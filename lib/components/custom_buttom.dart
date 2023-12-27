@@ -9,25 +9,28 @@ class CustomButton extends StatelessWidget {
   final String title;
   final Color backGroundColor;
   final Color textColor;
-  final VoidCallback onPressed;
-  final bool isSmall;
-
+  final VoidCallback? onPressed;
+  final double? width;
+  final double? height;
+  final bool isLoad;
   const CustomButton({
     super.key,
     required this.context,
     required this.title,
     required this.onPressed,
-    this.isSmall = false,
     this.backGroundColor = AppColor.buttonColorGreen,
     this.textColor = AppColor.colorTextButtonWhite,
+    this.width,
+    this.height,
+    this.isLoad = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final double width = Dimensions.screenWidth(context);
+    //  final double width = Dimensions.screenWidth(context);
     return SizedBox(
-      width: isSmall ? width / 2 : width,
-      height: 44,
+      width: width ?? Dimensions.screenWidth(context),
+      height: height ?? 44,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
@@ -35,12 +38,28 @@ class CustomButton extends StatelessWidget {
           backgroundColor: backGroundColor,
           shape: const StadiumBorder(),
         ),
-        child: CustomText(
-          size: FontSize.buttonText,
-          title: title,
-          color: textColor,
-          fontWeight: FontWeight.bold,
-        ),
+        child: isLoad
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    size: FontSize.buttonText,
+                    title: 'أنتظر قليلاً',
+                    color: textColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  const SizedBox(width: 20.0),
+                  const CircularProgressIndicator(
+                    color: AppColor.colorTextButtonWhite,
+                  ),
+                ],
+              )
+            : CustomText(
+                size: FontSize.buttonText,
+                title: title,
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
       ),
     );
   }
