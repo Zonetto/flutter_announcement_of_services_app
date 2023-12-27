@@ -1,85 +1,72 @@
+import 'dart:io';
+import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
-  final String? imagePath;
+  final String? imagePathNetwork;
+  final File? imagePathLocal;
   final double? width;
   final double? height;
   final EdgeInsets? margin;
   final double? radius;
-  final bool isCircular;
+  final bool isEdit;
   final bool isShadows;
+  final VoidCallback? onTap;
   const CustomImage({
     super.key,
-    required this.imagePath,
+    required this.imagePathNetwork,
     this.width = 140,
     this.height = 140,
-    this.isCircular = true,
+    this.isEdit = false,
     this.isShadows = true,
     this.radius = 150,
+    this.margin,
+    this.onTap,
+    this.imagePathLocal,
   });
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        imagePath == null
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(150),
-                child: Image.asset(
-                  'assets/images/repairing-computer.jpg',
-                  height: height,
-                  width: width,
-                  fit: BoxFit.cover,
-                ),
-              )
-            : ClipRRect(
-                borderRadius: BorderRadius.circular(150),
-                child: Image.network(
-                  imagePath!,
-                  height: height,
-                  width: width,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const CircularProgressIndicator();
-                  },
+    return Container(
+      height: height,
+      margin: margin,
+      width: width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius!),
+        boxShadow: isShadows ? const [AppColor.shadow] : null,
+        image: imagePathNetwork == null
+            ? imagePathLocal == null
+                ? const DecorationImage(
+                    image: AssetImage('assets/images/repairing-computer.jpg'),
+                    fit: BoxFit.cover,
+                  )
+                : DecorationImage(
+                    image: FileImage(imagePathLocal!),
+                    fit: BoxFit.cover,
+                  )
+            : DecorationImage(
+                image: NetworkImage(imagePathNetwork!),
+                fit: BoxFit.cover,
+                // loadingBuilder: (context, child, loadingProgress) {
+                //   if (loadingProgress == null) return child;
+                //   return const CircularProgressIndicator();
+                // },
+              ),
+      ),
+      child: isEdit
+          ? GestureDetector(
+              onTap: onTap,
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: const CircleAvatar(
+                  backgroundColor: AppColor.buttonColorGrey,
+                  child: Icon(
+                    Icons.camera_alt_outlined,
+                    size: 30,
+                  ),
                 ),
               ),
-                Container(
-          //  decoration: CustomShapeDecoration.shapeDecoration,
-          height: height,
-          margin:margin ,
-          width: width,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(150),
-            image: const DecorationImage(
-              image: AssetImage('assets/images/repairing-computer.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
-
-        ),
-      ],
+            )
+          : const SizedBox.shrink(),
     );
-    // return Container(
-    //   width: width,
-    //   height: height,
-    //   decoration: ShapeDecoration(
-    //     image: DecorationImage(
-    //       image: NetworkImage(imagePath),
-    //       // image: imagePath == null
-    //       //     ? AssetImage(
-    //       //         imagePath,
-    //       //       )
-    //       //     : NetworkImage(imagePath),
-    //       fit: BoxFit.cover,
-    //     ),
-    //     shape: isCircular
-    //         ? const OvalBorder()
-    //         : RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.circular(15),
-    //           ),
-    //     shadows: isShadows ? const [AppColor.shadow] : null,
-    //   ),
-    // );
   }
 }

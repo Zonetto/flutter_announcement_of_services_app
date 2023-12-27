@@ -1,3 +1,4 @@
+import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/typedef.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 class CustomDropDownString extends StatelessWidget {
   final BuildContext context;
   final ValidCallback onChanged;
+  final ValidCallback? valid;
   final String? value;
   final String? hintText;
   final String? suffixText;
@@ -20,6 +22,7 @@ class CustomDropDownString extends StatelessWidget {
     this.width,
     this.hintText,
     this.suffixText,
+    this.valid,
   });
 
   @override
@@ -29,7 +32,9 @@ class CustomDropDownString extends StatelessWidget {
       width: width ?? mediaQueryWidth,
       child: SizedBox(
         child: DropdownButtonFormField(
-          padding: const  EdgeInsets.only(bottom: 14.0),
+          validator: valid,
+          elevation: 0,
+          padding: const EdgeInsets.only(bottom: 14.0),
           decoration: InputDecoration(
             hintText: hintText,
             suffixText: suffixText,
@@ -41,10 +46,18 @@ class CustomDropDownString extends StatelessWidget {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(15.0),
             ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(15.0),
+            ),
             filled: true,
-            fillColor: const Color(0xFFD7D9E0),
+            fillColor: AppColor.buttonColorGrey,
           ),
-          dropdownColor: const Color(0xFFD7D9E0),
+          dropdownColor: AppColor.buttonColorGrey,
           value: value,
           onChanged: onChanged,
           items: items,
