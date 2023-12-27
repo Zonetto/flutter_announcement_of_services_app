@@ -35,9 +35,11 @@ class CustomTextCollector extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               isStar ? const SizedBox(width: 4.0) : const SizedBox.shrink(),
-              CustomText(
-                title: subTitle,
-                size: FontSize.plainText,
+              Expanded(
+                child: CustomText(
+                  title: subTitle,
+                  size: FontSize.plainText,
+                ),
               ),
             ],
           ),

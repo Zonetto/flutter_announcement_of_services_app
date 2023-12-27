@@ -24,23 +24,12 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return FittedBox(
-    //   fit: BoxFit.fill,
-    //   child: Text(
-    //     title,
-    //     //maxLines: 3,
-    //     style: TextStyle(
-    //       fontWeight: fontWeight,
-    //       color: color,
-    //       fontSize: 50,
-    //     ),
-    //   ),
-    // );
     return Text(
       textAlign: alignment,
       overflow: overflow,
       title,
       maxLines: maxLines,
+      //  style: Theme.of(context).textTheme.titleLarge,
       style: TextStyle(
         fontWeight: fontWeight,
         color: color,
