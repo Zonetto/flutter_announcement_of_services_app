@@ -9,7 +9,7 @@ environment:
 dependencies:
   cloud_firestore: ^4.13.2
   firebase_app_check: ^0.2.1+6
-  firebase_auth: ^4.14.1
+  firebase_auth: ^4.15.3
   firebase_core: ^2.23.0
   firebase_phone_auth_handler: ^1.0.8
   firebase_storage: null
@@ -21,6 +21,7 @@ dependencies:
   http: ^0.13.6
   image_picker: ^1.0.4
   intl: null
+  jwt_decoder: ^2.0.1
   path: ^1.8.3
   provider: ^6.1.1
   shared_preferences: ^2.2.2
