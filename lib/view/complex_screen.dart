@@ -1,11 +1,13 @@
 import 'package:announcement_of_services/utils/constant/size.dart';
+import 'package:announcement_of_services/view/advertisement_for_service_view_screen.dart';
 import 'package:announcement_of_services/view/categories_creen.dart';
 import 'package:announcement_of_services/view/search_screen.dart';
-import 'package:announcement_of_services/view_model/view_model_fetch.dart';
+import 'package:announcement_of_services/view_model/view_model_fetch_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'advertisement_for_service_screen.dart';
+import 'advertising_complex.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 
@@ -18,18 +20,19 @@ class ComplexScreen extends StatefulWidget {
 
 class _ComplexScreenState extends State<ComplexScreen> {
   int index = 0;
-  final List<StatefulWidget> screenlst = [
+  final List screenlst = [
     const HomeScreen(),
     const SearchScreen(),
+    //const  AdvertisementForServiceInfoScreenView(),
     const CategoriesScreen(),
-    const AdvertisementForServiceScreen(),
+     AdvertisingComplex(), //const AdvertisementForServiceScreen(),
     const ProfileScreen(),
   ];
-  @override
-  void initState() {
-    Provider.of<ViewModelFetch>(context, listen: false).fetchUserDetailsData();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   Provider.of<ViewModelFetch>(context, listen: false).fetchUserDetailsData();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
