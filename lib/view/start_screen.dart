@@ -74,7 +74,7 @@ class StartScreen extends StatelessWidget {
                         screen: const RegistrationOptionScreen(),
                       );
                     },
-                    isSmall: false,
+
                   ),
                 ],
               ),
