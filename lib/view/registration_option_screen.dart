@@ -3,6 +3,7 @@ import 'package:announcement_of_services/components/form/create_account_form.dar
 import 'package:announcement_of_services/components/form/sign_in_form.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
+import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                         // print('object');
                         // checkSignIn();
                       },
-                      isSmall: true,
+                      width:  Dimensions.screenWidth(context)/2,
                     ),
                   ),
                   const SizedBox(
@@ -68,7 +69,7 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                         });
                         // checkSignIn();
                       },
-                      isSmall: true,
+                                  width: Dimensions.screenWidth(context) / 2,
                     ),
                   ),
                 ],
