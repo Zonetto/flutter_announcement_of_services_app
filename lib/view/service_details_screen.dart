@@ -9,7 +9,39 @@ import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
 
 class ServiceDetailsScreen extends StatefulWidget {
-  const ServiceDetailsScreen({super.key});
+  final int call;
+  final String dateOfBirth;
+  final String email;
+  final String fullName;
+  final String serviceType;
+  final String yearsOfExperience;
+  final String startOfWorkingDays;
+  final String endOfWorkingDays;
+  final String startWorkingHours;
+  final String endWorkingHours;
+  final String servisePrice;
+  final String address;
+  final String location;
+  final int stars;
+  final String image;
+  const ServiceDetailsScreen({
+    super.key,
+    required this.call,
+    required this.dateOfBirth,
+    required this.email,
+    required this.fullName,
+    required this.serviceType,
+    required this.yearsOfExperience,
+    required this.startOfWorkingDays,
+    required this.endOfWorkingDays,
+    required this.startWorkingHours,
+    required this.endWorkingHours,
+    required this.servisePrice,
+    required this.address,
+    required this.location,
+    required this.stars,
+    required this.image,
+  });
 
   @override
   State<ServiceDetailsScreen> createState() => SserviceDetailsScreenState();
@@ -34,7 +66,7 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -42,11 +74,11 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                         children: [
                           CustomTextCollector(
                             title: 'البريد الإلكتروني',
-                            subTitle: 'ahmed12@66.com',
+                            subTitle: widget.email,
                           ),
                           CustomTextCollector(
                             title: 'رقم الهاتف',
-                            subTitle: '288744a78683',
+                            subTitle: widget.call.toString(),
                           ),
                         ],
                       ),
@@ -55,13 +87,13 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                     Column(
                       children: [
                         CustomImage(
-                          imagePath: 'assets/images/woman.jpg',
+                          imagePathNetwork: widget.image,
                           height: AppSize.imageSizeLarg(context),
                           width: AppSize.imageSizeLarg(context),
                         ),
                         const SizedBox(height: 4.0),
-                        const CustomText(
-                          title: 'محمد علي كاظم',
+                        CustomText(
+                          title: widget.fullName,
                           size: FontSize.subtitle,
                           fontWeight: FontWeight.bold,
                         ),
@@ -78,29 +110,30 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: Column(
                               children: [
                                 CustomTextCollector(
                                   title: 'التقيمات',
-                                  subTitle: '4.5',
+                                  subTitle: widget.stars.toString(),
                                   isStar: true,
                                 ),
                                 CustomTextCollector(
                                   title: 'نوع الخِدمة',
-                                  subTitle: 'نجارة',
+                                  subTitle: widget.serviceType,
                                 ),
                                 CustomTextCollector(
                                   title: 'سنوات الخبرة',
-                                  subTitle: '4 سنوات',
+                                  subTitle: widget.yearsOfExperience,
                                 ),
                                 CustomTextCollector(
                                   title: 'إيام العمل',
-                                  subTitle: 'من الأحد إلى السبت',
+                                  subTitle:
+                                      'من ${widget.startOfWorkingDays} إلى ${widget.endOfWorkingDays}',
                                 ),
                                 CustomTextCollector(
                                   title: 'الموقع',
-                                  subTitle: 'النجف الأشرف/ حي الحرفين',
+                                  subTitle: widget.address,
                                 ),
                               ],
                             ),
@@ -114,19 +147,24 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                                   context: context,
                                   title: 'تقييم',
                                   onPressed: () {},
-                                  isSmall: true,
+                                  width: Dimensions.screenWidth(context) / 2,
                                 ),
-                                const CustomTextCollector(
+                                CustomTextCollector(
                                   title: 'سعر الخِدمة',
-                                  subTitle: 'تبدأ من 50 ألف للمتر الواحد',
+                                  subTitle: widget.servisePrice.toString(),
                                 ),
-                                const CustomTextCollector(
+                                CustomTextCollector(
                                   title: 'العمر',
-                                  subTitle: '33',
+                                  subTitle: widget.dateOfBirth,
                                 ),
-                                const CustomTextCollector(
+                                CustomTextCollector(
                                   title: 'ساعات العمل',
-                                  subTitle: 'من 9 صباحاً إلى 9 مساءً',
+                                  subTitle:
+                                      'من ${widget.startWorkingHours} إلى ${widget.endWorkingHours}',
+                                ),
+                                CustomTextCollector(
+                                  title: 'أقرب نقطة',
+                                  subTitle: widget.location,
                                 ),
                               ],
                             ),
@@ -136,13 +174,12 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ],
                   ),
                 ),
-                //const Spacer(),
                 CustomButton(
                   context: context,
                   title: 'طلب الخِدمة',
                   onPressed: () {},
-                  //isSmall: true,
                 ),
+                const SizedBox(height: 14),
               ],
             ),
           ),
