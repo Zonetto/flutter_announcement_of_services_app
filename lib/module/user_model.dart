@@ -1,15 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'service_provider_model.dart';
+
 class UserModel {
   String? userId;
+  String? role;
+  DocumentReference? serviceProviderCollection;
   final int call;
   final String dateOfBirth;
   final String email;
   final String password;
   final String fullName;
   String? image;
-  final bool isServiceProvider;
+  final String isServiceProvider;
 
   UserModel({
     this.userId,
+    this.role,
+    this.serviceProviderCollection,
     required this.call,
     required this.dateOfBirth,
     required this.email,
@@ -22,9 +30,11 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       userId: json["userId"],
+      role: json["role"],
+      serviceProviderCollection: json["service_provider_collection"],
       call: json["call"],
       dateOfBirth: json["date_of_birth"],
-      email: json["e-mail"],
+      email: json["email"],
       password: json["password"],
       fullName: json["full_name"],
       image: json["image"],
@@ -34,13 +44,44 @@ class UserModel {
   toJson() {
     return {
       "userId": userId,
+      "role": role,
+      "service_provider_collection": serviceProviderCollection,
       "call": call,
       "date_of_birth": dateOfBirth,
-      "e-mail": email,
+      "email": email,
       "password": password,
       "full_name": fullName,
       "image": image,
       "is_service_provider": isServiceProvider,
     };
   }
+
+  Future<ServicesProviderModel?> getServiceProviderModel() async {
+    if (serviceProviderCollection != null) {
+      DocumentSnapshot<Object?> snapshot =
+          await serviceProviderCollection!.get();
+      if (snapshot.exists) {
+        return ServicesProviderModel.fromDocumentSnapshot(snapshot);
+      }
+    }
+    return null; // Handle the case when serviceProviderCollection is null or document does not exist
+  }
+
+  // Future<ServicesProviderModel?> searchServiceProviderModel(
+  //     String query) async {
+  //   if (serviceProviderCollection != null) {
+  //     CollectionReference collectionRef = serviceProviderCollection!.collection(
+  //         'your_subcollection_name'); // Replace 'your_subcollection_name' with the actual name of your subcollection
+
+  //     QuerySnapshot<Object?> snapshot = await collectionRef
+  //         .where('name', isGreaterThanOrEqualTo: query)
+  //         .where('name', isLessThan: query + 'z')
+  //         .get();
+  //     QueryDocumentSnapshot<Object?> document = snapshot.docs;
+  //     ServicesProviderModel providerModel =
+  //         ServicesProviderModel.fromDocumentSnapshot(document);
+  //     return providerModel;
+  //   }
+  //   return null;
+  // }
 }
