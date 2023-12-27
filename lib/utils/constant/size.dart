@@ -4,16 +4,16 @@ import 'responsive_screen.dart';
 
 class AppSize {
   static const EdgeInsets nternalMargin = EdgeInsets.symmetric(
-    horizontal: 20.0,
-    // vertical: 20.0,
+    horizontal: 10.0,
+   // vertical: 20.0,
   );
   static const EdgeInsets padding = EdgeInsets.symmetric(
     horizontal: 10.0,
-    //vertical: 20.0,
+    vertical: 20.0,
   );
 
   static double imageSizeSmall(BuildContext context) =>
-      Dimensions.screenWidth(context) / 12.0;
+      Dimensions.screenWidth(context) / 10.0;
   static double imageSizeLarg(BuildContext context) =>
       Dimensions.screenWidth(context) / 3.0;
 
