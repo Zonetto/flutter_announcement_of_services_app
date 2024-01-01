@@ -12,7 +12,7 @@ class CustomDropDownString extends StatelessWidget {
   final String? suffixText;
   final List<DropdownMenuItem<String>> items;
   final double? width;
-
+  final bool disabled;
   const CustomDropDownString({
     super.key,
     required this.context,
@@ -23,6 +23,7 @@ class CustomDropDownString extends StatelessWidget {
     this.hintText,
     this.suffixText,
     this.valid,
+    this.disabled = false,
   });
 
   @override
@@ -33,6 +34,8 @@ class CustomDropDownString extends StatelessWidget {
       child: SizedBox(
         child: DropdownButtonFormField(
           validator: valid,
+          menuMaxHeight: 200,
+
           elevation: 0,
           padding: const EdgeInsets.only(bottom: 14.0),
           decoration: InputDecoration(
@@ -59,7 +62,8 @@ class CustomDropDownString extends StatelessWidget {
           ),
           dropdownColor: AppColor.buttonColorGrey,
           value: value,
-          onChanged: onChanged,
+          // disabledHint: Text("asdsada"),
+          onChanged: disabled ? null : onChanged,
           items: items,
         ),
       ),
