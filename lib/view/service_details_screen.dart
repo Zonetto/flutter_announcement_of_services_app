@@ -12,6 +12,7 @@ class ServiceDetailsScreen extends StatefulWidget {
   final int call;
   final String dateOfBirth;
   final String email;
+  final VoidCallback? onPressedRating;
   final String fullName;
   final String serviceType;
   final String yearsOfExperience;
@@ -22,7 +23,7 @@ class ServiceDetailsScreen extends StatefulWidget {
   final String servisePrice;
   final String address;
   final String location;
-  final int stars;
+  final String stars;
   final String image;
   const ServiceDetailsScreen({
     super.key,
@@ -41,6 +42,7 @@ class ServiceDetailsScreen extends StatefulWidget {
     required this.location,
     required this.stars,
     required this.image,
+    this.onPressedRating,
   });
 
   @override
@@ -115,7 +117,7 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                               children: [
                                 CustomTextCollector(
                                   title: 'التقيمات',
-                                  subTitle: widget.stars.toString(),
+                                  subTitle: widget.stars,
                                   isStar: true,
                                 ),
                                 CustomTextCollector(
@@ -146,7 +148,7 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                                 CustomButton(
                                   context: context,
                                   title: 'تقييم',
-                                  onPressed: () {},
+                                  onPressed: widget.onPressedRating,
                                   width: Dimensions.screenWidth(context) / 2,
                                 ),
                                 CustomTextCollector(
@@ -188,3 +190,5 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
     );
   }
 }
+
+

@@ -6,6 +6,7 @@ import 'package:announcement_of_services/components/shared/custom_shape_decorati
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/utils/alert_dialog.dart';
+import 'package:announcement_of_services/utils/constant/constants.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
@@ -37,7 +38,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ViewModelAuth>(context, listen: false);
     _userDatils = context.watch<ViewModelFetch>().getUserDetails;
-
+    final bool isServiceProviderAccept =
+        _userDatils?.isServiceProvider == serviceProviderAccept;
+    //print(_userDatils?.call);
     return Column(
       children: [
         Container(
@@ -64,11 +67,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: 'رقم الهاتف',
                         subTitle: _userDatils?.call.toString() ?? '',
                       ),
-                      const CustomTextCollector(
-                        title: 'التقييم',
-                        subTitle: '4',
-                        isStar: true,
-                      ),
+                      isServiceProviderAccept
+                          ? const CustomTextCollector(
+                              title: 'التقييم',
+                              subTitle: '4',
+                              isStar: true,
+                            )
+                          : const SizedBox(height: 10.0),
                     ],
                   ),
                 ),
