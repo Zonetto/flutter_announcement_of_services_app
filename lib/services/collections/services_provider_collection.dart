@@ -3,6 +3,7 @@ import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/services/collections/user_collection.dart';
 import 'package:announcement_of_services/services/fire_database_servises.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
+import 'package:announcement_of_services/view_model/app_status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ServicesProviderCollection extends FireDatabaseServises {
@@ -16,13 +17,25 @@ class ServicesProviderCollection extends FireDatabaseServises {
   }
 
   @override
-  Future addInfoDB({String? doc, required Map<String, dynamic> info}) async {
-    _doc = _newCollection!.doc().id;
-    return await _newCollection!.doc(_doc!).set(info);
+  Future<Result> addInfoDB(
+      {String? doc, required Map<String, dynamic> info}) async {
+    Result result = Error();
+    await _newCollection!
+        .doc(doc!)
+        .set(info)
+        .whenComplete(() => result = Success());
+    return result;
   }
 
   DocumentReference getServiceProviderDocReference() {
     return _newCollection!.doc(_doc);
+  }
+
+  Future updateRatingDB({
+    required String? doc,
+    required Map<String, dynamic> info,
+  }) {
+    return _newCollection!.doc(doc).update(info);
   }
 
   @override
@@ -42,10 +55,15 @@ class ServicesProviderCollection extends FireDatabaseServises {
   }
 
   @override
-  Future updateInfoDB({
+  Future<Result> updateInfoDB({
     required String? doc,
     required Map<String, dynamic> info,
   }) async {
-    return _newCollection!.doc(doc).update(info);
+    Result result = Error();
+    await _newCollection!
+        .doc(doc)
+        .update(info)
+        .whenComplete(() => result = Success());
+    return result;
   }
 }

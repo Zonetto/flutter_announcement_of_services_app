@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_details_model.dart';
 import 'package:announcement_of_services/module/user_model.dart';
@@ -42,7 +41,7 @@ class UserCollection extends FireDatabaseServises {
             in snapshot.docs) {
           Map<String, dynamic>? userData = document.data();
 
-          if (userData != null) {
+          if (userData.isNotEmpty) {
             UserModel userModel = UserModel.fromJson(userData);
             if (userModel.serviceProviderCollection != null) {
               ServicesProviderModel? servicesProviderModel =
@@ -65,7 +64,7 @@ class UserCollection extends FireDatabaseServises {
       return controller.stream;
     } catch (e) {
       print('Unexpected error: $e');
-      return Stream.empty(); // or handle the error accordingly
+      return const Stream.empty(); // or handle the error accordingly
     }
   }
 
@@ -82,7 +81,7 @@ class UserCollection extends FireDatabaseServises {
             in snapshot.docs) {
           Map<String, dynamic>? userData = document.data();
 
-          if (userData != null) {
+          if (userData.isNotEmpty) {
             UserModel userModel = UserModel.fromJson(userData);
             if (userModel.serviceProviderCollection != null) {
               ServicesProviderModel? servicesProviderModel =
@@ -141,7 +140,7 @@ class UserCollection extends FireDatabaseServises {
     }
   }
 
-  Future<List<UserDetailsModel>?>? fetchAllDB({String? query}) async {
+  Future<List<UserDetailsModel>?>? fetchAllDB({required String query}) async {
     try {
       QuerySnapshot<Object?> snapshot = await newCollection!.get();
 
@@ -156,9 +155,9 @@ class UserCollection extends FireDatabaseServises {
           if (userModel.serviceProviderCollection != null) {
             ServicesProviderModel? servicesProviderModel =
                 await userModel.getServiceProviderModel();
-            if (servicesProviderModel!.desc.contains(query ?? '')) {
+            if (servicesProviderModel!.serviceType.contains(query)) {
               UserDetailsModel userDetailsModel =
-                  UserDetailsModel.fromJson(userData, servicesProviderModel!);
+                  UserDetailsModel.fromJson(userData, servicesProviderModel);
               userList.add(userDetailsModel);
             }
           }
