@@ -20,16 +20,30 @@ class ViewModelFetch extends ChangeNotifier {
   ServicesProviderModel? get getServicesProviderLst => _servicesProviderLst;
 
   Future<void> fetchSpecificUserDetailsData() async {
-    _userDetails ??= null;
+    _userDetails = null;
     final UserModel? userData = await UserCollection().getSpecificDB(doc: _doc);
     _userDetails = userData;
     notifyListeners();
   }
 
-  Future<void> fetchAllUserDetailsData({String? query}) async {
+  Future<bool> fetchAllUserDetailsData({required String query}) async {
+    _userAllDetails.clear();
     final List<UserDetailsModel>? userAllDetails =
-        await UserCollection().fetchAllDB(query: 'بناء');
+        await UserCollection().fetchAllDB(query: query);
     _userAllDetails = userAllDetails ?? [];
+    notifyListeners();
+    if (_userAllDetails.isNotEmpty) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<void> updateRatingDB({
+    required String? doc,
+    required Map<String, dynamic> info,
+  }) async {
+    await ServicesProviderCollection().updateRatingDB(doc: doc, info: info);
     notifyListeners();
   }
 

@@ -10,7 +10,6 @@ import 'package:announcement_of_services/utils/constant/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import 'app_status.dart';
@@ -189,8 +188,9 @@ class ViewModelAuth extends Token with ChangeNotifier {
       _authTimer = null;
     }
     notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    CacheHelper.sharedPreferences!.clear();
+    // final prefs = await SharedPreferences.getInstance();
+    // prefs.clear();
   }
 
   void _autoLogout() {
@@ -198,6 +198,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
       _authTimer!.cancel();
     }
     final timeToExpiry = _expiryDate!.difference(DateTime.now()).inSeconds;
+
     _authTimer =
         Timer(Duration(hours: timeToExpiry), logOut); // 2400 = 100 days
   }
