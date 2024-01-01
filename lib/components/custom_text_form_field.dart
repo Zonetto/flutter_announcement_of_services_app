@@ -12,7 +12,7 @@ class CustomTextFormFiled extends StatelessWidget {
   final String? hintText;
   final String? suffixText;
   final TextInputType textInputType;
-  final ValidCallback valid;
+  final ValidCallback? valid;
   final VoidCallback? onTab;
   final VoidCallback? onPressedPassword;
   final ValidCallback? onChanged;
@@ -34,7 +34,7 @@ class CustomTextFormFiled extends StatelessWidget {
     this.hintText,
     this.suffixText,
     required this.textInputType,
-    required this.valid,
+    this.valid,
     this.onChanged,
     this.onTab,
     this.icon,
