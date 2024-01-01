@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:announcement_of_services/components/custom_image.dart';
 import 'package:announcement_of_services/components/custom_text_form_field.dart';
 import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
+import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/utils/date_picker.dart';
 import 'package:announcement_of_services/components/custom_buttom.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
@@ -33,7 +35,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   bool _isObscureText = true;
-  bool _loodaing = false;
+  bool _lodaing = false;
 
   @override
   void dispose() {
@@ -70,63 +72,33 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          Stack(
-                            children: [
-                              _selectedImage == null
-                                  ? const CircleAvatar(
-                                      radius: 60,
-                                      backgroundColor: Colors.white,
-                                      child: Icon(
-                                        Icons.person,
-                                        size: 60,
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  : CircleAvatar(
-                                      radius: 60,
-                                      backgroundColor: Colors.white,
-                                      backgroundImage: FileImage(
-                                        _selectedImage!,
-                                      ),
-                                    ),
-                              Positioned(
-                                bottom: -10,
-                                left: 80,
-                                child: IconButton(
-                                  onPressed: () async {
-                                    final XFile? selectedImage =
-                                        await pickImage(ImageSource.gallery);
-                                    setState(() {
-                                      if (selectedImage != null) {
-                                        _selectedImage =
-                                            File(selectedImage.path);
-                                      }
-                                    });
-                                  },
-                                  icon: const Icon(Icons.camera_alt_rounded),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                  CustomImage(
+                    imagePathNetwork: null,
+                    imagePathLocal: _selectedImage,
+                    isEdit: !_lodaing ? true : false,
+                    onTap: () async {
+                      final XFile? selectedImage =
+                          await pickImage(ImageSource.gallery);
+                      setState(() {
+                        if (selectedImage != null) {
+                          _selectedImage = File(selectedImage.path);
+                        }
+                      });
+                    },
+                    height: AppSize.imageSizeLarg(context),
+                    width: AppSize.imageSizeLarg(context),
                   ),
-                  const SizedBox(height: 6.0),
+                  const SizedBox(height: 14.0),
                   CustomTextFormFiled(
                     context: context,
                     controller: _emailController,
                     headline: 'عنوان البريد الألكتروني',
                     hintText: 'إدخل البريد الألكتروني',
-                    readOnly: _loodaing ? true : false,
+                    readOnly: _lodaing ? true : false,
                     textInputType: TextInputType.emailAddress,
                     valid: (String? value) {
                       return ValidTextForm().email(value);
@@ -138,7 +110,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     controller: _fullNameController,
                     headline: 'الاسم',
                     hintText: 'إدخل الاسم',
-                    readOnly: _loodaing ? true : false,
+                    readOnly: _lodaing ? true : false,
                     textInputType: TextInputType.name,
                     valid: (String? value) {
                       return ValidTextForm().emptyText(value);
@@ -150,7 +122,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     controller: _callController,
                     headline: 'رقم الهاتف',
                     hintText: 'إدخل رقم الهاتف',
-                    readOnly: _loodaing ? true : false,
+                    readOnly: _lodaing ? true : false,
                     textInputType: TextInputType.phone,
                     valid: (String? value) {
                       return ValidTextForm().call(value);
@@ -167,7 +139,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     valid: (String? value) {
                       return ValidTextForm().emptyText(value);
                     },
-                    onTab: !_loodaing
+                    onTab: !_lodaing
                         ? () async {
                             final String date =
                                 await datePicker(context: context);
@@ -180,7 +152,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     context: context,
                     isPassword: true,
                     obscureText: _isObscureText,
-                    readOnly: _loodaing ? true : false,
+                    readOnly: _lodaing ? true : false,
                     onPressedPassword: () {
                       setState(() {
                         _isObscureText = !_isObscureText;
@@ -199,7 +171,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     context: context,
                     isPassword: true,
                     obscureText: _isObscureText,
-                    readOnly: _loodaing ? true : false,
+                    readOnly: _lodaing ? true : false,
                     onPressedPassword: () {
                       setState(() {
                         _isObscureText = !_isObscureText;
@@ -219,7 +191,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                   ),
                   //   Spacer(),
                   CustomButton(
-                    isLoad: _loodaing,
+                    isLoad: _lodaing,
                     context: context,
                     title: 'إنشاء حساب',
                     onPressed: () async {
@@ -227,7 +199,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                         return;
                       }
                       setState(() {
-                        _loodaing = true;
+                        _lodaing = true;
                       });
 
                       _logUpFormKey.currentState!.save();
@@ -261,7 +233,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                       }
                       if (auth is Error) {
                         setState(() {
-                          _loodaing = false;
+                          _lodaing = false;
                         });
 
                         styledScaffoldMessenger(
