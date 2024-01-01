@@ -1,14 +1,43 @@
+import 'package:flutter/material.dart';
+
 Map<String, dynamic> servicesProviderInfo = {
   'itemsServices': [
-    'نجارة',
-    'حدادة',
-    'صباغ',
-    'تصليح هواتف',
-    'تصليح شاشات',
-    'نجار قالب',
-    'صب مسلح',
-    'خياطة',
-    'عامل بناء',
+    {
+      'type': 'نجارة',
+      'icon': Icons.carpenter_outlined,
+    },
+    {
+      'type': 'حدادة',
+      'icon': Icons.hardware_outlined,
+    },
+    {
+      'type': 'صباغ',
+      'icon': Icons.format_paint_outlined,
+    },
+    {
+      'type': 'تصليح هواتف',
+      'icon': Icons.phonelink_setup_outlined,
+    },
+    {
+      'type': 'تصليح شاشات',
+      'icon': Icons.tv_outlined,
+    },
+    {
+      'type': 'تنظيف منازل',
+      'icon': Icons.cleaning_services_outlined,
+    },
+    {
+      'type': 'تنصيب برامج الحاسوب',
+      'icon': Icons.install_desktop_outlined,
+    },
+    {
+      'type': 'عامل بناء',
+      'icon': Icons.construction_rounded,
+    },
+
+    // 'نجار قالب': Icons.agriculture_outlined,
+    // 'صب مسلح': Icons.ac_unit_rounded,
+    // 'خياطة': Icons.app_blocking_outlined,
   ],
   'itemsYearsOfExperience': [
     'سنة واحدة',
@@ -42,28 +71,53 @@ Map<String, dynamic> servicesProviderInfo = {
 };
 
 class ServicesProviderInfoModel {
-  final List<String>? itemsServices;
+  final List<ItemsServices>? itemsServices;
+  // final List<String>? itemsServices;
   final List<String>? itemsYearsOfExperience;
   final List<String>? itemsStartOfWorkingDays;
   final List<String>? itemsAddress;
 
   ServicesProviderInfoModel({
-     this.itemsServices,
-     this.itemsYearsOfExperience,
-     this.itemsStartOfWorkingDays,
-     this.itemsAddress,
+    this.itemsServices,
+    this.itemsYearsOfExperience,
+    this.itemsStartOfWorkingDays,
+    this.itemsAddress,
   });
 
-  factory ServicesProviderInfoModel.formJson(Map<String, dynamic> json) {
+  factory ServicesProviderInfoModel.fromJson(Map<String, dynamic> json) {
+    List<ItemsServices>? itemsServicesList = [];
+    if (json['itemsServices'] != null) {
+      itemsServicesList = List<ItemsServices>.from(json['itemsServices'].map(
+        (service) => ItemsServices.fromJson(service),
+      ));
+    }
+
     return ServicesProviderInfoModel(
+      itemsServices: itemsServicesList,
       itemsAddress: json['itemsAddress'],
       itemsYearsOfExperience: json['itemsYearsOfExperience'],
-      itemsServices: json['itemsServices'],
       itemsStartOfWorkingDays: json['itemsStartOfWorkingDays'],
     );
   }
 
   ServicesProviderInfoModel fillServicesProviderInfo() {
-    return ServicesProviderInfoModel.formJson(servicesProviderInfo);
+    return ServicesProviderInfoModel.fromJson(servicesProviderInfo);
+  }
+}
+
+class ItemsServices {
+  final String type;
+  final IconData icon;
+
+  ItemsServices({
+    required this.type,
+    required this.icon,
+  });
+
+  factory ItemsServices.fromJson(Map<String, dynamic> json) {
+    return ItemsServices(
+      type: json['type'],
+      icon: json['icon'],
+    );
   }
 }

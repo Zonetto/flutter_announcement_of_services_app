@@ -12,7 +12,7 @@ class ServicesProviderModel {
   final String servisePrice;
   final String address;
   final String location;
-  final int stars;
+  String stars;
   final String? image;
 
   ServicesProviderModel({
