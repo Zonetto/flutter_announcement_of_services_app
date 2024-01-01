@@ -1,20 +1,33 @@
 import 'package:announcement_of_services/components/complex_card.dart';
+import 'package:announcement_of_services/components/custom_text.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_details_model.dart';
+import 'package:announcement_of_services/services/collections/services_provider_collection.dart';
 import 'package:announcement_of_services/services/collections/user_collection.dart';
+import 'package:announcement_of_services/utils/constant/color.dart';
+import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
+import 'package:announcement_of_services/view_model/view_model_fetch_user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 import 'service_details_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  double _ratingStar = 3;
+  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ViewModelFetch>(context, listen: false);
     return StreamBuilder<List<UserDetailsModel>>(
-      stream:
-          UserCollection().getchAllServiceProviderData(), //userDetails1,
+      stream: UserCollection().getchAllServiceProviderData(), //userDetails1,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -30,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                   user.servicesProviderModel;
               return ComplexCard(
                 isAdmin: false,
-                backgroundImagePath: servicesProviderModel.image!,
+                backgroundImagePath: servicesProviderModel.image,
                 name: user.fullName,
                 price: servicesProviderModel.servisePrice,
                 profileImagePath: user.profileImage,
@@ -42,8 +55,74 @@ class HomeScreen extends StatelessWidget {
                     screen: ServiceDetailsScreen(
                       call: user.call,
                       dateOfBirth: user.dateOfBirth,
+                      onPressedRating: () async {
+                        final String? doc =
+                            user.servicesProviderModel.serviceProviderId;
+                        print(doc);
+
+                        await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('تقييم'),
+                              content: RatingBar.builder(
+                                onRatingUpdate: (newValue) => setState(
+                                  () {
+                                    _ratingStar = newValue;
+                                  //  print(_ratingStar);
+                                  },
+                                ),
+                                itemBuilder: (context, index) => const Icon(
+                                  Icons.star_rounded,
+                                  color: AppColor.buttonColorGreen,
+                                ),
+                                direction: Axis.horizontal,
+                                initialRating: 3,
+                                unratedColor: AppColor.buttonColorRed,
+                                itemCount: 5,
+                                itemSize: 40,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const CustomText(
+                                      title: 'لا', size: FontSize.plainText),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    await ServicesProviderCollection()
+                                        .updateRatingDB(
+                                      doc: 'W5ZeWFpnbYFCAFar3jWG',
+                                      info: {'stars': _ratingStar.toString()},
+                                    );
+                                  },
+                                  child: const CustomText(
+                                      title: 'نعم', size: FontSize.plainText),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        // RatingBar.builder(
+                        //   onRatingUpdate: (newValue) => setState(
+                        //     () => _ratingStar = newValue,
+                        //   ),
+                        //   itemBuilder: (context, index) => const Icon(
+                        //     Icons.star_rounded,
+                        //     color: AppColor.buttonColorGreen,
+                        //   ),
+                        //   direction: Axis.horizontal,
+                        //   initialRating: 3,
+                        //   unratedColor: AppColor.buttonColorRed,
+                        //   itemCount: 5,
+                        //   itemSize: 40,
+                        //   glowColor: Colors.deepOrange,
+                        // );
+                      },
                       email: user.email,
-                      stars: servicesProviderModel.stars,
+                      stars: servicesProviderModel.stars.toString(),
                       address: servicesProviderModel.address,
                       startOfWorkingDays:
                           servicesProviderModel.startOfWorkingDays,
