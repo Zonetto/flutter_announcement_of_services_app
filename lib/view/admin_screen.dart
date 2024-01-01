@@ -74,7 +74,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
                       call: user.call,
                       dateOfBirth: user.dateOfBirth,
                       email: user.email,
-                      stars: servicesProviderModel.stars,
+                      stars: servicesProviderModel.stars.toString(),
                       address: servicesProviderModel.address,
                       startOfWorkingDays:
                           servicesProviderModel.startOfWorkingDays,
