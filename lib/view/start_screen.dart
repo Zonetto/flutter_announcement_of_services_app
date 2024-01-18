@@ -1,12 +1,11 @@
-import 'package:announcement_of_services/components/custom_text.dart';
+import 'package:announcement_of_services/components/buttom_widget.dart';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
-
-import '../components/custom_buttom.dart';
 import 'registration_option_screen.dart';
 
 class StartScreen extends StatelessWidget {
@@ -14,12 +13,7 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   elevation: 0.0,
-      // ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -29,7 +23,7 @@ class StartScreen extends StatelessWidget {
                 width: Dimensions.screenWidth(context),
                 height: Dimensions.screenHeight(context) / 2,
                 child: Image.asset(
-                'assets/images/clients_home_appliance1.png',
+                  'assets/images/clients_home_appliance1.png',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -38,12 +32,12 @@ class StartScreen extends StatelessWidget {
               padding: AppSize.nternalMargin,
               //height: 250,
               width: double.infinity,
-              margin: AppSize.padding,
-              decoration: CustomShapeDecoration.shapeDecoration,
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              decoration: CustomShapeDecoration.shapeDecoration(context),
               child: Column(
                 children: [
                   FittedBox(
-                    child: CustomText(
+                    child: TextWidget(
                       title: 'مرحباً بك في تطبيق السهولة هُنا',
                       size: Dimensions.screenWidth(context) * 0.08,
                       fontWeight: FontWeight.bold,
@@ -55,7 +49,7 @@ class StartScreen extends StatelessWidget {
                       horizontal: 20.0,
                       vertical: 10,
                     ),
-                    child: const CustomText(
+                    child: const TextWidget(
                       title:
                           'مرحباً بك في تطبيق السهولة هُنا سنتنشستنش شنتسشن سنشست شنستشنست شنتسنش سنشتسنشتسنشتس شنس تشنست نشتسنش سنشتسنشتسنش تسشسنتش سنشتس شنتسنش تسنشتس شنتسشنست نشسنشتس نشسنشتس نش تس',
                       size: FontSize.plainText,
@@ -65,16 +59,15 @@ class StartScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  CustomButton(
+                  ButtonWidget(
                     context: context,
                     title: 'أبدء',
                     onPressed: () {
-                      navigatePushScreen(
+                      navigateToScreen(
                         context: context,
                         screen: const RegistrationOptionScreen(),
                       );
                     },
-
                   ),
                 ],
               ),

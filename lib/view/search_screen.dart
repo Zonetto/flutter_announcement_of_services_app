@@ -1,9 +1,10 @@
 import 'package:announcement_of_services/components/complex_card.dart';
-import 'package:announcement_of_services/components/custom_text.dart';
-import 'package:announcement_of_services/components/custom_text_form_field.dart';
+import 'package:announcement_of_services/components/text_form_field_widget.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_details_model.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
+import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/view/service_details_screen.dart';
 import 'package:announcement_of_services/view_model/view_model_fetch_user.dart';
@@ -23,7 +24,8 @@ class SearchScreen extends StatelessWidget {
     userDatils = context.watch<ViewModelFetch>().getAllUserDetails;
     return Column(
       children: [
-        CustomTextFormFiled(
+        AppSize.sizedBoxHeight,
+        TextFormFieldWidget(
           context: context,
           controller: _searchController,
           headline: '',
@@ -43,7 +45,7 @@ class SearchScreen extends StatelessWidget {
         const SizedBox(height: 10),
         userDatils.isEmpty
             ? const Center(
-                child: CustomText(
+                child: TextWidget(
                   title: 'لا يوجد نتائج',
                   size: FontSize.subtitle,
                 ),
@@ -65,7 +67,7 @@ class SearchScreen extends StatelessWidget {
                       star: servicesProviderModel.stars.toString(),
                       title: servicesProviderModel.desc,
                       onTap: () {
-                        navigatePushScreen(
+                        navigateToScreen(
                           context: context,
                           screen: ServiceDetailsScreen(
                             call: user.call,
