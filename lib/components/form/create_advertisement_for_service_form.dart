@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'package:announcement_of_services/components/custom_buttom.dart';
-import 'package:announcement_of_services/components/custom_dropdown.dart';
-import 'package:announcement_of_services/components/custom_image.dart';
-import 'package:announcement_of_services/components/custom_text.dart';
-import 'package:announcement_of_services/components/custom_text_form_field.dart';
+import 'package:announcement_of_services/components/buttom_widget.dart';
+import 'package:announcement_of_services/components/dropdown_widget.dart';
+import 'package:announcement_of_services/components/image_widget.dart';
+import 'package:announcement_of_services/components/text_form_field_widget.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/services_provider_info_model.dart';
 import 'package:announcement_of_services/services/collections/services_provider_collection.dart';
@@ -13,15 +13,18 @@ import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
+import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/utils/date_picker.dart';
 import 'package:announcement_of_services/utils/fill_dropdown_items.dart';
 import 'package:announcement_of_services/utils/pick_image.dart';
 import 'package:announcement_of_services/utils/validate.dart';
 import 'package:announcement_of_services/view_model/app_status.dart';
 import 'package:announcement_of_services/view_model/view_model_auth.dart';
+import 'package:announcement_of_services/view_model/view_model_fetch_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class CreateOrEditAdvertisementForServiceForm extends StatefulWidget {
   final ServicesProviderModel? servicesProviderModel;
@@ -112,6 +115,7 @@ class _CreateOrEditAdvertisementForServiceFormState
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ViewModelFetch>(context, listen: false);
     final ServicesProviderInfoModel servicesProviderInfo =
         ServicesProviderInfoModel().fillServicesProviderInfo();
 
@@ -131,9 +135,10 @@ class _CreateOrEditAdvertisementForServiceFormState
       child: SingleChildScrollView(
         child: Column(
           children: [
+              AppSize.sizedBoxHeight,
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
-              child: CustomImage(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 14),
+              child: ImageWidget(
                 imagePathNetwork:
                     _selectedImage == null ? backgroundImage : null,
                 imagePathLocal: _selectedImage,
@@ -153,7 +158,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                 },
               ),
             ),
-            CustomTextFormFiled(
+            TextFormFieldWidget(
               isWithoutText: true,
               context: context,
               readOnly: _loading ? true : false,
@@ -167,7 +172,7 @@ class _CreateOrEditAdvertisementForServiceFormState
               },
             ),
             //
-            CustomDropDownString(
+            DropdownStringWidget(
               hintText: 'نوع الخدمة',
               context: context,
               value: _selectServices,
@@ -183,7 +188,7 @@ class _CreateOrEditAdvertisementForServiceFormState
               },
               items: dropdownItemsServices!,
             ),
-            CustomDropDownString(
+            DropdownStringWidget(
               hintText: 'سنوات الخبرة',
               context: context,
               value: _selectYearsOfExperience,
@@ -214,7 +219,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                     ),
                     child: const Row(
                       children: [
-                        CustomText(
+                        TextWidget(
                           title: 'إيام العمل',
                           size: FontSize.plainText,
                         ),
@@ -226,7 +231,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                   const SizedBox(
                     width: 4.0,
                   ),
-                  CustomDropDownString(
+                  DropdownStringWidget(
                     hintText: 'من',
                     width: Dimensions.screenWidth(context) / 2,
                     context: context,
@@ -246,7 +251,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                   const SizedBox(
                     width: 6.0,
                   ),
-                  CustomDropDownString(
+                  DropdownStringWidget(
                     hintText: 'إلى',
                     width: Dimensions.screenWidth(context) / 2,
                     context: context,
@@ -282,7 +287,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                     ),
                     child: const Row(
                       children: [
-                        CustomText(
+                        TextWidget(
                           title: 'ساعات العمل',
                           size: FontSize.plainText,
                         ),
@@ -294,7 +299,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                   const SizedBox(
                     width: 4.0,
                   ),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     width: Dimensions.screenWidth(context) / 2,
                     controller: _timeFromController,
@@ -319,7 +324,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                   const SizedBox(
                     width: 6.0,
                   ),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     width: Dimensions.screenWidth(context) / 2,
                     controller: _timeIntoController,
@@ -345,7 +350,7 @@ class _CreateOrEditAdvertisementForServiceFormState
               ),
             ),
 
-            CustomTextFormFiled(
+            TextFormFieldWidget(
               isWithoutText: true,
               context: context,
               controller: _priceController,
@@ -358,7 +363,7 @@ class _CreateOrEditAdvertisementForServiceFormState
               },
               icon: const Icon(Icons.price_check),
             ),
-            CustomDropDownString(
+            DropdownStringWidget(
               hintText: 'الحي/السكن',
               context: context,
               value: _selectAddress,
@@ -374,7 +379,7 @@ class _CreateOrEditAdvertisementForServiceFormState
               },
               items: dropdownItemsAddress!,
             ),
-            CustomTextFormFiled(
+            TextFormFieldWidget(
               context: context,
               controller: _locationController,
               hintText: 'اقرب نقطة دالة',
@@ -390,7 +395,7 @@ class _CreateOrEditAdvertisementForServiceFormState
               minLines: 2,
             ),
 
-            CustomButton(
+            ButtonWidget(
               context: context,
               title: isEdit ? 'تم' : 'الترقية لمزود خدمة',
               isLoad: _loading,
@@ -501,6 +506,8 @@ class _CreateOrEditAdvertisementForServiceFormState
                         "is_service_provider": serviceProviderWait,
                       },
                     );
+                    provider.setServicesProviderLst = null;
+                    provider.fetchSpecificUserDetailsData();
                     // ignore: use_build_context_synchronously
                     Navigator.pop(context);
                   }
@@ -517,7 +524,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                 // }
               },
             ),
-
+            AppSize.sizedBoxHeight,
             // TextFormField(maxLength: 130, maxLines: 3),
           ],
         ),

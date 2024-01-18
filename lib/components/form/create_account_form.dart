@@ -1,17 +1,17 @@
 import 'dart:io';
-import 'package:announcement_of_services/components/custom_image.dart';
-import 'package:announcement_of_services/components/custom_text_form_field.dart';
+import 'package:announcement_of_services/components/buttom_widget.dart';
+import 'package:announcement_of_services/components/image_widget.dart';
+import 'package:announcement_of_services/components/text_form_field_widget.dart';
 import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/utils/date_picker.dart';
-import 'package:announcement_of_services/components/custom_buttom.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/utils/pick_image.dart';
 import 'package:announcement_of_services/utils/styled_scaffold_messenger.dart';
 import 'package:announcement_of_services/utils/validate.dart';
-import 'package:announcement_of_services/view/complex_screen.dart';
+import 'package:announcement_of_services/view/bottom_navigation_bar_screen.dart';
 import 'package:announcement_of_services/view_model/app_status.dart';
 import 'package:announcement_of_services/view_model/view_model_auth.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomImage(
+                  ImageWidget(
                     imagePathNetwork: null,
                     imagePathLocal: _selectedImage,
                     isEdit: !_lodaing ? true : false,
@@ -93,7 +93,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     width: AppSize.imageSizeLarg(context),
                   ),
                   const SizedBox(height: 14.0),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     controller: _emailController,
                     headline: 'عنوان البريد الألكتروني',
@@ -105,7 +105,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     },
                     icon: const Icon(Icons.person),
                   ),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     controller: _fullNameController,
                     headline: 'الاسم',
@@ -117,7 +117,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     },
                     icon: const Icon(Icons.person),
                   ),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     controller: _callController,
                     headline: 'رقم الهاتف',
@@ -129,7 +129,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     },
                     icon: const Icon(Icons.phone),
                   ),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     controller: _dateOfBirthController,
                     headline: 'تاريخ الميلاد',
@@ -148,7 +148,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                         : null,
                     icon: const Icon(Icons.date_range_outlined),
                   ),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     isPassword: true,
                     obscureText: _isObscureText,
@@ -167,7 +167,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     },
                     icon: const Icon(Icons.password_outlined),
                   ),
-                  CustomTextFormFiled(
+                  TextFormFieldWidget(
                     context: context,
                     isPassword: true,
                     obscureText: _isObscureText,
@@ -190,7 +190,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                     icon: const Icon(Icons.password_outlined),
                   ),
                   //   Spacer(),
-                  CustomButton(
+                  ButtonWidget(
                     isLoad: _lodaing,
                     context: context,
                     title: 'إنشاء حساب',
@@ -228,8 +228,9 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                       await Future.delayed(const Duration(seconds: 2));
                       final auth = await provider.signUp(user, _selectedImage);
                       if (auth is Success) {
-                        navigatePushScreen(
-                            context: context, screen: const ComplexScreen());
+                        navigateAndReplaceScreen(
+                            context: context,
+                            screen: const BottomNavigationBarScreen());
                       }
                       if (auth is Error) {
                         setState(() {

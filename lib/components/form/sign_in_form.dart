@@ -1,11 +1,11 @@
-import 'package:announcement_of_services/components/custom_text_form_field.dart';
-import 'package:announcement_of_services/components/custom_buttom.dart';
+import 'package:announcement_of_services/components/buttom_widget.dart';
+import 'package:announcement_of_services/components/text_form_field_widget.dart';
 import 'package:announcement_of_services/module/auth_model.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/utils/styled_scaffold_messenger.dart';
 import 'package:announcement_of_services/utils/validate.dart';
-import 'package:announcement_of_services/view/complex_screen.dart';
+import 'package:announcement_of_services/view/bottom_navigation_bar_screen.dart';
 import 'package:announcement_of_services/view_model/app_status.dart';
 import 'package:announcement_of_services/view_model/view_model_auth.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class _SignInFormState extends State<SignInForm> {
           Expanded(
             child: ListView(
               children: [
-                CustomTextFormFiled(
+                TextFormFieldWidget(
                   context: context,
                   readOnly: _loodaing ? true : false,
                   controller: _emailController,
@@ -56,7 +56,7 @@ class _SignInFormState extends State<SignInForm> {
                   },
                   icon: const Icon(Icons.person),
                 ),
-                CustomTextFormFiled(
+                TextFormFieldWidget(
                   context: context,
                   isPassword: true,
                   obscureText: _isObscureText,
@@ -78,7 +78,7 @@ class _SignInFormState extends State<SignInForm> {
               ],
             ),
           ),
-          CustomButton(
+          ButtonWidget(
             isLoad: _loodaing,
             context: context,
             title: 'تسجيل الدخول',
@@ -101,10 +101,12 @@ class _SignInFormState extends State<SignInForm> {
               final auth = await provider.logIn(_authData!);
               // print("aaaaa $auth");
               if (auth is Success) {
-                print("auth.code ${auth.code}: ${auth.response}");
+               // print("auth.code ${auth.code}: ${auth.response}");
                 // ignore: use_build_context_synchronously
-                navigatePushScreen(
-                    context: context, screen: const ComplexScreen());
+                navigateAndReplaceScreen(
+                  context: context,
+                  screen: const BottomNavigationBarScreen(),
+                );
               } //} else {
               // ignore: use_build_context_synchronously
               if (auth is Error) {
