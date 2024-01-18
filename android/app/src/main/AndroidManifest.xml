@@ -5,6 +5,8 @@
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> 
 <uses-permission android:name="android permission.CAMERA"/>
+<uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <application
         android:label="announcement_of_services"
         android:name="${applicationName}"
@@ -25,6 +27,18 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="tel"/>
+            </intent-filter>
+
+
+
+              <!-- <uses-permission android:name="android.permission.CALL_PHONE" /> -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
