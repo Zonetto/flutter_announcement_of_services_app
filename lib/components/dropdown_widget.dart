@@ -3,7 +3,7 @@ import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/typedef.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropDownString extends StatelessWidget {
+class DropdownStringWidget extends StatelessWidget {
   final BuildContext context;
   final ValidCallback onChanged;
   final ValidCallback? valid;
@@ -13,7 +13,7 @@ class CustomDropDownString extends StatelessWidget {
   final List<DropdownMenuItem<String>> items;
   final double? width;
   final bool disabled;
-  const CustomDropDownString({
+  const DropdownStringWidget({
     super.key,
     required this.context,
     required this.onChanged,

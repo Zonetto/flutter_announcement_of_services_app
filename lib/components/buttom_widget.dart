@@ -1,10 +1,10 @@
-import 'package:announcement_of_services/components/custom_text.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class ButtonWidget extends StatelessWidget {
   final BuildContext context;
   final String title;
   final Color backGroundColor;
@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double? height;
   final bool isLoad;
-  const CustomButton({
+  const ButtonWidget({
     super.key,
     required this.context,
     required this.title,
@@ -42,7 +42,7 @@ class CustomButton extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomText(
+                  TextWidget(
                     size: FontSize.buttonText,
                     title: 'أنتظر قليلاً',
                     color: textColor,
@@ -54,7 +54,7 @@ class CustomButton extends StatelessWidget {
                   ),
                 ],
               )
-            : CustomText(
+            : TextWidget(
                 size: FontSize.buttonText,
                 title: title,
                 color: textColor,

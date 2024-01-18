@@ -2,9 +2,10 @@ import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:flutter/material.dart';
-import 'custom_text.dart';
 
-class CustomButtonInk extends StatelessWidget {
+import 'text_widget.dart';
+
+class ButtonInkWidget extends StatelessWidget {
   final BuildContext context;
   final String title;
   final String? imagePath;
@@ -12,7 +13,7 @@ class CustomButtonInk extends StatelessWidget {
   final bool isImage;
   final IconData? icon;
 
-  const CustomButtonInk({
+  const ButtonInkWidget({
     super.key,
     required this.context,
     required this.title,
@@ -29,12 +30,16 @@ class CustomButtonInk extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(35),
         onTap: onTap,
+       // splashColor: Colors.red, // Theme.of(context).scaffoldBackgroundColor,
+       // highlightColor: Theme.of(context).highlightColor,
         child: Ink(
           width: Dimensions.screenWidth(context),
           height: 44,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: ShapeDecoration(
-            color: AppColor.screenBackGroundColor,
+            color: Theme.of(context).splashColor,
+
+            // color: AppColor.buttonColorRed,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(35),
             ),
@@ -42,7 +47,7 @@ class CustomButtonInk extends StatelessWidget {
           ),
           child: Row(
             children: [
-              CustomText(
+              TextWidget(
                 size: FontSize.buttonText,
                 title: title,
                 fontWeight: FontWeight.bold,
