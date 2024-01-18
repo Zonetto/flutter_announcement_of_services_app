@@ -1,13 +1,12 @@
-import 'package:announcement_of_services/components/custom_text.dart';
+import 'package:announcement_of_services/components/buttom_widget.dart';
 import 'package:announcement_of_services/components/form/create_account_form.dart';
 import 'package:announcement_of_services/components/form/sign_in_form.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
-
-import '../components/custom_buttom.dart';
 
 class RegistrationOptionScreen extends StatefulWidget {
   const RegistrationOptionScreen({super.key});
@@ -28,10 +27,11 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
           padding: AppSize.padding,
           child: Column(
             children: [
+              AppSize.sizedBoxHeight,
               Row(
                 children: [
                   Expanded(
-                    child: CustomButton(
+                    child: ButtonWidget(
                       context: context,
                       title: 'تسجيل دخول',
                       backGroundColor: isSignIn
@@ -47,14 +47,14 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                         // print('object');
                         // checkSignIn();
                       },
-                      width:  Dimensions.screenWidth(context)/2,
+                      width: Dimensions.screenWidth(context) / 2,
                     ),
                   ),
                   const SizedBox(
                     width: 20.0,
                   ),
                   Expanded(
-                    child: CustomButton(
+                    child: ButtonWidget(
                       context: context,
                       title: 'إنشاء حساب',
                       backGroundColor: !isSignIn
@@ -69,7 +69,7 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                         });
                         // checkSignIn();
                       },
-                                  width: Dimensions.screenWidth(context) / 2,
+                      width: Dimensions.screenWidth(context) / 2,
                     ),
                   ),
                 ],
@@ -77,7 +77,7 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 alignment: Alignment.centerRight,
-                child: CustomText(
+                child: TextWidget(
                   title: isSignIn ? 'سجل الأن' : 'مرحباً بعودتك',
                   fontWeight: FontWeight.bold,
                   size: FontSize.headline,
@@ -86,7 +86,8 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
               Expanded(
                 child:
                     isSignIn ? const CreateAccountForm() : const SignInForm(),
-              )
+              ),
+              AppSize.sizedBoxHeight,
             ],
           ),
         ),

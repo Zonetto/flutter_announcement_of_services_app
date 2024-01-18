@@ -1,12 +1,13 @@
-import 'package:announcement_of_services/components/custom_buttom.dart';
-import 'package:announcement_of_services/components/custom_image.dart';
-import 'package:announcement_of_services/components/custom_text.dart';
-import 'package:announcement_of_services/components/custom_text_collector.dart';
+import 'package:announcement_of_services/components/buttom_widget.dart';
+import 'package:announcement_of_services/components/image_widget.dart';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
+import 'package:announcement_of_services/components/text_collector_widget.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ServiceDetailsScreen extends StatefulWidget {
   final int call;
@@ -25,6 +26,7 @@ class ServiceDetailsScreen extends StatefulWidget {
   final String location;
   final String stars;
   final String image;
+
   const ServiceDetailsScreen({
     super.key,
     required this.call,
@@ -58,13 +60,15 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
           padding: AppSize.padding,
           child: Container(
             padding: AppSize.nternalMargin,
+            margin: const EdgeInsets.symmetric(vertical: 10),
             //height: 250,
             // margin: const EdgeInsets.only(bottom: 24.0),
             width: Dimensions.screenWidth(context),
             height: Dimensions.screenHeight(context),
-            decoration: CustomShapeDecoration.shapeDecoration,
+            decoration: CustomShapeDecoration.shapeDecoration(context),
             child: Column(
               children: [
+                AppSize.sizedBoxHeight,
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -74,13 +78,13 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         // direction: Axis.vertical,
                         children: [
-                          CustomTextCollector(
+                          TextCollectorWidget(
                             title: 'البريد الإلكتروني',
                             subTitle: widget.email,
                           ),
-                          CustomTextCollector(
+                          TextCollectorWidget(
                             title: 'رقم الهاتف',
-                            subTitle: widget.call.toString(),
+                            subTitle: "0${widget.call.toString()}",
                           ),
                         ],
                       ),
@@ -88,13 +92,13 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                     //const Spacer(),
                     Column(
                       children: [
-                        CustomImage(
+                        ImageWidget(
                           imagePathNetwork: widget.image,
                           height: AppSize.imageSizeLarg(context),
                           width: AppSize.imageSizeLarg(context),
                         ),
                         const SizedBox(height: 4.0),
-                        CustomText(
+                        TextWidget(
                           title: widget.fullName,
                           size: FontSize.subtitle,
                           fontWeight: FontWeight.bold,
@@ -115,25 +119,25 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                           Expanded(
                             child: Column(
                               children: [
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'التقيمات',
                                   subTitle: widget.stars,
                                   isStar: true,
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'نوع الخِدمة',
                                   subTitle: widget.serviceType,
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'سنوات الخبرة',
                                   subTitle: widget.yearsOfExperience,
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'إيام العمل',
                                   subTitle:
                                       'من ${widget.startOfWorkingDays} إلى ${widget.endOfWorkingDays}',
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'الموقع',
                                   subTitle: widget.address,
                                 ),
@@ -145,26 +149,26 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                             child: Column(
                               children: [
                                 const SizedBox(height: 10.0),
-                                CustomButton(
+                                ButtonWidget(
                                   context: context,
                                   title: 'تقييم',
                                   onPressed: widget.onPressedRating,
                                   width: Dimensions.screenWidth(context) / 2,
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'سعر الخِدمة',
                                   subTitle: widget.servisePrice.toString(),
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'العمر',
                                   subTitle: widget.dateOfBirth,
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'ساعات العمل',
                                   subTitle:
                                       'من ${widget.startWorkingHours} إلى ${widget.endWorkingHours}',
                                 ),
-                                CustomTextCollector(
+                                TextCollectorWidget(
                                   title: 'أقرب نقطة',
                                   subTitle: widget.location,
                                 ),
@@ -176,12 +180,15 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ],
                   ),
                 ),
-                CustomButton(
+                ButtonWidget(
                   context: context,
                   title: 'طلب الخِدمة',
-                  onPressed: () {},
+                  onPressed: () {
+                    // ignore: deprecated_member_use
+                    launch("tel: +964${widget.call}");
+                  },
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 10),
               ],
             ),
           ),
@@ -190,5 +197,3 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
     );
   }
 }
-
-
