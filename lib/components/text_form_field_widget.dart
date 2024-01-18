@@ -3,9 +3,9 @@ import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/typedef.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_text.dart';
+import 'text_widget.dart';
 
-class CustomTextFormFiled extends StatelessWidget {
+class TextFormFieldWidget extends StatelessWidget {
   final BuildContext context;
   final TextEditingController controller;
   final String headline;
@@ -26,7 +26,7 @@ class CustomTextFormFiled extends StatelessWidget {
   final bool isPassword;
   final bool obscureText;
 
-  const CustomTextFormFiled({
+  const TextFormFieldWidget({
     super.key,
     required this.context,
     required this.controller,
@@ -58,7 +58,7 @@ class CustomTextFormFiled extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           !isWithoutText
-              ? CustomText(
+              ? TextWidget(
                   title: headline,
                   size: FontSize.subtitle,
                   fontWeight: FontWeight.w600,

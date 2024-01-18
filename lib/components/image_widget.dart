@@ -3,7 +3,7 @@ import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/view/lodaing_screen.dart';
 import 'package:flutter/material.dart';
 
-class CustomImage extends StatelessWidget {
+class ImageWidget extends StatelessWidget {
   final String? imagePathNetwork;
   final File? imagePathLocal;
   final double? width;
@@ -14,7 +14,7 @@ class CustomImage extends StatelessWidget {
   final bool isShadows;
   final VoidCallback? onTap;
 
-  const CustomImage({
+  const ImageWidget({
     super.key,
     required this.imagePathNetwork,
     this.width = 140,

@@ -1,13 +1,13 @@
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_text.dart';
+import 'text_widget.dart';
 
-class CustomTextCollector extends StatelessWidget {
+class TextCollectorWidget extends StatelessWidget {
   final String title;
   final String subTitle;
   final bool isStar;
-  const CustomTextCollector({
+  const TextCollectorWidget({
     super.key,
     required this.title,
     required this.subTitle,
@@ -21,7 +21,7 @@ class CustomTextCollector extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(
+          TextWidget(
             title: title,
             fontWeight: FontWeight.bold,
             size: FontSize.headline,
@@ -36,7 +36,7 @@ class CustomTextCollector extends StatelessWidget {
                   : const SizedBox.shrink(),
               isStar ? const SizedBox(width: 4.0) : const SizedBox.shrink(),
               Expanded(
-                child: CustomText(
+                child: TextWidget(
                   title: subTitle,
                   size: FontSize.plainText,
                 ),
