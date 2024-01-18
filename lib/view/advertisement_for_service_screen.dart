@@ -29,10 +29,12 @@ class _AdvertisementForServiceScreenState
             servicesProviderModel: widget.servicesProviderModel,
           )
         : Scaffold(
-            body: Padding(
-              padding: AppSize.padding,
-              child: CreateOrEditAdvertisementForServiceForm(
-                servicesProviderModel: widget.servicesProviderModel,
+            body: SafeArea(
+              child: Padding(
+                padding: AppSize.padding,
+                child: CreateOrEditAdvertisementForServiceForm(
+                  servicesProviderModel: widget.servicesProviderModel,
+                ),
               ),
             ),
           );
