@@ -1,6 +1,6 @@
+import 'package:announcement_of_services/components/buttom_ink_widget.dart';
 import 'package:announcement_of_services/components/complex_card.dart';
-import 'package:announcement_of_services/components/custom_buttom_ink.dart';
-import 'package:announcement_of_services/components/custom_text.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/services_provider_info_model.dart';
 import 'package:announcement_of_services/module/user_details_model.dart';
@@ -22,6 +22,7 @@ class CategoriesScreen extends StatelessWidget {
 
     return Column(
       children: [
+        const SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
             scrollDirection: Axis.vertical,
@@ -42,13 +43,13 @@ class CategoriesScreen extends StatelessWidget {
 
   Widget buildCustomButtonInk(
       BuildContext context, String itemsServices, IconData icon) {
-    return CustomButtonInk(
+    return ButtonInkWidget(
       context: context,
       title: itemsServices,
       icon: icon,
       isImage: false,
       onTap: () {
-        navigatePushScreen(
+        navigateToScreen(
           context: context,
           screen: CategoriesInfoScreen(
             query: itemsServices,
@@ -105,7 +106,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
       children: [
         if (userDetails.isEmpty)
           const Center(
-            child: CustomText(
+            child: TextWidget(
               title: 'لا يوجد نتائج',
               size: FontSize.subtitle,
             ),
@@ -121,7 +122,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
   Widget buildUserDetailsListView(List<UserDetailsModel> userDatils) {
     return !isNotEmptyData
         ? const Center(
-            child: CustomText(
+            child: TextWidget(
               title: 'لا يوجد نتائج',
               size: FontSize.subtitle,
             ),
@@ -152,7 +153,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
       star: servicesProviderModel.stars.toString(),
       title: servicesProviderModel.desc,
       onTap: () {
-        navigatePushScreen(
+        navigateToScreen(
           context: context,
           screen: ServiceDetailsScreen(
             call: user.call,

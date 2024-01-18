@@ -1,8 +1,8 @@
-import 'package:announcement_of_services/components/custom_buttom_ink.dart';
-import 'package:announcement_of_services/components/custom_image.dart';
-import 'package:announcement_of_services/components/custom_text.dart';
-import 'package:announcement_of_services/components/custom_text_collector.dart';
+import 'package:announcement_of_services/components/buttom_ink_widget.dart';
+import 'package:announcement_of_services/components/image_widget.dart';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
+import 'package:announcement_of_services/components/text_collector_widget.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/utils/alert_dialog.dart';
@@ -25,15 +25,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  @override
-  void initState() {
-    Provider.of<ViewModelFetch>(context, listen: false)
-        .fetchSpecificUserDetailsData();
-    super.initState();
-  }
-
   UserModel? _userDatils;
   ServicesProviderModel? _servicesProviderModel;
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ViewModelAuth>(context, listen: false);
@@ -43,11 +37,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //print(_userDatils?.call);
     return Column(
       children: [
+        AppSize.sizedBoxHeight,
         Container(
           padding: AppSize.nternalMargin,
           width: Dimensions.screenWidth(context),
           margin: const EdgeInsets.fromLTRB(0, 0, 0, 14),
-          decoration: CustomShapeDecoration.shapeDecoration,
+          decoration: CustomShapeDecoration.shapeDecoration(context),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -59,16 +54,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     // direction: Axis.vertical,
                     children: [
-                      CustomTextCollector(
+                      TextCollectorWidget(
                         title: 'البريد الإلكتروني',
                         subTitle: _userDatils?.email ?? '',
                       ),
-                      CustomTextCollector(
+                      TextCollectorWidget(
                         title: 'رقم الهاتف',
                         subTitle: _userDatils?.call.toString() ?? '',
                       ),
                       isServiceProviderAccept
-                          ? const CustomTextCollector(
+                          ? const TextCollectorWidget(
                               title: 'التقييم',
                               subTitle: '4',
                               isStar: true,
@@ -83,13 +78,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 alignment: Alignment.center,
                 child: Column(
                   children: [
-                    CustomImage(
+                    ImageWidget(
                       imagePathNetwork: _userDatils?.image,
                       height: AppSize.imageSizeLarg(context),
                       width: AppSize.imageSizeLarg(context),
                     ),
                     const SizedBox(height: 4.0),
-                    CustomText(
+                    TextWidget(
                       title: _userDatils?.fullName ?? '',
                       size: FontSize.subtitle,
                       fontWeight: FontWeight.bold,
@@ -103,14 +98,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // const SizedBox(height: 20.0),
         Column(
           children: [
-            CustomButtonInk(
+            ButtonInkWidget(
               context: context,
               title: 'الوضع',
               icon: Icons.mode_night_outlined,
               onTap: () {},
               isImage: false,
             ),
-            CustomButtonInk(
+            ButtonInkWidget(
               context: context,
               title: 'حول التطبيق',
               icon: Icons.info_outlined,
@@ -124,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               isImage: false,
             ),
-            CustomButtonInk(
+            ButtonInkWidget(
               context: context,
               title: 'اتصل بنا',
               icon: Icons.local_phone_outlined,
@@ -143,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               isImage: false,
             ),
-            CustomButtonInk(
+            ButtonInkWidget(
               context: context,
               title: 'تسجيل خروج',
               icon: Icons.exit_to_app,
@@ -154,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   content: 'هل أنت متأكد من تسجيل الخروج؟',
                   onPressed: () {
                     provider.logOut();
-                    navigatePushScreen(
+                    navigateToScreen(
                         context: context, screen: const StartScreen());
                   },
                 );

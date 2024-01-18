@@ -68,7 +68,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
                 star: servicesProviderModel.stars.toString(),
                 title: servicesProviderModel.desc,
                 onTap: () {
-                  navigatePushScreen(
+                  navigateToScreen(
                     context: context,
                     screen: ServiceDetailsScreen(
                       call: user.call,
