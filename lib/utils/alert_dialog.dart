@@ -1,4 +1,4 @@
-import 'package:announcement_of_services/components/custom_text.dart';
+import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:flutter/material.dart';
 
@@ -22,11 +22,11 @@ Future<void> alertDialog({
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const CustomText(title: 'لا', size: FontSize.plainText),
+            child: const TextWidget(title: 'لا', size: FontSize.plainText),
           ),
           TextButton(
             onPressed: onPressed,
-            child: const CustomText(title: 'نعم', size: FontSize.plainText),
+            child: const TextWidget(title: 'نعم', size: FontSize.plainText),
           ),
         ],
       );
