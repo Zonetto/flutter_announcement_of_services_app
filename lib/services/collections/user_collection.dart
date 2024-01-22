@@ -68,7 +68,7 @@ class UserCollection extends FireDatabaseServises {
     }
   }
 
-  Stream<List<UserDetailsModel>> getchAllServiceProviderData() {
+  Stream<List<UserDetailsModel>> getStreamAllServiceProviderData() {
     try {
       StreamController<List<UserDetailsModel>> controller =
           StreamController<List<UserDetailsModel>>();
@@ -124,7 +124,7 @@ class UserCollection extends FireDatabaseServises {
 
   @override
   Future<UserModel?> getSpecificDB({required String doc}) async {
-    print("getFromDB userId $doc");
+    //print("getFromDB userId $doc");
     try {
       DocumentSnapshot snapshot = await newCollection!.doc(doc).get();
       if (snapshot.exists) {
@@ -158,6 +158,37 @@ class UserCollection extends FireDatabaseServises {
             if (servicesProviderModel!.serviceType.contains(query)) {
               UserDetailsModel userDetailsModel =
                   UserDetailsModel.fromJson(userData, servicesProviderModel);
+              userList.add(userDetailsModel);
+            }
+          }
+        }
+      }
+
+      return userList;
+    } catch (e) {
+      print('Firestore error: $e');
+      return null; // or handle the error accordingly
+    }
+  }
+
+  Future<List<UserDetailsModel>?>? getAllServiceProviderData() async {
+    try {
+      QuerySnapshot<Object?> snapshot = await newCollection!.get();
+
+      List<UserDetailsModel> userList = [];
+
+      for (QueryDocumentSnapshot<Object?> document in snapshot.docs) {
+        Map<String, dynamic>? userData =
+            document.data() as Map<String, dynamic>;
+        if (userData.isNotEmpty) {
+          UserModel userModel = UserModel.fromJson(userData);
+          if (userModel.serviceProviderCollection != null) {
+            ServicesProviderModel? servicesProviderModel =
+                await userModel.getServiceProviderModel();
+
+            if (userModel.isServiceProvider == serviceProviderAccept) {
+              UserDetailsModel userDetailsModel =
+                  UserDetailsModel.fromJson(userData, servicesProviderModel!);
               userList.add(userDetailsModel);
             }
           }
