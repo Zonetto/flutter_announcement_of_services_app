@@ -10,18 +10,26 @@ import 'package:flutter/material.dart';
 import 'view_model_auth.dart';
 
 class ViewModelFetch extends ChangeNotifier {
-  final String _doc = UserManager().userId;
+  String? _doc;
   UserModel? _userDetails;
+
   ServicesProviderModel? _servicesProviderLst;
+  set setServicesProviderLst(ServicesProviderModel? servicesProviderLst) =>
+      _servicesProviderLst = servicesProviderLst;
+
   List<UserDetailsModel> _userAllDetails = [];
+  List<UserDetailsModel> _allServiceProviderLst = [];
 
   UserModel? get getUserDetails => _userDetails;
   List<UserDetailsModel> get getAllUserDetails => _userAllDetails;
+  List<UserDetailsModel> get getAllServiceProviderLst => _allServiceProviderLst;
   ServicesProviderModel? get getServicesProviderLst => _servicesProviderLst;
 
   Future<void> fetchSpecificUserDetailsData() async {
+    _doc = UserManager().userId;
     _userDetails = null;
-    final UserModel? userData = await UserCollection().getSpecificDB(doc: _doc);
+    final UserModel? userData =
+        await UserCollection().getSpecificDB(doc: _doc!);
     _userDetails = userData;
     notifyListeners();
   }
@@ -48,9 +56,20 @@ class ViewModelFetch extends ChangeNotifier {
   }
 
   Future<void> fetchSpecificServerProviderData() async {
+    _doc = UserManager().userId;
     final ServicesProviderModel? servicesProviderLst =
-        await ServicesProviderCollection().getSpecificDB(doc: _doc);
+        await ServicesProviderCollection().getSpecificDB(doc: _doc!);
     _servicesProviderLst = servicesProviderLst;
+    // fetchSpecificUserDetailsData();
+    notifyListeners();
+  }
+
+  Future<void> fetchAllServiceProviderData() async {
+    _allServiceProviderLst.clear();
+    final List<UserDetailsModel>? userAllDetails =
+        await UserCollection().getAllServiceProviderData();
+    _allServiceProviderLst = userAllDetails ?? [];
+  //  print("llll ${_allServiceProviderLst.length}");
     notifyListeners();
   }
 }

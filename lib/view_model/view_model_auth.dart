@@ -7,9 +7,8 @@ import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/services/collections/user_collection.dart';
 import 'package:announcement_of_services/services/fire_storage_servises.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
 import 'app_status.dart';
@@ -43,10 +42,10 @@ abstract class Token {
 class ViewModelAuth extends Token with ChangeNotifier {
   Timer? _authTimer;
   bool isLoad = true;
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+//  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FireStorageServises fireStorageServises = FireStorageServises();
   bool? get isAuth => token != null;
-  Response? _res;
+  http.Response? _res;
   Future<Result> _authenticate({
     required String email,
     required String password,
@@ -54,7 +53,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
     required String urlSegment,
     File? photo,
   }) async {
-    final fullUrl = "$basUrl/accounts:$urlSegment?$key";
+    final fullUrl = "$baseUrl/accounts:$urlSegment?$key";
 
     try {
       _res = await http.post(
@@ -100,6 +99,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
             .uploadAndGetImageToFirebaseStorage(photo!);
         user!.image = downloadUrl;
         user.userId = _userId;
+        user.password = _hashPassword(password);
         await Future.delayed(const Duration(seconds: 3));
         UserCollection().addInfoDB(doc: uid, info: user.toJson());
       }
@@ -202,4 +202,9 @@ class ViewModelAuth extends Token with ChangeNotifier {
     _authTimer =
         Timer(Duration(hours: timeToExpiry), logOut); // 2400 = 100 days
   }
+}
+
+String _hashPassword(String password) {
+  final Digest sha256Hash = sha256.convert(utf8.encode(password));
+  return sha256Hash.toString();
 }
