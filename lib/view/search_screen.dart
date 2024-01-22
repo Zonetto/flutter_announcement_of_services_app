@@ -1,4 +1,4 @@
-import 'package:announcement_of_services/components/complex_card.dart';
+import 'package:announcement_of_services/components/card_contents_widget.dart';
 import 'package:announcement_of_services/components/text_form_field_widget.dart';
 import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
@@ -58,7 +58,7 @@ class SearchScreen extends StatelessWidget {
                     final UserDetailsModel user = userDatils[index];
                     final ServicesProviderModel servicesProviderModel =
                         user.servicesProviderModel;
-                    return ComplexCard(
+                    return CardContents(
                       isAdmin: false,
                       backgroundImagePath: servicesProviderModel.image,
                       name: user.fullName,

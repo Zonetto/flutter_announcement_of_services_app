@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
-import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
-import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -71,7 +69,8 @@ class SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  backgroundColor: AppColor.colorTextBlack1,
+      backgroundColor: Theme.of(context).bottomAppBarColor,
+      //backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +90,7 @@ class SplashScreenState extends State<SplashScreen>
                     width: 100,
                     height: 100,
                     decoration: const BoxDecoration(
-                      color: AppColor.buttonColorGreen,
+                      color: AppColor.green,
                       shape: BoxShape.circle,
                     ),
                     child: AnimatedBuilder(
@@ -101,7 +100,8 @@ class SplashScreenState extends State<SplashScreen>
                         child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColor.colorTextBlack1.withOpacity(1),
+                            // color: AppColor.darkShade.withOpacity(1),
+                            color: Theme.of(context).splashColor,
                           ),
                         ),
                       ),
@@ -110,16 +110,17 @@ class SplashScreenState extends State<SplashScreen>
                 ),
               ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 50),
-                  child: TextWidget(
-                    title: 'السهولة هنا',
-                    size: FontSize.headline,
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.colorTextButtonWhite,
+                  padding: const EdgeInsets.only(top: 50),
+                  child: Text(
+                    'السهولة هنا',
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          color: AppColor.white,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                 ),
               ],

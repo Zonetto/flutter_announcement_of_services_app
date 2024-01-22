@@ -161,7 +161,8 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                                 ),
                                 TextCollectorWidget(
                                   title: 'العمر',
-                                  subTitle: widget.dateOfBirth,
+                                  subTitle: calculateAge((widget.dateOfBirth))
+                                      .toString(), // widget.dateOfBirth,
                                 ),
                                 TextCollectorWidget(
                                   title: 'ساعات العمل',
@@ -196,4 +197,20 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
       ),
     );
   }
+}
+
+int calculateAge(String birthYear) {
+  int currentYear = DateTime.now().year;
+  int currentYear1 = convertStringToDate(birthYear);
+
+  int age = currentYear - currentYear1;
+
+  return age;
+}
+
+int convertStringToDate(String dateString) {
+  List<String> dateParts = dateString.split('/');
+  int year = int.parse(dateParts[2]);
+
+  return year;
 }

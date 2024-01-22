@@ -3,6 +3,7 @@ import 'package:announcement_of_services/components/image_widget.dart';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
 import 'package:announcement_of_services/components/text_collector_widget.dart';
 import 'package:announcement_of_services/components/text_widget.dart';
+import 'package:announcement_of_services/main.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/utils/alert_dialog.dart';
@@ -102,7 +103,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               context: context,
               title: 'الوضع',
               icon: Icons.mode_night_outlined,
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  MyApp.themeNotifier.value =
+                      MyApp.themeNotifier.value == ThemeMode.light
+                          ? ThemeMode.dark
+                          : ThemeMode.light;
+                });
+              },
               isImage: false,
             ),
             ButtonInkWidget(

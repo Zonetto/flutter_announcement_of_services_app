@@ -1,4 +1,4 @@
-import 'package:announcement_of_services/components/complex_card.dart';
+import 'package:announcement_of_services/components/card_contents_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_details_model.dart';
 import 'package:announcement_of_services/services/collections/user_collection.dart';
@@ -36,7 +36,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
               final String doc = user.userId;
               final ServicesProviderModel servicesProviderModel =
                   user.servicesProviderModel;
-              return ComplexCard(
+              return CardContents(
                 onPressedAccept: () {
                   UserCollection().updateInfoDB(
                     doc: doc,

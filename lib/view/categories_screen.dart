@@ -1,5 +1,5 @@
 import 'package:announcement_of_services/components/buttom_ink_widget.dart';
-import 'package:announcement_of_services/components/complex_card.dart';
+import 'package:announcement_of_services/components/card_contents_widget.dart';
 import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/services_provider_info_model.dart';
@@ -144,7 +144,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
 
   Widget buildComplexCard(BuildContext context, UserDetailsModel user,
       ServicesProviderModel servicesProviderModel) {
-    return ComplexCard(
+    return CardContents(
       isAdmin: false,
       backgroundImagePath: servicesProviderModel.image,
       name: user.fullName,

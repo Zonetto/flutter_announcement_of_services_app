@@ -23,6 +23,16 @@ class AdvertisementForServiceInfoScreen extends StatefulWidget {
 class SserviceDetailsScreenState
     extends State<AdvertisementForServiceInfoScreen> {
   ServicesProviderModel? _servicesProviderModel;
+  @override
+  void initState() {
+    final provider = Provider.of<ViewModelFetch>(context, listen: false);
+
+    // Check if user details are already available
+    if (provider.getUserDetails == null) {
+      provider.fetchSpecificServerProviderData();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
