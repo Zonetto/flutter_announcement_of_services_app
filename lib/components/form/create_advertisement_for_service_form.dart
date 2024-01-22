@@ -9,7 +9,6 @@ import 'package:announcement_of_services/module/services_provider_info_model.dar
 import 'package:announcement_of_services/services/collections/services_provider_collection.dart';
 import 'package:announcement_of_services/services/collections/user_collection.dart';
 import 'package:announcement_of_services/services/fire_storage_servises.dart';
-import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
@@ -135,7 +134,7 @@ class _CreateOrEditAdvertisementForServiceFormState
       child: SingleChildScrollView(
         child: Column(
           children: [
-              AppSize.sizedBoxHeight,
+            AppSize.sizedBoxHeight,
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 14),
               child: ImageWidget(
@@ -215,7 +214,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppColor.buttonColorGrey,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                     child: const Row(
                       children: [
@@ -283,7 +282,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppColor.buttonColorGrey,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                     child: const Row(
                       children: [
@@ -508,6 +507,8 @@ class _CreateOrEditAdvertisementForServiceFormState
                     );
                     provider.setServicesProviderLst = null;
                     provider.fetchSpecificUserDetailsData();
+                    provider.fetchSpecificServerProviderData();
+                    
                     // ignore: use_build_context_synchronously
                     Navigator.pop(context);
                   }
