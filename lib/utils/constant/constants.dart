@@ -4,7 +4,7 @@ class CollectionDB {
   static const String postCollection = 'post_tbl';
 }
 
-const String basUrl = 'https://identitytoolkit.googleapis.com/v1';
+const String baseUrl = 'https://identitytoolkit.googleapis.com/v1';
 const String key = 'key=AIzaSyAte23mrZFcs16b_FufGlGesH_TCP7zPBc';
 const String serviceProviderAccept = "ACCEPT";
 const String serviceProviderUnaccepted = "UNACCEPTED";
