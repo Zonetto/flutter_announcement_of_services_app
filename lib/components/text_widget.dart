@@ -1,4 +1,3 @@
-import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +6,7 @@ class TextWidget extends StatelessWidget {
   final double size;
   final TextAlign alignment;
   final FontWeight? fontWeight;
-  final Color color;
+  final Color? color;
   final int? maxLines;
   final TextOverflow? overflow;
 
@@ -16,7 +15,7 @@ class TextWidget extends StatelessWidget {
     required this.title,
     this.size = 18,
     this.fontWeight,
-    this.color = AppColor.colorTextBlack,
+    this.color ,
     this.alignment = TextAlign.right,
     this.maxLines,
     this.overflow,
@@ -32,7 +31,7 @@ class TextWidget extends StatelessWidget {
       //  style: Theme.of(context).textTheme.titleLarge,
       style: TextStyle(
         fontWeight: fontWeight,
-      //  color: color,
+        color: Theme.of(context).textTheme.bodyLarge!.color,
         fontSize: Dimensions.fontSize(context, size),
       ),
     );

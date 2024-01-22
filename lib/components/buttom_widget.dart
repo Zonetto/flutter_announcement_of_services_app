@@ -18,8 +18,8 @@ class ButtonWidget extends StatelessWidget {
     required this.context,
     required this.title,
     required this.onPressed,
-    this.backGroundColor = AppColor.buttonColorGreen,
-    this.textColor = AppColor.colorTextButtonWhite,
+    this.backGroundColor = AppColor.green,
+    this.textColor = AppColor.white,
     this.width,
     this.height,
     this.isLoad = false,
@@ -50,7 +50,7 @@ class ButtonWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 20.0),
                   const CircularProgressIndicator(
-                    color: AppColor.colorTextButtonWhite,
+                    color: AppColor.white,
                   ),
                 ],
               )

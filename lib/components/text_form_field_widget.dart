@@ -87,18 +87,21 @@ class TextFormFieldWidget extends StatelessWidget {
                 borderSide: const BorderSide(color: Colors.green, width: 1),
               ),
               hintText: hintText,
+              hintStyle: TextStyle(color: Theme.of(context).hintColor),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide.none,
               ),
+              suffixIconColor: Theme.of(context).iconTheme.color,
               filled: true,
-              fillColor: const Color(0xFFD7D9E0),
+              fillColor: Theme.of(context).secondaryHeaderColor,
               suffixIcon: isPassword
                   ? IconButton(
                       icon: Icon(
                         obscureText
                             ? Icons.remove_red_eye_rounded
                             : Icons.remove_red_eye_outlined,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       onPressed: onPressedPassword,
                     )

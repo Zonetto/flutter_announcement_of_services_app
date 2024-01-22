@@ -106,7 +106,7 @@ class CardContents extends StatelessWidget {
                                     const TextWidget(
                                       title: 'متوفر',
                                       size: FontSize.plainText,
-                                      color: AppColor.colorTextButtonGreen,
+                                      color: AppColor.shadeOfGreen,
                                     ),
                                   ],
                                 ),
@@ -131,7 +131,7 @@ class CardContents extends StatelessWidget {
                           child: Center(
                             child: TextWidget(
                               title: '$price ألف',
-                              color: AppColor.colorTextButtonWhite,
+                              color: AppColor.white,
                               size: FontSize.plainText,
                             ),
                           ),

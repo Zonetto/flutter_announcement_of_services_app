@@ -89,7 +89,7 @@ class ImageWidget extends StatelessWidget {
       child: Container(
         alignment: Alignment.bottomCenter,
         child: const CircleAvatar(
-          backgroundColor: AppColor.buttonColorGrey,
+          backgroundColor: AppColor.grey,
           child: Icon(
             Icons.camera_alt_outlined,
             size: 30,
