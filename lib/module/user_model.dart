@@ -9,7 +9,7 @@ class UserModel {
   final int call;
   final String dateOfBirth;
   final String email;
-  final String password;
+  String password;
   final String fullName;
   String? image;
   final String isServiceProvider;
@@ -66,22 +66,4 @@ class UserModel {
     }
     return null; // Handle the case when serviceProviderCollection is null or document does not exist
   }
-
-  // Future<ServicesProviderModel?> searchServiceProviderModel(
-  //     String query) async {
-  //   if (serviceProviderCollection != null) {
-  //     CollectionReference collectionRef = serviceProviderCollection!.collection(
-  //         'your_subcollection_name'); // Replace 'your_subcollection_name' with the actual name of your subcollection
-
-  //     QuerySnapshot<Object?> snapshot = await collectionRef
-  //         .where('name', isGreaterThanOrEqualTo: query)
-  //         .where('name', isLessThan: query + 'z')
-  //         .get();
-  //     QueryDocumentSnapshot<Object?> document = snapshot.docs;
-  //     ServicesProviderModel providerModel =
-  //         ServicesProviderModel.fromDocumentSnapshot(document);
-  //     return providerModel;
-  //   }
-  //   return null;
-  // }
 }
