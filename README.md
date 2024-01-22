@@ -5,7 +5,7 @@
 ---
 ### To download the project follow the:
 1. create a file in the document as name **flutter_announcement_of_services_app**
-2. Go to file **flutter_announcement_of_services_app***
+2. Go to file **flutter_announcement_of_services_app**
 3. git clone
 ```
 git clone https://github.com/Zonetto/flutter_announcement_of_services_app.git
