@@ -1,3 +1,4 @@
+import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/typedef.dart';
@@ -53,20 +54,20 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? Dimensions.screenWidth(context),
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.only(bottom: 13.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           !isWithoutText
               ? TextWidget(
                   title: headline,
-                  size: FontSize.subtitle,
+                  size: FontSize.subtitle(context),
                   fontWeight: FontWeight.w600,
                 )
               : const SizedBox.shrink(),
           !isWithoutText
               ? const SizedBox(
-                  height: 4.0,
+                  height: 10.0,
                 )
               : const SizedBox.shrink(),
           TextFormField(
@@ -84,7 +85,7 @@ class TextFormFieldWidget extends StatelessWidget {
               suffixText: suffixText,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
-                borderSide: const BorderSide(color: Colors.green, width: 1),
+                borderSide: const BorderSide(color: AppColor.green, width: 1),
               ),
               hintText: hintText,
               hintStyle: TextStyle(color: Theme.of(context).hintColor),

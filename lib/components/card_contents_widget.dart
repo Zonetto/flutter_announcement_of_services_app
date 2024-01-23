@@ -53,17 +53,14 @@ class CardContents extends StatelessWidget {
             // crossAxisAlignment: CrossAxisAlignment.end,
             // mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ImageWidget(
+              ImageWidget1(
                 imagePathNetwork: backgroundImagePath,
-                width: Dimensions.screenWidth(context),
-                height: 120,
-                radius: 15,
               ),
               Expanded(
                 child: ListTile(
                   title: TextWidget(
                     title: title,
-                    size: FontSize.subtitle,
+                    size: FontSize.subtitle(context),
                     fontWeight: FontWeight.bold,
                   ),
                   subtitle: Column(
@@ -76,7 +73,7 @@ class CardContents extends StatelessWidget {
                           ),
                           TextWidget(
                             title: star.toString(),
-                            size: FontSize.plainText,
+                            size: FontSize.plainText(context),
                           ),
                         ],
                       ),
@@ -100,12 +97,12 @@ class CardContents extends StatelessWidget {
                                   children: [
                                     TextWidget(
                                       title: name,
-                                      size: FontSize.plainText,
+                                      size: FontSize.plainText(context),
                                       fontWeight: FontWeight.bold,
                                     ),
-                                    const TextWidget(
+                                    TextWidget(
                                       title: 'متوفر',
-                                      size: FontSize.plainText,
+                                      size: FontSize.plainText(context),
                                       color: AppColor.shadeOfGreen,
                                     ),
                                   ],
@@ -132,7 +129,7 @@ class CardContents extends StatelessWidget {
                             child: TextWidget(
                               title: '$price ألف',
                               color: AppColor.white,
-                              size: FontSize.plainText,
+                              size: FontSize.plainText(context),
                             ),
                           ),
                         ),

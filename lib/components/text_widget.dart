@@ -1,4 +1,3 @@
-import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
@@ -15,7 +14,7 @@ class TextWidget extends StatelessWidget {
     required this.title,
     this.size = 18,
     this.fontWeight,
-    this.color ,
+    this.color,
     this.alignment = TextAlign.right,
     this.maxLines,
     this.overflow,
@@ -28,11 +27,11 @@ class TextWidget extends StatelessWidget {
       overflow: overflow,
       title,
       maxLines: maxLines,
-      //  style: Theme.of(context).textTheme.titleLarge,
       style: TextStyle(
         fontWeight: fontWeight,
-        color: Theme.of(context).textTheme.bodyLarge!.color,
-        fontSize: Dimensions.fontSize(context, size),
+        color: color ?? Theme.of(context).textTheme.bodyLarge!.color,
+        fontSize: size,
+        fontFamily: "Cairo",
       ),
     );
   }

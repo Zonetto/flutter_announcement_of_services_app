@@ -43,7 +43,7 @@ class ButtonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextWidget(
-                    size: FontSize.buttonText,
+                    size: FontSize.buttonText(context),
                     title: 'أنتظر قليلاً',
                     color: textColor,
                     fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class ButtonWidget extends StatelessWidget {
                 ],
               )
             : TextWidget(
-                size: FontSize.buttonText,
+                size: FontSize.buttonText(context),
                 title: title,
                 color: textColor,
                 fontWeight: FontWeight.bold,

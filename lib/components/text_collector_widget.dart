@@ -23,8 +23,8 @@ class TextCollectorWidget extends StatelessWidget {
         children: [
           TextWidget(
             title: title,
-            fontWeight: FontWeight.bold,
-            size: FontSize.headline,
+            fontWeight: FontWeight.w600,
+            size: FontSize.headline(context),
           ),
           Row(
             children: [
@@ -38,7 +38,7 @@ class TextCollectorWidget extends StatelessWidget {
               Expanded(
                 child: TextWidget(
                   title: subTitle,
-                  size: FontSize.plainText,
+                  size: FontSize.plainText(context),
                 ),
               ),
             ],

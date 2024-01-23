@@ -30,8 +30,8 @@ class ButtonInkWidget extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(35),
         onTap: onTap,
-       // splashColor: Colors.red, // Theme.of(context).scaffoldBackgroundColor,
-       // highlightColor: Theme.of(context).highlightColor,
+        // splashColor: Colors.red, // Theme.of(context).scaffoldBackgroundColor,
+        // highlightColor: Theme.of(context).highlightColor,
         child: Ink(
           width: Dimensions.screenWidth(context),
           height: 44,
@@ -43,12 +43,12 @@ class ButtonInkWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(35),
             ),
-            shadows: const [AppColor.shadow],
+            shadows: [AppColor.shadow(context)],
           ),
           child: Row(
             children: [
               TextWidget(
-                size: FontSize.buttonText,
+                size: FontSize.buttonText(context),
                 title: title,
                 fontWeight: FontWeight.bold,
               ),
