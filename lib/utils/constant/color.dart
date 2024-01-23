@@ -13,10 +13,11 @@ class AppColor {
   static const Color colorTextBlack = Colors.black;
   static Color buttonColorRed = Colors.red.withOpacity(0.8);
   static const Color shadowColor = Color(0x3F000000);
-  static const BoxShadow shadow = BoxShadow(
-    color: AppColor.shadowColor,
-    blurRadius: 4,
-    offset: Offset(0, 4),
-    spreadRadius: 0,
-  );
+  static BoxShadow shadow(BuildContext context) => const BoxShadow(
+        //? light shadowColor //? dark darkShadeText
+        color: AppColor.shadowColor,
+        blurRadius: 4,
+        offset: Offset(0, 4),
+        spreadRadius: 0,
+      );
 }
