@@ -137,14 +137,11 @@ class _CreateOrEditAdvertisementForServiceFormState
             AppSize.sizedBoxHeight,
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 14),
-              child: ImageWidget(
+              child: ImageWidget1(
                 imagePathNetwork:
                     _selectedImage == null ? backgroundImage : null,
                 imagePathLocal: _selectedImage,
-                width: Dimensions.screenWidth(context),
                 // disabled: _loading ? true : false,
-                height: 120,
-                radius: 15,
                 isEdit: !_loading ? true : false,
                 onTap: () async {
                   final XFile? selectedImage =
@@ -216,14 +213,14 @@ class _CreateOrEditAdvertisementForServiceFormState
                       borderRadius: BorderRadius.circular(10),
                       color: Theme.of(context).secondaryHeaderColor,
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
                         TextWidget(
                           title: 'إيام العمل',
-                          size: FontSize.plainText,
+                          size: FontSize.plainText(context),
                         ),
-                        Spacer(),
-                        Icon(Icons.date_range_outlined),
+                        const Spacer(),
+                        const Icon(Icons.date_range_outlined),
                       ],
                     ),
                   ),
@@ -277,21 +274,21 @@ class _CreateOrEditAdvertisementForServiceFormState
                 children: [
                   Container(
                     height: 60,
-                    width: Dimensions.screenWidth(context) / 3,
+                    width: Dimensions.screenWidth(context) / 2.5,
                     margin: const EdgeInsets.only(bottom: 14.0),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Theme.of(context).secondaryHeaderColor,
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
                         TextWidget(
                           title: 'ساعات العمل',
-                          size: FontSize.plainText,
+                          size: FontSize.plainText(context),
                         ),
-                        Spacer(),
-                        Icon(Icons.date_range_outlined),
+                        const Spacer(),
+                        const Icon(Icons.date_range_outlined),
                       ],
                     ),
                   ),
@@ -508,7 +505,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                     provider.setServicesProviderLst = null;
                     provider.fetchSpecificUserDetailsData();
                     provider.fetchSpecificServerProviderData();
-                    
+
                     // ignore: use_build_context_synchronously
                     Navigator.pop(context);
                   }

@@ -49,17 +49,6 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //    _logUpFormKey.currentState?.dispose();
-  //   _emailController.dispose();
-  //   _fullNameController.dispose();
-  //   _callController.dispose();
-  //   _dateOfBirthController.dispose();
-  //   _passwordController.dispose();
-  //   _confirmPasswordController.dispose();
-  //   super.initState();
-  // }
   File? _selectedImage;
   @override
   Widget build(BuildContext context) {
@@ -72,10 +61,12 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
                   ImageWidget(
                     imagePathNetwork: null,
                     imagePathLocal: _selectedImage,
@@ -201,20 +192,14 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                       setState(() {
                         _lodaing = true;
                       });
-
                       _logUpFormKey.currentState!.save();
                       final String email = _emailController.text.trim();
-                      //  'a44hmedee@gmail.com'; //_emailController.text.trim();
                       String fullName = _fullNameController.text.trim();
-                      //  'Ahmed'; //_fullNameController.text.trim();
                       final String password = _passwordController.text.trim();
-                      //  '112233'; //_passwordController.text.trim();
                       final String dateOfBirth =
-                          _dateOfBirthController.text.trim(); //
-                      _dateOfBirthController.text.trim(); // '2002';
-                      // _dateOfBirthController.text.trim();
+                          _dateOfBirthController.text.trim();
+                      _dateOfBirthController.text.trim();
                       final int call = int.parse(_callController.text.trim());
-                      // 098; //int.parse(_callController.text.trim());
                       String isServiceProvider = serviceProviderUnaccepted;
                       final UserModel user = UserModel(
                         call: call,
@@ -225,21 +210,38 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                         fullName: fullName,
                         isServiceProvider: isServiceProvider,
                       );
-                      await Future.delayed(const Duration(seconds: 2));
-                      final auth = await provider.signUp(user, _selectedImage);
-                      if (auth is Success) {
-                        navigateAndReplaceScreen(
-                            context: context,
-                            screen: const BottomNavigationBarScreen());
-                      }
-                      if (auth is Error) {
+                      if (_selectedImage != null) {
+                        await Future.delayed(const Duration(seconds: 1));
+
+                        final auth =
+                            await provider.signUp(user, _selectedImage);
+                        if (auth is Success) {
+                          // ignore: use_build_context_synchronously
+                          navigateAndReplaceScreen(
+                              context: context,
+                              screen: const BottomNavigationBarScreen());
+                        }
+                        if (auth is Error) {
+                          setState(() {
+                            _lodaing = false;
+                          });
+                          print(auth.errorResponse);
+                          if (auth.code == 400) {
+                            // ignore: use_build_context_synchronously
+                            styledScaffoldMessenger(
+                              context: context,
+                              message: 'لقد تم التسجيل في هذا الحساب مسبقاً\nرجاءًا حاول تغير عنوان البريد الالكتروني',
+                              color: AppColor.buttonColorRed,
+                            );
+                          }
+                        }
+                      } else {
                         setState(() {
                           _lodaing = false;
                         });
-
                         styledScaffoldMessenger(
                           context: context,
-                          message: 'تأكد من ملئ جميع الحقول',
+                          message: 'لايمكن ان تكون الصورة فارغة',
                           color: AppColor.buttonColorRed,
                         );
                       }
