@@ -7,23 +7,19 @@ environment:
   sdk: '>=3.1.2 <4.0.0'
 
 dependencies:
-  animations: ^2.0.11
+
   cloud_firestore: ^4.13.2
   crypto: ^3.0.1
-  firebase_app_check: ^0.2.1+6
   firebase_core: ^2.23.0
-  firebase_phone_auth_handler: ^1.0.8
   firebase_storage: ^11.6.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
-  flutterfire_cli: ^0.2.7
   http: ^0.13.6
   image_picker: ^1.0.4
   intl: ^0.18.0
-  path: ^1.8.3
   provider: ^6.1.1
   shared_preferences: ^2.2.2
   url_launcher: ^6.0.9
@@ -39,5 +35,17 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/clients_home_appliance1.png
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/cairo/Cairo-Black.ttf
+        - asset: assets/fonts/cairo/Cairo-Bold.ttf
+        - asset: assets/fonts/cairo/Cairo-ExtraBold.ttf
+        - asset: assets/fonts/cairo/Cairo-ExtraLight.ttf
+        - asset: assets/fonts/cairo/Cairo-Light.ttf
+        - asset: assets/fonts/cairo/Cairo-Medium.ttf
+        - asset: assets/fonts/cairo/Cairo-Regular.ttf
+        - asset: assets/fonts/cairo/Cairo-SemiBold.ttf
+
 flutter_intl:
   enabled: true
