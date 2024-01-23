@@ -1,6 +1,7 @@
 import 'package:announcement_of_services/components/buttom_widget.dart';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
 import 'package:announcement_of_services/components/text_widget.dart';
+import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
@@ -14,7 +15,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -31,30 +32,36 @@ class StartScreen extends StatelessWidget {
             Container(
               padding: AppSize.nternalMargin,
               //height: 250,
+
               width: double.infinity,
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              decoration: CustomShapeDecoration.shapeDecoration(context),
+              decoration: CustomShapeDecoration.shapeDecoration(
+                context,
+                color: AppColor.white,
+              ),
               child: Column(
                 children: [
                   FittedBox(
                     child: TextWidget(
-                      title: 'مرحباً بك في تطبيق السهولة هُنا',
+                      title: 'ابحث، احجز، احصل على الخدمة',
                       size: Dimensions.screenWidth(context) * 0.08,
                       fontWeight: FontWeight.bold,
+                      color: AppColor.darkShadeText,
                     ),
                   ),
                   Container(
                     // padding: EdgeInsets.all(30.0),
+                    //  color: AppColor.white,
                     margin: const EdgeInsets.symmetric(
                       horizontal: 20.0,
                       vertical: 10,
                     ),
-                    child: const TextWidget(
-                      title:
-                          'مرحباً بك في تطبيق السهولة هُنا سنتنشستنش شنتسشن سنشست شنستشنست شنتسنش سنشتسنشتسنشتس شنس تشنست نشتسنش سنشتسنشتسنش تسشسنتش سنشتس شنتسنش تسنشتس شنتسشنست نشسنشتس نشسنشتس نش تس',
-                      size: FontSize.plainText,
-                      alignment: TextAlign.center,
-                    ),
+                    child: TextWidget(
+                        title:
+                            'تطبيقنا يوفر اتصالًا فوريًا بين مقدمي الخدمات المحترفين والأفراد الباحثين عن الخدمات. ابحث، احجز، واحصل على مجموعة متنوعة من الخدمات بسهولة وفعالية. انضم إلينا لتجربة تواصل فريدة تلبي احتياجاتك بكل يسر وسرعة.',
+                        size: FontSize.plainText(context),
+                        alignment: TextAlign.center,
+                        color: AppColor.darkShadeText),
                   ),
                   const SizedBox(
                     height: 10.0,

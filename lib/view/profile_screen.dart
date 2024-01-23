@@ -1,6 +1,7 @@
 import 'package:announcement_of_services/components/buttom_ink_widget.dart';
 import 'package:announcement_of_services/components/image_widget.dart';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
+import 'package:announcement_of_services/components/shared/network/local/cache_helper.dart';
 import 'package:announcement_of_services/components/text_collector_widget.dart';
 import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/main.dart';
@@ -87,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 4.0),
                     TextWidget(
                       title: _userDatils?.fullName ?? '',
-                      size: FontSize.subtitle,
+                      size: FontSize.subtitle(context),
                       fontWeight: FontWeight.bold,
                     ),
                   ],
@@ -103,13 +104,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               context: context,
               title: 'الوضع',
               icon: Icons.mode_night_outlined,
-              onTap: () {
-                setState(() {
-                  MyApp.themeNotifier.value =
-                      MyApp.themeNotifier.value == ThemeMode.light
-                          ? ThemeMode.dark
-                          : ThemeMode.light;
-                });
+              onTap: () async {
+                if (MyApp.themeNotifier.value == ThemeMode.light) {
+                  await CacheHelper.putDataBoolean(key: 'mode', value: false);
+                  MyApp.themeNotifier.value = ThemeMode.dark;
+                } else {
+                  await CacheHelper.putDataBoolean(key: 'mode', value: true);
+                  MyApp.themeNotifier.value = ThemeMode.light;
+                }
               },
               isImage: false,
             ),
@@ -131,19 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               context: context,
               title: 'اتصل بنا',
               icon: Icons.local_phone_outlined,
-              onTap: () async {
-                // final UserModel? userData = await FireDatabaseServises()
-                //     .getUserFromDB(provider.getUserId!);
-
-                // final Map<String, dynamic>? userData =
-                //     await DatabaseMethod().getUserFromDB1(provider.getUserId!);
-
-                //  final Map<String, dynamic> u = DatabaseMethod().getUserFromDB(provider.getUserId!);
-                // print(userData!.call);
-                // print(provider1.getUserId!);
-                print(_userDatils?.image);
-                //provider1.fetchUserDetailsData();
-              },
+              onTap: () async {},
               isImage: false,
             ),
             ButtonInkWidget(

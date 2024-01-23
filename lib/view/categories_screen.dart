@@ -105,10 +105,10 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (userDetails.isEmpty)
-          const Center(
+           Center(
             child: TextWidget(
               title: 'لا يوجد نتائج',
-              size: FontSize.subtitle,
+              size: FontSize.subtitle(context),
             ),
           ),
         if (userDetails.isNotEmpty)
@@ -121,10 +121,10 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
 
   Widget buildUserDetailsListView(List<UserDetailsModel> userDatils) {
     return !isNotEmptyData
-        ? const Center(
+        ?  Center(
             child: TextWidget(
               title: 'لا يوجد نتائج',
-              size: FontSize.subtitle,
+              size: FontSize.subtitle(context),
             ),
           )
         : Expanded(

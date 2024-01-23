@@ -100,7 +100,7 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                         const SizedBox(height: 4.0),
                         TextWidget(
                           title: widget.fullName,
-                          size: FontSize.subtitle,
+                          size: FontSize.subtitle(context),
                           fontWeight: FontWeight.bold,
                         ),
                       ],
@@ -189,7 +189,7 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                     launch("tel: +964${widget.call}");
                   },
                 ),
-                const SizedBox(height: 10),
+              const SizedBox(height: 4),
               ],
             ),
           ),

@@ -116,10 +116,11 @@ class SplashScreenState extends State<SplashScreen>
                 Padding(
                   padding: const EdgeInsets.only(top: 50),
                   child: Text(
-                    'السهولة هنا',
+                    'محطة الخدمات',
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: AppColor.white,
                           fontWeight: FontWeight.w600,
+                          fontFamily: "Cairo",
                         ),
                   ),
                 ),

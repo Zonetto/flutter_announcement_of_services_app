@@ -44,10 +44,10 @@ class SearchScreen extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         userDatils.isEmpty
-            ? const Center(
+            ? Center(
                 child: TextWidget(
                   title: 'لا يوجد نتائج',
-                  size: FontSize.subtitle,
+                  size: FontSize.subtitle(context),
                 ),
               )
             : Expanded(

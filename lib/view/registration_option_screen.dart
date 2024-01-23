@@ -34,8 +34,9 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                     child: ButtonWidget(
                       context: context,
                       title: 'تسجيل دخول',
-                      backGroundColor:
-                          isSignIn ? AppColor.grey : AppColor.green,
+                      backGroundColor: isSignIn
+                          ? Theme.of(context).secondaryHeaderColor
+                          : AppColor.green,
                       textColor:
                           isSignIn ? AppColor.shadeOfGreen : AppColor.white,
                       onPressed: () {
@@ -55,8 +56,9 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                     child: ButtonWidget(
                       context: context,
                       title: 'إنشاء حساب',
-                      backGroundColor:
-                          !isSignIn ? AppColor.grey : AppColor.green,
+                      backGroundColor: !isSignIn
+                          ? Theme.of(context).secondaryHeaderColor
+                          : AppColor.green,
                       textColor:
                           !isSignIn ? AppColor.shadeOfGreen : AppColor.white,
                       onPressed: () {
@@ -76,7 +78,7 @@ class _RegistrationOptionScreenState extends State<RegistrationOptionScreen> {
                 child: TextWidget(
                   title: isSignIn ? 'سجل الأن' : 'مرحباً بعودتك',
                   fontWeight: FontWeight.bold,
-                  size: FontSize.headline,
+                  size: FontSize.headline(context),
                 ),
               ),
               Expanded(

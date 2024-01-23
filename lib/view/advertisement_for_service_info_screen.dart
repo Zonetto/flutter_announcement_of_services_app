@@ -46,11 +46,8 @@ class SserviceDetailsScreenState
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 14),
-            child: ImageWidget(
+            child: ImageWidget1(
               imagePathNetwork: _servicesProviderModel?.image,
-              width: Dimensions.screenWidth(context),
-              height: 120,
-              radius: 15,
             ),
           ),
           Container(
@@ -142,7 +139,7 @@ class SserviceDetailsScreenState
                     // print(_servicesProviderModel?.endOfWorkingDays ?? '');
                   },
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 4),
               ],
             ),
           ),
