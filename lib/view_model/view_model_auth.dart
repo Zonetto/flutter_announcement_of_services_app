@@ -15,7 +15,7 @@ import 'app_status.dart';
 
 class UserManager {
   static final UserManager _instance = UserManager._internal();
-  late String userId;
+  String? userId;
 
   factory UserManager() {
     return _instance;
@@ -54,7 +54,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
     File? photo,
   }) async {
     final fullUrl = "$baseUrl/accounts:$urlSegment?$key";
-
+    print("1");
     try {
       _res = await http.post(
         Uri.parse(fullUrl),
@@ -66,57 +66,39 @@ class ViewModelAuth extends Token with ChangeNotifier {
           },
         ),
       );
-
-      // if (urlSegment == "signInWithPassword") {
-      //   firebaseAuth.signInWithEmailAndPassword(
-      //     email: email,
-      //     password: password,
-      //   );
-      // }
-
+      UserCollection userCollection = UserCollection();
       final Map<String, dynamic> resData = json.decode(_res!.body);
       final String uid = resData['localId'];
-
-      //firebaseAuth.currentUser!.uid.toString(); //resData['localId'];
 
       if (resData['error'] != null) {
         print("${resData['error']['message']}");
         throw "${resData['error']['message']}";
       }
-      // _token = resData['email'];
+      print("2");
       _userId = uid;
       UserManager().userId = uid;
       _expiryDate =
           DateTime.now().add(Duration(hours: int.parse(resData['expiresIn'])));
       _autoLogout();
       if (urlSegment == "signUp") {
-        //  await fireStorageServises.upload(photo!);
-        // firebaseAuth.createUserWithEmailAndPassword(
-        //   email: email,
-        //   password: password,
-        // );
         String? downloadUrl = await fireStorageServises
             .uploadAndGetImageToFirebaseStorage(photo!);
         user!.image = downloadUrl;
         user.userId = _userId;
         user.password = _hashPassword(password);
-        await Future.delayed(const Duration(seconds: 3));
-        UserCollection().addInfoDB(doc: uid, info: user.toJson());
+        await Future.delayed(const Duration(seconds: 1));
+        userCollection.addInfoDB(doc: uid, info: user.toJson());
       }
-
       notifyListeners();
-      //   await CacheHelper.putDataString(key: 'token', value: _token);
       await CacheHelper.putDataString(key: 'userId', value: _userId);
       await CacheHelper.putDataString(
           key: 'expiryDate', value: _expiryDate!.toIso8601String());
       return Success(code: _res!.statusCode, response: resData);
     } catch (e) {
+      UserManager().userId = null;
+      print("${_res!.statusCode}    ${e.toString()}");
       return Error(code: _res!.statusCode, errorResponse: e.toString());
-      //return false;
-      // rethrow;
     }
-
-    // return true;
   }
 
   Future<bool> tryAuthLogin() async {
@@ -155,28 +137,16 @@ class ViewModelAuth extends Token with ChangeNotifier {
       urlSegment: "signUp",
       photo: photo,
     );
-    // print(auth);
-    // if (!auth) {
-    //   return false;
-    // }
     return auth;
   }
 
   Future<Result> logIn(AuthModel authUser) async {
-    // try {
     final auth = await _authenticate(
       email: authUser.email,
       password: authUser.password,
       urlSegment: "signInWithPassword",
     );
     return auth;
-    //  } catch (e) {}
-
-    //print(auth);
-    // if (!auth) {
-    //   return false;
-    // }
-    // return true;
   }
 
   void logOut() async {
@@ -189,8 +159,6 @@ class ViewModelAuth extends Token with ChangeNotifier {
     }
     notifyListeners();
     CacheHelper.sharedPreferences!.clear();
-    // final prefs = await SharedPreferences.getInstance();
-    // prefs.clear();
   }
 
   void _autoLogout() {
