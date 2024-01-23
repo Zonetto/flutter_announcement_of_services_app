@@ -12,21 +12,25 @@ Future<void> alertDialog({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: title != null ? Text(title) : null,
-        content: Text(
-          content,
-          style: const TextStyle(fontSize: 16),
-        ),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: title != null
+            ? TextWidget(title: title, size: FontSize.headline(context))
+            : null,
+        // content: Text(
+        //   content,
+
+        // ),
+        content: TextWidget(title: content, size: FontSize.plainText(context)),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const TextWidget(title: 'لا', size: FontSize.plainText),
+            child: TextWidget(title: 'لا', size: FontSize.plainText(context)),
           ),
           TextButton(
             onPressed: onPressed,
-            child: const TextWidget(title: 'نعم', size: FontSize.plainText),
+            child: TextWidget(title: 'نعم', size: FontSize.plainText(context)),
           ),
         ],
       );
