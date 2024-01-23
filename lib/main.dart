@@ -7,12 +7,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'components/shared/network/local/cache_helper.dart';
 import 'generated/l10n.dart';
 import 'view/bottom_navigation_bar_screen.dart';
 import 'view/lodaing_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   // Platform.isAndroid
   await Firebase.initializeApp(
     options: const FirebaseOptions(
@@ -30,8 +32,11 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.dark);
+  static final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(
+    CacheHelper.getDataBoolean(key: 'mode') == true
+        ? ThemeMode.light
+        : ThemeMode.dark,
+  );
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -91,7 +96,7 @@ ThemeData lightMode() {
     bottomAppBarColor: AppColor.green,
     cardColor: AppColor.lightShade,
     scaffoldBackgroundColor: AppColor.white,
-    hintColor: AppColor.colorTextBlack,
+    hintColor: AppColor.darkShadeText,
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColor.white,
       iconTheme: MaterialStateProperty.all<IconThemeData>(IconThemeData(
@@ -116,6 +121,7 @@ ThemeData darkMode() {
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: AppColor.white),
     ),
+
     bottomAppBarColor: AppColor.darkShade,
     secondaryHeaderColor: AppColor.darkShadeText,
     progressIndicatorTheme:
@@ -123,7 +129,7 @@ ThemeData darkMode() {
     splashColor: AppColor.darkShadeText,
     hintColor: AppColor.whiteText,
     cardColor: AppColor.darkShadeText,
-    scaffoldBackgroundColor: AppColor.darkShade,
+    scaffoldBackgroundColor: AppColor.colorTextBlack,
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColor.darkShade,
       iconTheme: MaterialStateProperty.all<IconThemeData>(const IconThemeData(
@@ -140,14 +146,3 @@ ThemeData darkMode() {
     ),
   );
 }
-
-
-
-          // routes: {
-          //   "/LoadingScreen": (context) => const LoadingScreen(),
-          //   "/RegistrationOptionScreen": (context) =>
-          //       const RegistrationOptionScreen(),
-          //   "/StartScreen": (context) => const StartScreen(),
-          //   "/BottomNavigationBarScreen": (context) =>
-          //       const BottomNavigationBarScreen(),
-          // },
