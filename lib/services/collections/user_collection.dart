@@ -14,7 +14,7 @@ class UserCollection extends FireDatabaseServises {
   }
   @override
   Future addInfoDB({String? doc, required Map<String, dynamic> info}) {
-    return newCollection!.doc(doc).set(info);
+    return firestore.collection(CollectionDB.userCollection).doc(doc).set(info);
   }
 
   Stream<UserModel>? stateIsServiceProvider() {
