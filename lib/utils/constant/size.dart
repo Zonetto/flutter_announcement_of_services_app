@@ -16,7 +16,7 @@ class AppSize {
   );
 
   static double imageSizeSmall(BuildContext context) =>
-      Dimensions.screenWidth(context) / 10.0;
+      Dimensions.screenWidth(context) / 9.0;
   static double imageSizeLarg(BuildContext context) =>
       Dimensions.screenWidth(context) / 3.0;
 
