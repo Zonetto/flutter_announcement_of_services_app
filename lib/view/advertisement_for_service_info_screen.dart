@@ -26,8 +26,6 @@ class SserviceDetailsScreenState
   @override
   void initState() {
     final provider = Provider.of<ViewModelFetch>(context, listen: false);
-
-    // Check if user details are already available
     if (provider.getUserDetails == null) {
       provider.fetchSpecificServerProviderData();
     }
@@ -120,16 +118,6 @@ class SserviceDetailsScreenState
                   context: context,
                   title: 'تعديل',
                   onPressed: () async {
-                    //_servicesProviderModel;
-                    // await Navigator.of(context).pushReplacement(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => AdvertisementForServiceScreen(
-                    //       servicesProviderModel: _servicesProviderModel,
-                    //     ),
-                    //   ),
-                    //   // (route) => false,
-                    // );
-
                     navigateToScreen(
                       context: context,
                       screen: AdvertisementForServiceScreen(

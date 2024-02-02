@@ -35,7 +35,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
               final UserDetailsModel user = snapshot.data![index];
               final String doc = user.userId;
               final ServicesProviderModel servicesProviderModel =
-                  user.servicesProviderModel;
+                  user.servicesProviderModel!;
               return CardContents(
                 onPressedAccept: () {
                   UserCollection().updateInfoDB(
@@ -75,6 +75,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
                       dateOfBirth: user.dateOfBirth,
                       email: user.email,
                       stars: servicesProviderModel.stars.toString(),
+                     // serviceProviderCollection: user.servicesProviderModel,
                       address: servicesProviderModel.address,
                       startOfWorkingDays:
                           servicesProviderModel.startOfWorkingDays,

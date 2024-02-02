@@ -105,7 +105,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (userDetails.isEmpty)
-           Center(
+          Center(
             child: TextWidget(
               title: 'لا يوجد نتائج',
               size: FontSize.subtitle(context),
@@ -121,7 +121,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
 
   Widget buildUserDetailsListView(List<UserDetailsModel> userDatils) {
     return !isNotEmptyData
-        ?  Center(
+        ? Center(
             child: TextWidget(
               title: 'لا يوجد نتائج',
               size: FontSize.subtitle(context),
@@ -134,7 +134,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
               itemBuilder: (context, index) {
                 final UserDetailsModel user = userDatils[index];
                 final ServicesProviderModel servicesProviderModel =
-                    user.servicesProviderModel;
+                    user.servicesProviderModel!;
 
                 return buildComplexCard(context, user, servicesProviderModel);
               },
@@ -159,6 +159,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
             call: user.call,
             dateOfBirth: user.dateOfBirth,
             email: user.email,
+            title: servicesProviderModel.desc,
             stars: servicesProviderModel.stars.toString(),
             address: servicesProviderModel.address,
             startOfWorkingDays: servicesProviderModel.startOfWorkingDays,

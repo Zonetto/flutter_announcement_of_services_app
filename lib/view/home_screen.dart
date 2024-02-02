@@ -45,15 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
       child: userDatils.isEmpty
           ? const LoadingScreen()
           : Column(
-            children: [
-              Expanded(
+              children: [
+                Expanded(
                   child: ListView.builder(
                     itemCount: userDatils.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
                       final UserDetailsModel user = userDatils[index];
                       final ServicesProviderModel servicesProviderModel =
-                          user.servicesProviderModel;
+                          user.servicesProviderModel!;
                       return Column(
                         children: [
                           AppSize.sizedBoxHeight,
@@ -72,6 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   call: user.call,
                                   dateOfBirth: user.dateOfBirth,
                                   email: user.email,
+                                  serviceProviderCollection: user.userId,
+                                  title: servicesProviderModel.desc,
                                   stars: servicesProviderModel.stars.toString(),
                                   address: servicesProviderModel.address,
                                   startOfWorkingDays:
@@ -85,8 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fullName: user.fullName,
                                   image: user.profileImage,
                                   location: servicesProviderModel.location,
-                                  serviceType: servicesProviderModel.serviceType,
-                                  servisePrice: servicesProviderModel.servisePrice,
+                                  serviceType:
+                                      servicesProviderModel.serviceType,
+                                  servisePrice:
+                                      servicesProviderModel.servisePrice,
                                   yearsOfExperience:
                                       servicesProviderModel.yearsOfExperience,
                                 ),
@@ -98,8 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-            ],
-          ),
+              ],
+            ),
     );
 
     // return StreamBuilder<List<UserDetailsModel>>(

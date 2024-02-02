@@ -57,7 +57,7 @@ class SearchScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final UserDetailsModel user = userDatils[index];
                     final ServicesProviderModel servicesProviderModel =
-                        user.servicesProviderModel;
+                        user.servicesProviderModel!;
                     return CardContents(
                       isAdmin: false,
                       backgroundImagePath: servicesProviderModel.image,
@@ -73,6 +73,7 @@ class SearchScreen extends StatelessWidget {
                             call: user.call,
                             dateOfBirth: user.dateOfBirth,
                             email: user.email,
+                            title: servicesProviderModel.desc,
                             stars: servicesProviderModel.stars.toString(),
                             address: servicesProviderModel.address,
                             startOfWorkingDays:
