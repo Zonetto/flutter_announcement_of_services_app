@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserCollection extends FireDatabaseServises {
   CollectionReference? newCollection;
+  String userId = UserManager().userId!;
   UserCollection() {
     newCollection = firestore.collection(CollectionDB.userCollection);
   }
@@ -20,7 +21,7 @@ class UserCollection extends FireDatabaseServises {
   Stream<UserModel>? stateIsServiceProvider() {
     return firestore
         .collection(CollectionDB.userCollection)
-        .doc(UserManager().userId)
+        .doc(userId)
         .snapshots()
         .map((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       UserModel isServiceprovider = UserModel.fromJson(snapshot.data() ?? {});
@@ -117,9 +118,9 @@ class UserCollection extends FireDatabaseServises {
     return newCollection!.doc(doc).update(info);
   }
 
-  getUserReference() {
-    // final String userId = UserManager().userId;
-    return newCollection!.doc().toString();
+  getUserReference({String? doc}) {
+    // final String userId = UserManager().userId!;
+    return newCollection!.doc(doc ?? userId);
   }
 
   @override
@@ -168,6 +169,30 @@ class UserCollection extends FireDatabaseServises {
     } catch (e) {
       print('Firestore error: $e');
       return null; // or handle the error accordingly
+    }
+  }
+
+  Future<UserDetailsModel?> fetchSpecifiDB({String? doc}) async {
+    try {
+      DocumentSnapshot<Object?>? document =
+          await newCollection?.doc(doc ?? userId).get();
+      if (document?.exists ?? false) {
+        Map<String, dynamic>? userData =
+            document!.data() as Map<String, dynamic>?;
+        if (userData != null) {
+          UserModel userModel = UserModel.fromJson(userData);
+          ServicesProviderModel? servicesProviderModel =
+              await userModel.getServiceProviderModel();
+
+          UserDetailsModel userDetailsModel =
+              UserDetailsModel.fromJson(userData, servicesProviderModel);
+          return userDetailsModel;
+        }
+      }
+      return null; // Return null if document doesn't exist or conditions are not met
+    } catch (e) {
+      print('Firestore error: $e');
+      return null; // Handle the error accordingly
     }
   }
 
