@@ -21,6 +21,8 @@ class TextFormFieldWidget extends StatelessWidget {
   final int maxLines;
   final int? maxLength;
   final int minLines;
+  final double? borderSideWidth;
+  final InputBorder? enabledBorder;
   final bool readOnly;
   final double? width;
   final bool isWithoutText;
@@ -41,6 +43,8 @@ class TextFormFieldWidget extends StatelessWidget {
     this.icon,
     this.maxLines = 1,
     this.minLines = 1,
+    this.borderSideWidth = 1,
+    this.enabledBorder,
     this.readOnly = false,
     this.width,
     this.isWithoutText = false,
@@ -85,10 +89,17 @@ class TextFormFieldWidget extends StatelessWidget {
               suffixText: suffixText,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
-                borderSide: const BorderSide(color: AppColor.green, width: 1),
+                borderSide: BorderSide(
+                  color: AppColor.green,
+                  width: borderSideWidth!,
+                ),
               ),
+              enabledBorder: enabledBorder,
               hintText: hintText,
-              hintStyle: TextStyle(color: Theme.of(context).hintColor),
+              hintStyle: TextStyle(
+                color: Theme.of(context).hintColor,
+                fontFamily: "Cairo",
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide.none,

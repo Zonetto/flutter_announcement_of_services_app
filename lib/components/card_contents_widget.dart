@@ -41,7 +41,7 @@ class CardContents extends StatelessWidget {
       child: Card(
         // color: AppColor.screenBackGroundColor,
         color: Theme.of(context).cardColor,
-        elevation: 10.0,
+        elevation: 6.0,
         // margin: const EdgeInsets.symmetric(vertical: 14.0),
 
         shape: RoundedRectangleBorder(
