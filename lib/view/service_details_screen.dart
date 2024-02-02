@@ -1,18 +1,23 @@
 import 'package:announcement_of_services/components/buttom_widget.dart';
+import 'package:announcement_of_services/components/form/request_sevice_form.dart';
 import 'package:announcement_of_services/components/image_widget.dart';
 import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
 import 'package:announcement_of_services/components/text_collector_widget.dart';
 import 'package:announcement_of_services/components/text_widget.dart';
+import 'package:announcement_of_services/services/collections/user_collection.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:announcement_of_services/utils/constant/size.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 class ServiceDetailsScreen extends StatefulWidget {
   final int call;
   final String dateOfBirth;
   final String email;
+  final String? serviceProviderCollection;
+  final String? title;
   final VoidCallback? onPressedRating;
   final String fullName;
   final String serviceType;
@@ -26,12 +31,14 @@ class ServiceDetailsScreen extends StatefulWidget {
   final String location;
   final String stars;
   final String image;
-
+  final bool? isRequest;
   const ServiceDetailsScreen({
     super.key,
     required this.call,
     required this.dateOfBirth,
     required this.email,
+    this.serviceProviderCollection,
+    this.title,
     required this.fullName,
     required this.serviceType,
     required this.yearsOfExperience,
@@ -45,16 +52,22 @@ class ServiceDetailsScreen extends StatefulWidget {
     required this.stars,
     required this.image,
     this.onPressedRating,
+    this.isRequest = false,
   });
 
   @override
   State<ServiceDetailsScreen> createState() => SserviceDetailsScreenState();
 }
 
+bool _lodaing = false;
+final TextEditingController _descController = TextEditingController(); //
+//final GlobalKey<FormState> _requestServiceKey = GlobalKey<FormState>();
+
 class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //  key: _requestServiceKey,
       body: SafeArea(
         child: Padding(
           padding: AppSize.padding,
@@ -181,15 +194,50 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ],
                   ),
                 ),
-                ButtonWidget(
-                  context: context,
-                  title: 'طلب الخِدمة',
-                  onPressed: () {
-                    // ignore: deprecated_member_use
-                    launch("tel: +964${widget.call}");
-                  },
-                ),
-              const SizedBox(height: 4),
+                !widget.isRequest!
+                    ? ButtonWidget(
+                        context: context,
+                        title: 'طلب الخِدمة',
+                        isLoad: _lodaing,
+                        onPressed: () {
+                          final String title = widget.title!;
+                          final String fullName = widget.fullName;
+                          final String imagePath = widget.image;
+                          final DocumentReference userId =
+                              UserCollection().getUserReference();
+                          final DocumentReference servicesProviderId =
+                              UserCollection().getUserReference(
+                            doc: widget.serviceProviderCollection,
+                          );
+                          _descController.clear();
+                          showDialog(
+                            context: context,
+                            builder: (context) => Material(
+                              child: Column(
+                                children: [
+                                  RequestServiceForm(
+                                    fullName: fullName,
+                                    serviceTitle: title,
+                                    descController: _descController,
+                                    imagePath: imagePath,
+                                    servicesProviderId: servicesProviderId,
+                                    userid: userId,
+                                  ),
+                                  //  const RequestServiceDialog(),
+                                ],
+                              ),
+                            ),
+                          );
+                          // alertDialog(
+                          //     content: 'هل انت متأكد طلب خدمة $title؟',
+                          //     context: context,
+                          //    );
+
+                          // launch("tel: +964${widget.call}");
+                        },
+                      )
+                    : const SizedBox.shrink(),
+                const SizedBox(height: 4),
               ],
             ),
           ),
