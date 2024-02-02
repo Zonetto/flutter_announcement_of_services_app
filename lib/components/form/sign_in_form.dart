@@ -101,7 +101,7 @@ class _SignInFormState extends State<SignInForm> {
               final auth = await provider.logIn(_authData!);
               // print("aaaaa $auth");
               if (auth is Success) {
-               // print("auth.code ${auth.code}: ${auth.response}");
+                // print("auth.code ${auth.code}: ${auth.response}");
                 // ignore: use_build_context_synchronously
                 navigateAndReplaceScreen(
                   context: context,
@@ -110,6 +110,8 @@ class _SignInFormState extends State<SignInForm> {
               } //} else {
               // ignore: use_build_context_synchronously
               if (auth is Error) {
+                 print(auth.code);
+                print(auth.errorResponse);
                 setState(() {
                   _loodaing = false;
                 });

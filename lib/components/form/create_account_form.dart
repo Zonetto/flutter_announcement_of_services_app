@@ -212,16 +212,19 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                       );
                       if (_selectedImage != null) {
                         await Future.delayed(const Duration(seconds: 1));
-
+                        //  print("11");
                         final auth =
                             await provider.signUp(user, _selectedImage);
                         if (auth is Success) {
                           // ignore: use_build_context_synchronously
                           navigateAndReplaceScreen(
-                              context: context,
-                              screen: const BottomNavigationBarScreen());
+                            context: context,
+                            screen: const BottomNavigationBarScreen(),
+                          );
+                               print("10");
                         }
                         if (auth is Error) {
+                            print(auth.code);
                           setState(() {
                             _lodaing = false;
                           });
@@ -230,7 +233,8 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                             // ignore: use_build_context_synchronously
                             styledScaffoldMessenger(
                               context: context,
-                              message: 'لقد تم التسجيل في هذا الحساب مسبقاً\nرجاءًا حاول تغير عنوان البريد الالكتروني',
+                              message:
+                                  'لقد تم التسجيل في هذا الحساب مسبقاً\nرجاءًا حاول تغير عنوان البريد الالكتروني',
                               color: AppColor.buttonColorRed,
                             );
                           }

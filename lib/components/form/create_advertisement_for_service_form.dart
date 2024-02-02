@@ -405,8 +405,8 @@ class _CreateOrEditAdvertisementForServiceFormState
                   _loading = true;
                 });
                 // print(_loading);
-                Result result;
                 _createAdvertisementKey.currentState!.save();
+                Result result;
                 ServicesProviderCollection servicesProviderCollection =
                     ServicesProviderCollection();
 
