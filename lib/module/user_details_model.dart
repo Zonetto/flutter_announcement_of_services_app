@@ -10,7 +10,7 @@ class UserDetailsModel {
   final String fullName;
   final String profileImage;
   final String isServiceProvider;
-  final ServicesProviderModel servicesProviderModel;
+  final ServicesProviderModel? servicesProviderModel;
 
   UserDetailsModel({
     required this.userId,
@@ -20,26 +20,13 @@ class UserDetailsModel {
     required this.fullName,
     required this.profileImage,
     required this.isServiceProvider,
-    required this.servicesProviderModel,
+     this.servicesProviderModel,
   });
 
-  factory UserDetailsModel.fromDocumentSnapshot(
-    DocumentSnapshot<Object?> snapshot,
-  ) {
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-
-    // Extract ServicesProviderModel data from the DocumentReference
-    DocumentReference servicesProviderRef = data["service_provider_collection"];
-    ServicesProviderModel servicesProviderModel =
-        ServicesProviderModel.fromDocumentReference1(servicesProviderRef);
-
-    return UserDetailsModel.fromJson(data, servicesProviderModel);
-  }
-
   factory UserDetailsModel.fromJson(
-      Map<String, dynamic> json, ServicesProviderModel servicesProviderModel) {
+      Map<String, dynamic> json, ServicesProviderModel? servicesProviderModel) {
     return UserDetailsModel(
-      userId: json["userId"],
+      userId: json["user_id"],
       call: json["call"],
       dateOfBirth: json["date_of_birth"],
       email: json["email"],
@@ -48,5 +35,12 @@ class UserDetailsModel {
       profileImage: json["image"],
       servicesProviderModel: servicesProviderModel,
     );
+  }
+
+  factory UserDetailsModel.fromDocumentSnapshot(
+      DocumentSnapshot<Object?> snapshot,
+      ServicesProviderModel servicesProviderModel) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return UserDetailsModel.fromJson(data, servicesProviderModel);
   }
 }

@@ -29,7 +29,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      userId: json["userId"],
+      userId: json["user_id"],
       role: json["role"],
       serviceProviderCollection: json["service_provider_collection"],
       call: json["call"],
@@ -43,7 +43,7 @@ class UserModel {
   }
   toJson() {
     return {
-      "userId": userId,
+      "user_id": userId,
       "role": role,
       "service_provider_collection": serviceProviderCollection,
       "call": call,
