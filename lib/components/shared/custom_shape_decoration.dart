@@ -5,7 +5,7 @@ class CustomShapeDecoration {
   static ShapeDecoration shapeDecoration(BuildContext context,
           {Color? color}) =>
       ShapeDecoration(
-        color: color ?? Theme.of(context).splashColor,
+        color: color ?? Theme.of(context).cardColor,
         // color: AppColor.screenBackGroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
