@@ -54,7 +54,6 @@ class ViewModelAuth extends Token with ChangeNotifier {
     File? photo,
   }) async {
     final fullUrl = "$baseUrl/accounts:$urlSegment?$key";
-    print("1");
     try {
       _res = await http.post(
         Uri.parse(fullUrl),
@@ -66,38 +65,48 @@ class ViewModelAuth extends Token with ChangeNotifier {
           },
         ),
       );
-      UserCollection userCollection = UserCollection();
-      final Map<String, dynamic> resData = json.decode(_res!.body);
-      final String uid = resData['localId'];
 
-      if (resData['error'] != null) {
-        print("${resData['error']['message']}");
-        throw "${resData['error']['message']}";
+      if (_res != null) {
+        final Map<String, dynamic> resData = json.decode(_res!.body);
+        if (resData['error'] != null) {
+          print("${resData['error']['message']}");
+          throw "${resData['error']['message']}";
+        }
+        final String uid = resData['localId'];
+        print("5");
+        _userId = uid;
+        UserManager().userId = uid;
+        _expiryDate = DateTime.now()
+            .add(Duration(hours: int.parse(resData['expiresIn'])));
+        _autoLogout();
+        if (urlSegment == "signUp") {
+          UserCollection userCollection = UserCollection();
+          String? downloadUrl = await fireStorageServises
+              .uploadAndGetImageToFirebaseStorage(photo!);
+          user!.image = downloadUrl;
+          user.userId = _userId;
+          user.password = _hashPassword(password);
+          await Future.delayed(const Duration(seconds: 1));
+          userCollection.addInfoDB(doc: uid, info: user.toJson());
+        }
+        notifyListeners();
+        await CacheHelper.putDataString(key: 'userId', value: _userId);
+        await CacheHelper.putDataString(
+            key: 'expiryDate', value: _expiryDate!.toIso8601String());
+        return Success(code: _res!.statusCode, response: resData);
+      } else {
+        return Error();
       }
-      print("2");
-      _userId = uid;
-      UserManager().userId = uid;
-      _expiryDate =
-          DateTime.now().add(Duration(hours: int.parse(resData['expiresIn'])));
-      _autoLogout();
-      if (urlSegment == "signUp") {
-        String? downloadUrl = await fireStorageServises
-            .uploadAndGetImageToFirebaseStorage(photo!);
-        user!.image = downloadUrl;
-        user.userId = _userId;
-        user.password = _hashPassword(password);
-        await Future.delayed(const Duration(seconds: 1));
-        userCollection.addInfoDB(doc: uid, info: user.toJson());
-      }
-      notifyListeners();
-      await CacheHelper.putDataString(key: 'userId', value: _userId);
-      await CacheHelper.putDataString(
-          key: 'expiryDate', value: _expiryDate!.toIso8601String());
-      return Success(code: _res!.statusCode, response: resData);
     } catch (e) {
+      // return Error();
       UserManager().userId = null;
-      print("${_res!.statusCode}    ${e.toString()}");
+      // print("${_res!.statusCode}    ${e.toString()}");
+      // return Error(code: _res!.statusCode, errorResponse: e.toString());
+      //   if (_res != null) {
+      // print("${_res!.statusCode}    ${e.toString()}");
       return Error(code: _res!.statusCode, errorResponse: e.toString());
+      //}
+      // return Error();
     }
   }
 
