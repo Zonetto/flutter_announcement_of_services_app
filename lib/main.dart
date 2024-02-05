@@ -3,6 +3,7 @@ import 'package:announcement_of_services/view/splash_screen.dart';
 import 'package:announcement_of_services/view/start_screen.dart';
 import 'package:announcement_of_services/view_model/view_model_auth.dart';
 import 'package:announcement_of_services/view_model/view_model_fetch_user.dart';
+import 'package:announcement_of_services/view_model/view_model_request.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -46,7 +47,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ViewModelFetch>(
           create: (_) => ViewModelFetch(),
-        )
+        ),
+        ChangeNotifierProvider<ViewModelRequest>(
+          create: (_) => ViewModelRequest()
+            ..fetchWithServicesProviderDetails()
+            ..fetchWithUserDetails(),
+        ),
       ],
       child: Consumer<ViewModelAuth>(
         builder: (ctx, auth, _) => ValueListenableBuilder(
