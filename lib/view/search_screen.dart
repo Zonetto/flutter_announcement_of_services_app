@@ -4,7 +4,6 @@ import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/user_details_model.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
-import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/view/service_details_screen.dart';
 import 'package:announcement_of_services/view_model/view_model_fetch_user.dart';
@@ -15,7 +14,6 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
 
   final TextEditingController _searchController = TextEditingController();
-  // bool _resultSearch = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,6 @@ class SearchScreen extends StatelessWidget {
     userDatils = context.watch<ViewModelFetch>().getAllUserDetails;
     return Column(
       children: [
-        AppSize.sizedBoxHeight,
         TextFormFieldWidget(
           context: context,
           controller: _searchController,
