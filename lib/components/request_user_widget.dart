@@ -31,6 +31,7 @@ class RequestUserWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String status = requestDetailsModel.status!;
     DateTime requestDateTime = DateTime.parse(requestDetailsModel.requestDate);
     String formattedDate =
         intl.DateFormat('yyyy-MM-dd EE', 'en').format(requestDateTime);
@@ -223,11 +224,9 @@ class RequestUserWidget extends StatelessWidget {
                                   children: [
                                     TextWidget(
                                       size: FontSize.plainText(context),
-                                      title: requestDetailsModel.status ==
-                                              REQUEST_WAIT
-                                          ? 'انتظر لحين موافقة مزود الخِدمة ${userDetailsModel.fullName}'
-                                          : requestDetailsModel.date,
-                                      //   style: FlutterFlowTheme.of(context).labelMedium,
+                                      title: status == REQUEST_WAIT
+                                          ? 'انتظر لحين موافقة مزود الخِدمة ${userDetailsModel.fullName}'  
+                                          : status == REQUEST_ACCEPTED? "تاريخ المباشرة ${requestDetailsModel.date}\nوقت المباشرة ${requestDetailsModel.time}": status == REQUEST_UNACCEPTED? 'تم رفض الطلب': 'تم الانتهاء من العمل',
                                     ),
                                   ],
                                 ),
@@ -270,28 +269,41 @@ class RequestUserWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ButtonWidget(
-                          context: context,
-                          title: 'قبول الطلب',
-                          onPressed: onPressedAccepted,
-                          width: Dimensions.screenWidth(context) / 3.5,
-                          backGroundColor: AppColor.green.withOpacity(0.9),
-                        ),
+                        status != REQUEST_ACCEPTED &&
+                                status != REQUEST_UNACCEPTED &&
+                                status != REQUEST_DONE
+                            ? ButtonWidget(
+                                context: context,
+                                title: 'قبول الطلب',
+                                onPressed: onPressedAccepted,
+                                width: Dimensions.screenWidth(context) / 3.5,
+                                backGroundColor:
+                                    AppColor.green.withOpacity(0.9),
+                              )
+                            : const SizedBox.shrink(),
                         const SizedBox(width: 6),
-                        ButtonWidget(
-                          context: context,
-                          title: 'رفض الطلب',
-                          onPressed: onPressedUnaccrpted,
-                          width: Dimensions.screenWidth(context) / 3.5,
-                          backGroundColor: AppColor.buttonColorRed,
-                        ),
+                        status != REQUEST_UNACCEPTED &&
+                                status != REQUEST_ACCEPTED &&
+                                status != REQUEST_DONE
+                            ? ButtonWidget(
+                                context: context,
+                                title: 'رفض الطلب',
+                                onPressed: onPressedUnaccrpted,
+                                width: Dimensions.screenWidth(context) / 3.5,
+                                backGroundColor: AppColor.buttonColorRed,
+                              )
+                            : const SizedBox.shrink(),
                         const SizedBox(width: 6),
-                        ButtonWidget(
-                          context: context,
-                          title: 'تم الانتهاء',
-                          onPressed: onPressedDone,
-                          width: Dimensions.screenWidth(context) / 3.5,
-                        ),
+                        status != REQUEST_DONE &&
+                                status == REQUEST_ACCEPTED &&
+                                status != REQUEST_UNACCEPTED
+                            ? ButtonWidget(
+                                context: context,
+                                title: 'تم الانتهاء',
+                                onPressed: onPressedDone,
+                                width: Dimensions.screenWidth(context) / 2,
+                              )
+                            : const SizedBox.shrink(),
                       ],
                     )
                   : const SizedBox.shrink(),
