@@ -12,9 +12,9 @@ class ViewModelRequest extends ChangeNotifier {
 
   Future<void> updateInfoStatuse({
     required String doc,
-    required String status,
+    required Map<String, dynamic> info,
   }) async {
-    _requestCollection.updateInfoDB(doc: doc, info: {"status": status});
+    _requestCollection.updateInfoDB(doc: doc, info:info );
     fetchWithUserDetails();
   }
 
