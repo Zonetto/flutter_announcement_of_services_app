@@ -26,12 +26,10 @@ class ButtonInkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 14.0),
+      padding: const EdgeInsets.only(bottom: 10.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(35),
         onTap: onTap,
-        // splashColor: Colors.red, // Theme.of(context).scaffoldBackgroundColor,
-        // highlightColor: Theme.of(context).highlightColor,
         child: Ink(
           width: Dimensions.screenWidth(context),
           height: 44,

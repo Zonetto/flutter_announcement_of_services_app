@@ -1,3 +1,4 @@
+import 'package:announcement_of_services/components/shared/custom_shape_decoration.dart';
 import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
@@ -7,9 +8,10 @@ import 'buttom_widget.dart';
 import 'image_widget.dart';
 import 'text_widget.dart';
 
-class CardContents extends StatelessWidget {
+class CardContentsWidget extends StatelessWidget {
   final String? backgroundImagePath;
   final String? profileImagePath;
+  final String yearsOfExperience;
   final VoidCallback? onTap;
   final VoidCallback? onPressedRejection;
   final VoidCallback? onPressedAccept;
@@ -19,10 +21,11 @@ class CardContents extends StatelessWidget {
   final String price;
   final String title;
   final bool isAdmin;
-  const CardContents({
+  const CardContentsWidget({
     super.key,
     required this.backgroundImagePath,
     required this.profileImagePath,
+    required this.yearsOfExperience,
     required this.name,
     required this.star,
     required this.price,
@@ -39,11 +42,8 @@ class CardContents extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        // color: AppColor.screenBackGroundColor,
         color: Theme.of(context).cardColor,
-        elevation: 6.0,
-        // margin: const EdgeInsets.symmetric(vertical: 14.0),
-
+        elevation: 2.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -65,6 +65,7 @@ class CardContents extends StatelessWidget {
                   ),
                   subtitle: Column(
                     children: [
+                      const SizedBox(height: 4),
                       Row(
                         children: [
                           const Icon(
@@ -74,6 +75,19 @@ class CardContents extends StatelessWidget {
                           TextWidget(
                             title: star.toString(),
                             size: FontSize.plainText(context),
+                          ),
+                          const SizedBox(width: 10),
+                          Container(
+                            decoration:
+                                CustomShapeDecoration.shapeDecoration(context),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                              vertical: 1.0,
+                            ),
+                            child: TextWidget(
+                              title: '$yearsOfExperience خبرة',
+                              size: FontSize.plainText(context),
+                            ),
                           ),
                         ],
                       ),
