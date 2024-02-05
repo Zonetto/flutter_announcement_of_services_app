@@ -9,6 +9,7 @@ import 'package:announcement_of_services/module/services_provider_info_model.dar
 import 'package:announcement_of_services/services/collections/services_provider_collection.dart';
 import 'package:announcement_of_services/services/collections/user_collection.dart';
 import 'package:announcement_of_services/services/fire_storage_servises.dart';
+import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
 import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
@@ -16,6 +17,7 @@ import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/utils/date_picker.dart';
 import 'package:announcement_of_services/utils/fill_dropdown_items.dart';
 import 'package:announcement_of_services/utils/pick_image.dart';
+import 'package:announcement_of_services/utils/styled_scaffold_messenger.dart';
 import 'package:announcement_of_services/utils/validate.dart';
 import 'package:announcement_of_services/view_model/app_status.dart';
 import 'package:announcement_of_services/view_model/view_model_auth.dart';
@@ -77,10 +79,6 @@ class _CreateOrEditAdvertisementForServiceFormState
     _locationController.dispose();
     _timeFromController.dispose();
     _timeIntoController.dispose();
-    //  _priceController.clear();
-    // _locationController.clear();
-    // _timeFromController.clear();
-    // _timeIntoController.clear();
     super.dispose();
   }
 
@@ -440,11 +438,6 @@ class _CreateOrEditAdvertisementForServiceFormState
                     ? widget.servicesProviderModel!.serviceProviderId.toString()
                     : null;
 
-                // final DocumentReference? ref = !isEdit
-                //     ? servicesProviderCollection
-                //         .getServiceProviderDocReference()
-                //     : null;
-
                 ServicesProviderModel servicesProviderModel =
                     ServicesProviderModel(
                   serviceProviderId:
@@ -465,25 +458,33 @@ class _CreateOrEditAdvertisementForServiceFormState
 
                 final userManager = UserManager().userId;
                 if (!isEdit) {
-                  result = await servicesProviderCollection.addInfoDB(
-                    doc: serviceProviderId!.id,
-                    info: servicesProviderModel.toJson(),
-                  );
-                  if (result is Success) {
-                    // final ref = servicesProviderCollection;
-
-                    UserCollection().updateInfoDB(
-                      doc: userManager,
-                      info: {
-                        "service_provider_collection": serviceProviderId,
-                        "is_service_provider": serviceProviderWait,
-                      },
+                  if (backgroundImage != null) {
+                    result = await servicesProviderCollection.addInfoDB(
+                      doc: serviceProviderId!.id,
+                      info: servicesProviderModel.toJson(),
                     );
-                  }
-                  if (result is Error) {
-                    setState(() {
-                      _loading = false;
-                    });
+                    if (result is Success) {
+                      // final ref = servicesProviderCollection;
+
+                      UserCollection().updateInfoDB(
+                        doc: userManager,
+                        info: {
+                          "service_provider_collection": serviceProviderId,
+                          "is_service_provider": serviceProviderWait,
+                        },
+                      );
+                    }
+                    if (result is Error) {
+                      setState(() {
+                        _loading = false;
+                      });
+                    }
+                  } else {
+                    // ignore: use_build_context_synchronously
+                    styledScaffoldMessenger(
+                        context: context,
+                        message: 'يجب اختيار صورة',
+                        color: AppColor.buttonColorRed);
                   }
                 }
                 if (isEdit) {
