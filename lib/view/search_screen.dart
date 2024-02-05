@@ -55,9 +55,10 @@ class SearchScreen extends StatelessWidget {
                     final UserDetailsModel user = userDatils[index];
                     final ServicesProviderModel servicesProviderModel =
                         user.servicesProviderModel!;
-                    return CardContents(
+                    return CardContentsWidget(
                       isAdmin: false,
                       backgroundImagePath: servicesProviderModel.image,
+                      yearsOfExperience: servicesProviderModel.yearsOfExperience,
                       name: user.fullName,
                       price: servicesProviderModel.servisePrice,
                       profileImagePath: user.profileImage,

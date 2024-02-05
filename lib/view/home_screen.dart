@@ -46,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
           : Column(
               children: [
                 Expanded(
-                  child: ListView.builder(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 4),
                     itemCount: userDatils.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
@@ -56,9 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Column(
                         children: [
                           // AppSize.sizedBoxHeight,
-                          CardContents(
+                          CardContentsWidget(
                             isAdmin: false,
                             backgroundImagePath: servicesProviderModel.image,
+                              yearsOfExperience:
+                                servicesProviderModel.yearsOfExperience,
                             name: user.fullName,
                             price: servicesProviderModel.servisePrice,
                             profileImagePath: user.profileImage,
