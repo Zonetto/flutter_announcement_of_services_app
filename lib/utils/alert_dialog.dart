@@ -1,10 +1,15 @@
+import 'package:announcement_of_services/components/buttom_widget.dart';
 import 'package:announcement_of_services/components/text_widget.dart';
+import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
+import 'package:announcement_of_services/utils/constant/responsive_screen.dart';
 import 'package:flutter/material.dart';
 
 Future<void> alertDialog({
   String? title,
-  required String content,
+  Widget? widget,
+  String? content,
+  String? acceptedTitle,
   required BuildContext context,
   required onPressed,
 }) async {
@@ -20,17 +25,24 @@ Future<void> alertDialog({
         //   content,
 
         // ),
-        content: TextWidget(title: content, size: FontSize.plainText(context)),
+        content: widget ??
+            TextWidget(title: content ?? '', size: FontSize.plainText(context)),
         actions: [
-          TextButton(
+          ButtonWidget(
+            context: context,
             onPressed: () {
               Navigator.pop(context);
             },
-            child: TextWidget(title: 'لا', size: FontSize.plainText(context)),
+            title: 'الغاء',
+            backGroundColor: AppColor.buttonColorRed,
+            width: Dimensions.screenWidth(context) / 3.5,
           ),
-          TextButton(
+          ButtonWidget(
+            context: context,
             onPressed: onPressed,
-            child: TextWidget(title: 'نعم', size: FontSize.plainText(context)),
+            title: acceptedTitle ?? 'نعم',
+            backGroundColor: AppColor.green,
+            width: Dimensions.screenWidth(context) / 3.5,
           ),
         ],
       );
