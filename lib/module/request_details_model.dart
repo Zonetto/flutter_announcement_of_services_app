@@ -8,6 +8,7 @@ class RequestDetailsModel {
   final String desc;
   final String date;
   final String time;
+  final String? workingHours;
   final String requestDate;
   String? status;
 
@@ -18,6 +19,7 @@ class RequestDetailsModel {
     required this.date,
     required this.desc,
     required this.time,
+    this.workingHours,
     required this.requestDate,
     this.status = REQUEST_WAIT,
   });
@@ -34,6 +36,7 @@ class RequestDetailsModel {
       desc: json["desc"],
       date: json["date"],
       time: json["time"],
+      workingHours: json["working_hours"],
       requestDate: json["request_date"],
       status: json["status"],
     );
