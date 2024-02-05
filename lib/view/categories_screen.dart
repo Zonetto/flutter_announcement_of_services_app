@@ -22,7 +22,6 @@ class CategoriesScreen extends StatelessWidget {
 
     return Column(
       children: [
-        const SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
             scrollDirection: Axis.vertical,

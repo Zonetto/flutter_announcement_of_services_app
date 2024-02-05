@@ -40,6 +40,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(toolbarHeight: 12),
       //  backgroundColor: AppColor.colorTextButtonWhite,
       body: SafeArea(
         child: Padding(

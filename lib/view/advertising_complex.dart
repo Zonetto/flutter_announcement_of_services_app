@@ -1,7 +1,5 @@
-import 'package:announcement_of_services/components/text_widget.dart';
 import 'package:announcement_of_services/module/user_model.dart';
 import 'package:announcement_of_services/services/collections/user_collection.dart';
-import 'package:announcement_of_services/utils/constant/color.dart';
 import 'package:announcement_of_services/utils/constant/constants.dart';
 import 'package:announcement_of_services/view/admin_screen.dart';
 import 'package:announcement_of_services/view/advertisement_for_service_screen.dart';
@@ -26,9 +24,6 @@ class AdvertisingComplex extends StatelessWidget {
         child: Column(
           children: [
             const TabBar(
-              // dividerColor: Colors.amber,
-              // unselectedLabelColor: Colors.amber,
-              //   indicatorSize: TabBarIndicatorSize.label,
               tabs: [
                 Tab(text: 'الاعلان عن خدمة'),
                 Tab(text: 'طلباتي'),

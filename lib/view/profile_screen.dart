@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //print(_userDatils?.call);
     return Column(
       children: [
-        AppSize.sizedBoxHeight,
+        //AppSize.sizedBoxHeight,
         Container(
           padding: AppSize.nternalMargin,
           width: Dimensions.screenWidth(context),
