@@ -36,7 +36,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
               final String doc = user.userId;
               final ServicesProviderModel servicesProviderModel =
                   user.servicesProviderModel!;
-              return CardContents(
+              return CardContentsWidget(
                 onPressedAccept: () {
                   UserCollection().updateInfoDB(
                     doc: doc,
@@ -62,6 +62,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
                   );
                 },
                 backgroundImagePath: servicesProviderModel.image!,
+                yearsOfExperience: servicesProviderModel.yearsOfExperience,
                 name: user.fullName,
                 price: servicesProviderModel.servisePrice,
                 profileImagePath: user.profileImage,
@@ -75,7 +76,6 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
                       dateOfBirth: user.dateOfBirth,
                       email: user.email,
                       stars: servicesProviderModel.stars.toString(),
-                     // serviceProviderCollection: user.servicesProviderModel,
                       address: servicesProviderModel.address,
                       startOfWorkingDays:
                           servicesProviderModel.startOfWorkingDays,

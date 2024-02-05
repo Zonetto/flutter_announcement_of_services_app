@@ -143,9 +143,10 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
 
   Widget buildComplexCard(BuildContext context, UserDetailsModel user,
       ServicesProviderModel servicesProviderModel) {
-    return CardContents(
+    return CardContentsWidget(
       isAdmin: false,
       backgroundImagePath: servicesProviderModel.image,
+      yearsOfExperience: servicesProviderModel.yearsOfExperience,
       name: user.fullName,
       price: servicesProviderModel.servisePrice,
       profileImagePath: user.profileImage,

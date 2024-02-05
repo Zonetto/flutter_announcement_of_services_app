@@ -86,7 +86,7 @@ class _RequestScreenState extends State<RequestScreen> {
       ),
       child: Column(
         children: [
-          const SizedBox(height: 10),
+          //const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.vertical,
@@ -229,28 +229,6 @@ class _RequestScreenState extends State<RequestScreen> {
                               },
                               items: dropdownItemsWorkingHours!,
                             ),
-                            // TextFormFieldWidget(
-                            //   context: context,
-                            //   controller: _dateController,
-                            //   headline: 'تاريخ مباشرة العمل',
-                            //   hintText: 'إدخل تاريخ',
-                            //   textInputType: TextInputType.number,
-                            //   readOnly: true,
-                            //   onTab: () async {
-                            //     date = await datePicker(context: context);
-                            //     _dateController.text = date ?? '';
-                            //   },
-                            //   icon: const Icon(Icons.date_range_outlined),
-                            // ),
-                            // TextFormFieldWidget(
-                            //   context: context,
-                            //   controller: _timeController,
-                            //   headline: 'وقت مباشرة العمل',
-                            //   hintText: 'إدخل وقت',
-                            //   textInputType: TextInputType.number,
-                            //   readOnly: false,
-                            //   icon: const Icon(Icons.access_time_outlined),
-                            // ),
                           ],
                         ),
                       ),
