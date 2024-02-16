@@ -99,7 +99,6 @@ ThemeData lightMode() {
     ),
     secondaryHeaderColor: AppColor.grey,
     splashColor: AppColor.white,
-    bottomAppBarColor: AppColor.green,
     cardColor: AppColor.lightShade,
     scaffoldBackgroundColor: AppColor.white,
     hintColor: AppColor.darkShadeText,
@@ -116,7 +115,7 @@ ThemeData lightMode() {
           fontWeight: FontWeight.w800,
         ),
       ),
-    ),
+    ), bottomAppBarTheme: const BottomAppBarTheme(color: AppColor.green),
   );
 }
 
@@ -127,8 +126,6 @@ ThemeData darkMode() {
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: AppColor.white),
     ),
-
-    bottomAppBarColor: AppColor.darkShade,
     secondaryHeaderColor: AppColor.darkShadeText,
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: AppColor.white),
@@ -149,6 +146,6 @@ ThemeData darkMode() {
           fontWeight: FontWeight.w800,
         ),
       ),
-    ),
+    ), bottomAppBarTheme: const BottomAppBarTheme(color: AppColor.darkShade),
   );
 }
