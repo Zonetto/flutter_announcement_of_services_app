@@ -9,7 +9,7 @@ class ServicesProviderModel {
   final String endOfWorkingDays;
   final String startWorkingHours;
   final String endWorkingHours;
-  final String servisePrice;
+  final String servicePrice;
   final String address;
   final String location;
   String stars;
@@ -24,7 +24,7 @@ class ServicesProviderModel {
     required this.endOfWorkingDays,
     required this.startWorkingHours,
     required this.endWorkingHours,
-    required this.servisePrice,
+    required this.servicePrice,
     required this.address,
     required this.location,
     required this.stars,
@@ -47,7 +47,7 @@ class ServicesProviderModel {
       endOfWorkingDays: json['endOfWorkingDays'],
       startWorkingHours: json['startWorkingHours'],
       endWorkingHours: json['endWorkingHours'],
-      servisePrice: json['servisePrice'],
+      servicePrice: json['servisePrice'],
       address: json['address'],
       location: json['location'],
       stars: json['stars'],
@@ -65,7 +65,7 @@ class ServicesProviderModel {
       "endOfWorkingDays": endOfWorkingDays,
       "startWorkingHours": startWorkingHours,
       "endWorkingHours": endWorkingHours,
-      "servisePrice": servisePrice,
+      "servisePrice": servicePrice,
       "address": address,
       "location": location,
       "stars": stars,
