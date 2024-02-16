@@ -5,6 +5,7 @@ import 'package:announcement_of_services/module/service_provider_model.dart';
 import 'package:announcement_of_services/module/services_provider_info_model.dart';
 import 'package:announcement_of_services/module/user_details_model.dart';
 import 'package:announcement_of_services/utils/constant/font_size.dart';
+import 'package:announcement_of_services/utils/constant/size.dart';
 import 'package:announcement_of_services/utils/navigate_utils.dart';
 import 'package:announcement_of_services/view_model/view_model_fetch_user.dart';
 import 'package:flutter/material.dart';
@@ -99,26 +100,31 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
     userDetails = context.watch<ViewModelFetch>().getAllUserDetails;
 
     return Scaffold(
-        body: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if (userDetails.isEmpty)
-          Center(
-            child: TextWidget(
-              title: 'لا يوجد نتائج',
-              size: FontSize.subtitle(context),
-            ),
-          ),
-        if (userDetails.isNotEmpty)
-          Expanded(
-            child: buildUserDetailsListView(userDetails),
-          ),
-      ],
-    ));
+      appBar: AppBar(toolbarHeight: 12),
+      body: Padding(
+        padding: AppSize.padding,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (userDetails.isEmpty)
+              Center(
+                child: TextWidget(
+                  title: 'لا يوجد نتائج',
+                  size: FontSize.subtitle(context),
+                ),
+              ),
+            if (userDetails.isNotEmpty)
+              Expanded(
+                child: buildUserDetailsListView(userDetails),
+              ),
+          ],
+        ),
+      ),
+    );
   }
 
-  Widget buildUserDetailsListView(List<UserDetailsModel> userDatils) {
+  Widget buildUserDetailsListView(List<UserDetailsModel> userDetails) {
     return !isNotEmptyData
         ? Center(
             child: TextWidget(
@@ -128,10 +134,10 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
           )
         : Expanded(
             child: ListView.builder(
-              itemCount: userDatils.length,
+              itemCount: userDetails.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                final UserDetailsModel user = userDatils[index];
+                final UserDetailsModel user = userDetails[index];
                 final ServicesProviderModel servicesProviderModel =
                     user.servicesProviderModel!;
 
@@ -148,7 +154,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
       backgroundImagePath: servicesProviderModel.image,
       yearsOfExperience: servicesProviderModel.yearsOfExperience,
       name: user.fullName,
-      price: servicesProviderModel.servisePrice,
+      price: servicesProviderModel.servicePrice,
       profileImagePath: user.profileImage,
       star: servicesProviderModel.stars.toString(),
       title: servicesProviderModel.desc,
@@ -170,7 +176,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
             image: user.profileImage,
             location: servicesProviderModel.location,
             serviceType: servicesProviderModel.serviceType,
-            servisePrice: servicesProviderModel.servisePrice,
+            servicePrice: servicesProviderModel.servicePrice,
             yearsOfExperience: servicesProviderModel.yearsOfExperience,
           ),
         );

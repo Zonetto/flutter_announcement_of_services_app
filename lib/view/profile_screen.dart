@@ -82,8 +82,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     ImageWidget(
                       imagePathNetwork: _userDatils?.image,
-                      height: AppSize.imageSizeLarg(context),
-                      width: AppSize.imageSizeLarg(context),
+                      height: AppSize.imageSizeLarge(context),
+                      width: AppSize.imageSizeLarge(context),
                     ),
                     const SizedBox(height: 4.0),
                     TextWidget(

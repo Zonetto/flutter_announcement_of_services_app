@@ -64,7 +64,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
                 backgroundImagePath: servicesProviderModel.image!,
                 yearsOfExperience: servicesProviderModel.yearsOfExperience,
                 name: user.fullName,
-                price: servicesProviderModel.servisePrice,
+                price: servicesProviderModel.servicePrice,
                 profileImagePath: user.profileImage,
                 star: servicesProviderModel.stars.toString(),
                 title: servicesProviderModel.desc,
@@ -87,7 +87,7 @@ class SserviceDetailsScreenState extends State<AdminScreen> {
                       image: user.profileImage,
                       location: servicesProviderModel.location,
                       serviceType: servicesProviderModel.serviceType,
-                      servisePrice: servicesProviderModel.servisePrice,
+                      servicePrice: servicesProviderModel.servicePrice,
                       yearsOfExperience:
                           servicesProviderModel.yearsOfExperience,
                     ),

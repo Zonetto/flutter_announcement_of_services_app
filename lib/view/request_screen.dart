@@ -181,7 +181,7 @@ class _RequestScreenState extends State<RequestScreen> {
                       },
                     );
                   },
-                  onPressedUnaccrpted: () async {
+                  onPressedUnaccepted: () async {
                     await alertDialog(
                       title: 'رفض الطلب',
                       acceptedTitle: 'رفض الطلب',
@@ -295,7 +295,7 @@ class _RequestScreenState extends State<RequestScreen> {
                             isNotServiceProvider,
                         serviceType: servicesProviderModel?.serviceType ??
                             isNotServiceProvider,
-                        servisePrice: servicesProviderModel?.servisePrice ??
+                        servicePrice: servicesProviderModel?.servicePrice ??
                             isNotServiceProvider,
                         yearsOfExperience:
                             servicesProviderModel?.yearsOfExperience ??

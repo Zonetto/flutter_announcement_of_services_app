@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               yearsOfExperience:
                                 servicesProviderModel.yearsOfExperience,
                             name: user.fullName,
-                            price: servicesProviderModel.servisePrice,
+                            price: servicesProviderModel.servicePrice,
                             profileImagePath: user.profileImage,
                             star: servicesProviderModel.stars.toString(),
                             title: servicesProviderModel.desc,
@@ -92,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   location: servicesProviderModel.location,
                                   serviceType:
                                       servicesProviderModel.serviceType,
-                                  servisePrice:
-                                      servicesProviderModel.servisePrice,
+                                  servicePrice:
+                                      servicesProviderModel.servicePrice,
                                   yearsOfExperience:
                                       servicesProviderModel.yearsOfExperience,
                                 ),

@@ -78,7 +78,7 @@ class SserviceDetailsScreenState
                           ),
                           TextCollectorWidget(
                             title: 'سعر الخِدمة',
-                            subTitle: _servicesProviderModel?.servisePrice
+                            subTitle: _servicesProviderModel?.servicePrice
                                     .toString() ??
                                 '',
                           ),

@@ -26,7 +26,7 @@ class ServiceDetailsScreen extends StatefulWidget {
   final String endOfWorkingDays;
   final String startWorkingHours;
   final String endWorkingHours;
-  final String servisePrice;
+  final String servicePrice;
   final String address;
   final String location;
   final String stars;
@@ -46,7 +46,7 @@ class ServiceDetailsScreen extends StatefulWidget {
     required this.endOfWorkingDays,
     required this.startWorkingHours,
     required this.endWorkingHours,
-    required this.servisePrice,
+    required this.servicePrice,
     required this.address,
     required this.location,
     required this.stars,
@@ -59,7 +59,7 @@ class ServiceDetailsScreen extends StatefulWidget {
   State<ServiceDetailsScreen> createState() => SserviceDetailsScreenState();
 }
 
-bool _lodaing = false;
+bool _loading = false;
 final TextEditingController _descController = TextEditingController(); //
 //final GlobalKey<FormState> _requestServiceKey = GlobalKey<FormState>();
 
@@ -107,8 +107,8 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                       children: [
                         ImageWidget(
                           imagePathNetwork: widget.image,
-                          height: AppSize.imageSizeLarg(context),
-                          width: AppSize.imageSizeLarg(context),
+                          height: AppSize.imageSizeLarge(context),
+                          width: AppSize.imageSizeLarge(context),
                         ),
                         const SizedBox(height: 4.0),
                         TextWidget(
@@ -170,7 +170,7 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                                 ),
                                 TextCollectorWidget(
                                   title: 'سعر الخِدمة',
-                                  subTitle: widget.servisePrice.toString(),
+                                  subTitle: widget.servicePrice.toString(),
                                 ),
                                 TextCollectorWidget(
                                   title: 'العمر',
@@ -198,7 +198,7 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ? ButtonWidget(
                         context: context,
                         title: 'طلب الخِدمة',
-                        isLoad: _lodaing,
+                        isLoad: _loading,
                         onPressed: () {
                           final String title = widget.title!;
                           final String fullName = widget.fullName;
@@ -223,17 +223,10 @@ class SserviceDetailsScreenState extends State<ServiceDetailsScreen> {
                                     servicesProviderId: servicesProviderId,
                                     userid: userId,
                                   ),
-                                  //  const RequestServiceDialog(),
                                 ],
                               ),
                             ),
                           );
-                          // alertDialog(
-                          //     content: 'هل انت متأكد طلب خدمة $title؟',
-                          //     context: context,
-                          //    );
-
-                          // launch("tel: +964${widget.call}");
                         },
                       )
                     : const SizedBox.shrink(),
