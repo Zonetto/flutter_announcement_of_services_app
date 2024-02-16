@@ -98,6 +98,7 @@ ThemeData lightMode() {
       color: AppColor.green,
     ),
     secondaryHeaderColor: AppColor.grey,
+     bottomAppBarColor: AppColor.green,
     splashColor: AppColor.white,
     cardColor: AppColor.lightShade,
     scaffoldBackgroundColor: AppColor.white,
@@ -127,6 +128,7 @@ ThemeData darkMode() {
       bodyLarge: TextStyle(color: AppColor.white),
     ),
     secondaryHeaderColor: AppColor.darkShadeText,
+        bottomAppBarColor: AppColor.darkShade,
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: AppColor.white),
     splashColor: AppColor.darkShadeText,
