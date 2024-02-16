@@ -45,7 +45,7 @@ class ButtonWidget extends StatelessWidget {
                   TextWidget(
                     size: FontSize.buttonText(context),
                     title: 'أنتظر قليلاً',
-                    color: textColor,
+                  //  color: textColor,
                     fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(width: 20.0),

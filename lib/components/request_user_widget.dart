@@ -16,7 +16,7 @@ class RequestUserWidget extends StatelessWidget {
   final bool isServiceProvider;
   final VoidCallback onTap;
   final VoidCallback? onPressedAccepted;
-  final VoidCallback? onPressedUnaccrpted;
+  final VoidCallback? onPressedUnaccepted;
   final VoidCallback? onPressedDone;
   const RequestUserWidget({
     super.key,
@@ -25,7 +25,7 @@ class RequestUserWidget extends StatelessWidget {
     this.isServiceProvider = false,
     required this.onTap,
     this.onPressedAccepted,
-    this.onPressedUnaccrpted,
+    this.onPressedUnaccepted,
     this.onPressedDone,
   });
 
@@ -225,8 +225,14 @@ class RequestUserWidget extends StatelessWidget {
                                     TextWidget(
                                       size: FontSize.plainText(context),
                                       title: status == REQUEST_WAIT
-                                          ? 'انتظر لحين موافقة مزود الخِدمة ${userDetailsModel.fullName}'  
-                                          : status == REQUEST_ACCEPTED? "تاريخ المباشرة ${requestDetailsModel.date}\nوقت المباشرة ${requestDetailsModel.time}": status == REQUEST_UNACCEPTED? 'تم رفض الطلب': 'تم الانتهاء من العمل',
+                                          ? isServiceProvider
+                                              ? ''
+                                              : 'انتظر لحين موافقة مزود الخِدمة ${userDetailsModel.fullName}'
+                                          : status == REQUEST_ACCEPTED
+                                              ? "تاريخ المباشرة ${requestDetailsModel.date}\nوقت المباشرة ${requestDetailsModel.time}"
+                                              : status == REQUEST_UNACCEPTED
+                                                  ? 'تم رفض الطلب'
+                                                  : 'تم الانتهاء من العمل',
                                     ),
                                   ],
                                 ),
@@ -288,7 +294,7 @@ class RequestUserWidget extends StatelessWidget {
                             ? ButtonWidget(
                                 context: context,
                                 title: 'رفض الطلب',
-                                onPressed: onPressedUnaccrpted,
+                                onPressed: onPressedUnaccepted,
                                 width: Dimensions.screenWidth(context) / 3.5,
                                 backGroundColor: AppColor.buttonColorRed,
                               )
