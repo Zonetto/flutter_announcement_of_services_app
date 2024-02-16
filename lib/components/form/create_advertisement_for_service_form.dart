@@ -90,7 +90,7 @@ class _CreateOrEditAdvertisementForServiceFormState
     isEdit = false;
     if (widget.servicesProviderModel != null) isEdit = true;
     if (servicesProviderModel != null) {
-      _priceController.text = servicesProviderModel.servisePrice;
+      _priceController.text = servicesProviderModel.servicePrice;
       _titleController.text = servicesProviderModel.desc;
       _locationController.text = servicesProviderModel.location;
       _timeFromController.text = servicesProviderModel.startWorkingHours;
@@ -449,7 +449,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                   endOfWorkingDays: endOfWorkingDays,
                   startWorkingHours: startWorkingHours,
                   endWorkingHours: endWorkingHours,
-                  servisePrice: servisePrice,
+                  servicePrice: servisePrice,
                   address: address,
                   location: location,
                   stars: stars,

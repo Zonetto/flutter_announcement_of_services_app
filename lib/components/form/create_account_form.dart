@@ -80,8 +80,8 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                         }
                       });
                     },
-                    height: AppSize.imageSizeLarg(context),
-                    width: AppSize.imageSizeLarg(context),
+                    height: AppSize.imageSizeLarge(context),
+                    width: AppSize.imageSizeLarge(context),
                   ),
                   const SizedBox(height: 14.0),
                   TextFormFieldWidget(
