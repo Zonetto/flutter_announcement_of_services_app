@@ -49,7 +49,7 @@ class UserCollection extends FireDatabaseServises {
                   await userModel.getServiceProviderModel();
               if (servicesProviderModel != null) {
                 UserDetailsModel userDetailsModel =
-                    UserDetailsModel.fromJson(userData, servicesProviderModel!);
+                    UserDetailsModel.fromJson(userData, servicesProviderModel);
                 userList.add(userDetailsModel);
               }
             }

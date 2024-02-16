@@ -73,7 +73,7 @@ class RequestCollection extends FireDatabaseServises {
     } catch (e) {
       // Handle errors
       print('Error fetching request with user details: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -110,7 +110,7 @@ class RequestCollection extends FireDatabaseServises {
     } catch (e) {
       // Handle errors
       print('Error fetching request with user details: $e');
-      throw e;
+      rethrow;
     }
   }
 }
