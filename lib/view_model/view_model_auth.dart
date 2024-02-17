@@ -75,6 +75,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
         final String uid = resData['localId'];
         print("5");
         _userId = uid;
+        print(_userId);
         UserManager().userId = uid;
         _expiryDate = DateTime.now()
             .add(Duration(hours: int.parse(resData['expiresIn'])));
