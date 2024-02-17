@@ -27,15 +27,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  UserModel? _userDatils;
+  UserModel? _userDetails;
   ServicesProviderModel? _servicesProviderModel;
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ViewModelAuth>(context, listen: false);
-    _userDatils = context.watch<ViewModelFetch>().getUserDetails;
+    _userDetails = context.watch<ViewModelFetch>().getUserDetails;
     final bool isServiceProviderAccept =
-        _userDatils?.isServiceProvider == serviceProviderAccept;
+        _userDetails?.isServiceProvider == serviceProviderAccept;
     //print(_userDatils?.call);
     return Column(
       children: [
@@ -58,11 +58,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       TextCollectorWidget(
                         title: 'البريد الإلكتروني',
-                        subTitle: _userDatils?.email ?? '',
+                        subTitle: _userDetails?.email ?? '',
                       ),
                       TextCollectorWidget(
                         title: 'رقم الهاتف',
-                        subTitle: _userDatils?.call.toString() ?? '',
+                        subTitle: _userDetails?.call.toString() ?? '',
                       ),
                       isServiceProviderAccept
                           ? const TextCollectorWidget(
@@ -81,13 +81,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   children: [
                     ImageWidget(
-                      imagePathNetwork: _userDatils?.image,
+                      imagePathNetwork: _userDetails?.image,
                       height: AppSize.imageSizeLarge(context),
                       width: AppSize.imageSizeLarge(context),
                     ),
                     const SizedBox(height: 4.0),
                     TextWidget(
-                      title: _userDatils?.fullName ?? '',
+                      title: _userDetails?.fullName ?? '',
                       size: FontSize.subtitle(context),
                       fontWeight: FontWeight.bold,
                     ),
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: () async {
                 try {
                   _servicesProviderModel =
-                      await _userDatils!.getServiceProviderModel();
+                      await _userDetails!.getServiceProviderModel();
                   print(
                       "_servicesProviderModel ${_servicesProviderModel!.address}");
                 } catch (e) {}
