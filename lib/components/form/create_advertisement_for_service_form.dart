@@ -66,7 +66,7 @@ class _CreateOrEditAdvertisementForServiceFormState
   String? _selectServices;
   String? _selectYearsOfExperience;
   String? _selectStartOfWorkingDays;
-  String? _selectendOfWorkingDays;
+  String? _selectedOfWorkingDays;
   String? _selectAddress;
   File? _selectedImage;
   bool isEdit = false;
@@ -99,7 +99,7 @@ class _CreateOrEditAdvertisementForServiceFormState
       _selectServices = servicesProviderModel.serviceType;
       _selectYearsOfExperience = servicesProviderModel.yearsOfExperience;
       _selectStartOfWorkingDays = servicesProviderModel.startOfWorkingDays;
-      _selectendOfWorkingDays = servicesProviderModel.endOfWorkingDays;
+      _selectedOfWorkingDays = servicesProviderModel.endOfWorkingDays;
       _selectAddress = servicesProviderModel.address;
     } else {
       _priceController.clear();
@@ -250,13 +250,13 @@ class _CreateOrEditAdvertisementForServiceFormState
                     width: Dimensions.screenWidth(context) / 2,
                     context: context,
                     disabled: _loading ? true : false,
-                    value: _selectendOfWorkingDays,
+                    value: _selectedOfWorkingDays,
                     valid: (String? value) {
                       return ValidTextForm().nullText(value);
                     },
                     onChanged: (value) {
                       setState(() {
-                        _selectendOfWorkingDays = value!;
+                        _selectedOfWorkingDays = value!;
                       });
                       return null;
                     },
@@ -413,7 +413,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                     _selectYearsOfExperience!.trim();
                 final String startOfWorkingDays =
                     _selectStartOfWorkingDays!.trim();
-                final String endOfWorkingDays = _selectendOfWorkingDays!.trim();
+                final String endOfWorkingDays = _selectedOfWorkingDays!.trim();
                 final String startWorkingHours =
                     _timeFromController.text.trim();
                 final String endWorkingHours = _timeIntoController.text.trim();

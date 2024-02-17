@@ -23,7 +23,7 @@ class _SignInFormState extends State<SignInForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isObscureText = true;
-  bool _loodaing = false;
+  bool _loading = false;
   AuthModel? _authData;
   @override
   void dispose() {
@@ -46,7 +46,7 @@ class _SignInFormState extends State<SignInForm> {
               children: [
                 TextFormFieldWidget(
                   context: context,
-                  readOnly: _loodaing ? true : false,
+                  readOnly: _loading ? true : false,
                   controller: _emailController,
                   headline: 'عنوان البريد الألكتروني',
                   hintText: 'إدخل البريد الألكتروني',
@@ -66,7 +66,7 @@ class _SignInFormState extends State<SignInForm> {
                     });
                   },
                   controller: _passwordController,
-                  readOnly: _loodaing ? true : false,
+                  readOnly: _loading ? true : false,
                   headline: 'كلمة المرور',
                   hintText: 'إدخل كلمة المرور',
                   textInputType: TextInputType.visiblePassword,
@@ -79,7 +79,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
           ),
           ButtonWidget(
-            isLoad: _loodaing,
+            isLoad: _loading,
             context: context,
             title: 'تسجيل الدخول',
             onPressed: () async {
@@ -88,7 +88,7 @@ class _SignInFormState extends State<SignInForm> {
                 return;
               }
               setState(() {
-                _loodaing = true;
+                _loading = true;
               });
               _sigInFormKey.currentState!.save();
               final String email = _emailController.text.trim();
@@ -113,7 +113,7 @@ class _SignInFormState extends State<SignInForm> {
                  print(auth.code);
                 print(auth.errorResponse);
                 setState(() {
-                  _loodaing = false;
+                  _loading = false;
                 });
                 // ignore: use_build_context_synchronously
                 styledScaffoldMessenger(
