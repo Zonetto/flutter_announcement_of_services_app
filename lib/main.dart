@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   static final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(
     CacheHelper.getDataBoolean(key: 'mode') == true
-        ? ThemeMode.light
-        : ThemeMode.dark,
+        ? ThemeMode.dark
+        : ThemeMode.light,
   );
   @override
   Widget build(BuildContext context) {
