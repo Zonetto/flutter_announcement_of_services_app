@@ -172,6 +172,54 @@ class UserCollection extends FireDatabaseServises {
     }
   }
 
+  Future<List<UserDetailsModel>?>? fetchFlitterDB({
+    String? queryServiceType,
+    String? queryRating,
+    String? queryAddress,
+    String? queryYearsOfExperience,
+  }) async {
+    try {
+      QuerySnapshot<Object?> snapshot = await newCollection!.get();
+
+      List<UserDetailsModel> userList = [];
+
+      for (QueryDocumentSnapshot<Object?> document in snapshot.docs) {
+        Map<String, dynamic>? userData =
+            document.data() as Map<String, dynamic>?;
+
+        if (userData != null) {
+          UserModel userModel = UserModel.fromJson(userData);
+          if (userModel.serviceProviderCollection != null) {
+            ServicesProviderModel? servicesProviderModel =
+                await userModel.getServiceProviderModel();
+            if (servicesProviderModel!.serviceType
+                .contains(queryServiceType!)) {
+              final checkQueryYearsOfExperience = servicesProviderModel
+                  .yearsOfExperience
+                  .contains(queryYearsOfExperience ?? '');
+              final checkQueryAddress =
+                  servicesProviderModel.address.contains(queryAddress ?? '');
+              final checkQueryRating =
+                  servicesProviderModel.stars.contains(queryRating ?? '');
+              if (checkQueryYearsOfExperience ||
+                  checkQueryAddress ||
+                  checkQueryRating) {
+                UserDetailsModel userDetailsModel =
+                    UserDetailsModel.fromJson(userData, servicesProviderModel);
+                userList.add(userDetailsModel);
+              }
+            }
+          }
+        }
+      }
+
+      return userList;
+    } catch (e) {
+      print('Firestore error: $e');
+      return null; // or handle the error accordingly
+    }
+  }
+
   Future<UserDetailsModel?> fetchSpecifiDB({String? doc}) async {
     try {
       DocumentSnapshot<Object?>? document =
