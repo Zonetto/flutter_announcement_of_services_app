@@ -42,6 +42,9 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
   @override
   void initState() {
     fetchData();
+    _selectedRating = null;
+    _selectedAddress = null;
+    _selectedYearsOfExperience = null;
     super.initState();
   }
 
@@ -63,7 +66,7 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
   Widget build(BuildContext context) {
     // userDetails = context.watch<ViewModelFetch>().getAllUserDetails;
     // TextEditingController controller = TextEditingController();
-
+    final provider = Provider.of<ViewModelFetch>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -118,10 +121,22 @@ class _CategoriesInfoScreenState extends State<CategoriesInfoScreen> {
                     ],
                   ),
                 ),
-                onPressed: () {
-                  print(addressLst[int.parse(_selectedAddress.toString())]);
-                  print(yearsOfExperienceLst[
-                      int.parse(_selectedYearsOfExperience.toString())]);
+                onPressed: () async {
+                  String? queryRating =
+                      rating[int.parse(_selectedRating ?? '0')];
+                  String? queryAddress =
+                      addressLst[int.parse(_selectedAddress ?? '0')];
+                  String? queryYearsOfExperience = yearsOfExperienceLst[
+                      int.parse(_selectedYearsOfExperience ?? '0')];
+                  await provider.fetchFlitterDetailsData(
+                    queryServiceType: widget.query,
+                    queryRating: queryRating,
+                    queryAddress: queryAddress,
+                    queryYearsOfExperience: queryYearsOfExperience,
+                  );
+                  // print(addressLst[int.parse(_selectedAddress.toString())]);
+                  // print(yearsOfExperienceLst[
+                  //     int.parse(_selectedYearsOfExperience.toString())]);
                 },
               );
             },
