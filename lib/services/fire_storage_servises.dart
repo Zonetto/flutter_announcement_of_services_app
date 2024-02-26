@@ -5,19 +5,17 @@ import 'package:uuid/uuid.dart';
 
 String _bucket = 'gs://flutterhomeservice-73056.appspot.com';
 
-class FireStorageServises {
+class FireStorageServices {
   Reference? _referenceRoot;
   final FirebaseStorage _firebaseStorage =
       FirebaseStorage.instanceFor(bucket: _bucket);
 
   final Uuid _uid = const Uuid();
 
-  FireStorageServises() {
+  FireStorageServices() {
     _referenceRoot =
         _firebaseStorage.ref().child('Images').child("${_uid.v1()}.png");
   }
-  init() {}
-
   Future<void> upload(File selectedImage) async {
     try {
       UploadTask uploadTask = _referenceRoot!.putFile(selectedImage);
