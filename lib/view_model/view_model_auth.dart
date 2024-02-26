@@ -43,7 +43,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
   Timer? _authTimer;
   bool isLoad = true;
 //  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  FireStorageServises fireStorageServises = FireStorageServises();
+  FireStorageServices fireStorageServises = FireStorageServices();
   bool? get isAuth => token != null;
   http.Response? _res;
   Future<Result> _authenticate({
@@ -65,7 +65,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
           },
         ),
       );
-
+      print("2");
       if (_res != null) {
         final Map<String, dynamic> resData = json.decode(_res!.body);
         if (resData['error'] != null) {
@@ -73,7 +73,6 @@ class ViewModelAuth extends Token with ChangeNotifier {
           throw "${resData['error']['message']}";
         }
         final String uid = resData['localId'];
-        print("5");
         _userId = uid;
         print(_userId);
         UserManager().userId = uid;
@@ -105,7 +104,7 @@ class ViewModelAuth extends Token with ChangeNotifier {
       // return Error(code: _res!.statusCode, errorResponse: e.toString());
       //   if (_res != null) {
       // print("${_res!.statusCode}    ${e.toString()}");
-      return Error(code: _res!.statusCode, errorResponse: e.toString());
+      return Error(code: _res?.statusCode, errorResponse: e.toString());
       //}
       // return Error();
     }
