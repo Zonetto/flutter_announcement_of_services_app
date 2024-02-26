@@ -423,7 +423,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                 String stars = "0.0";
                 String? image;
                 if (_selectedImage != null) {
-                  image = await FireStorageServises()
+                  image = await FireStorageServices()
                       .uploadAndGetImageToFirebaseStorage(_selectedImage!);
                 } else {
                   image = backgroundImage;
