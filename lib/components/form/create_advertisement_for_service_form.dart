@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:announcement_of_services/components/buttom_widget.dart';
 import 'package:announcement_of_services/components/dropdown_widget.dart';
@@ -425,6 +426,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                 if (_selectedImage != null) {
                   image = await FireStorageServices()
                       .uploadAndGetImageToFirebaseStorage(_selectedImage!);
+                  log("1");
                 } else {
                   image = backgroundImage;
                 }
@@ -433,7 +435,7 @@ class _CreateOrEditAdvertisementForServiceFormState
                     ? servicesProviderCollection
                         .getServiceProviderDocReference()
                     : null;
-
+                log("${servicesProviderCollection.doc}  2");
                 final String? serviceProviderIdisEdit = isEdit
                     ? widget.servicesProviderModel!.serviceProviderId.toString()
                     : null;
@@ -458,14 +460,12 @@ class _CreateOrEditAdvertisementForServiceFormState
 
                 final userManager = UserManager().userId;
                 if (!isEdit) {
-                  if (backgroundImage != null) {
+                  if (_selectedImage != null) {
                     result = await servicesProviderCollection.addInfoDB(
                       doc: serviceProviderId!.id,
                       info: servicesProviderModel.toJson(),
                     );
                     if (result is Success) {
-                      // final ref = servicesProviderCollection;
-
                       UserCollection().updateInfoDB(
                         doc: userManager,
                         info: {
@@ -480,11 +480,15 @@ class _CreateOrEditAdvertisementForServiceFormState
                       });
                     }
                   } else {
+                    setState(() {
+                      _loading = false;
+                    });
                     // ignore: use_build_context_synchronously
                     styledScaffoldMessenger(
-                        context: context,
-                        message: 'يجب اختيار صورة',
-                        color: AppColor.buttonColorRed);
+                      context: context,
+                      message: 'يجب اختيار صورة',
+                      color: AppColor.buttonColorRed,
+                    );
                   }
                 }
                 if (isEdit) {
