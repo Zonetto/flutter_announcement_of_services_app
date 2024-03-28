@@ -30,18 +30,18 @@ class _HomeScreenState extends State<HomeScreen> {
   // double _averageRating = 0;
   @override
   Widget build(BuildContext context) {
-    List<UserDetailsModel> userDatils = [];
+    List<UserDetailsModel> userDetails = [];
     final provider = Provider.of<ViewModelFetch>(context, listen: false);
 
-    if (userDatils.isEmpty) {
-      userDatils = context
+    if (userDetails.isEmpty) {
+      userDetails = context
           .watch<ViewModelFetch>()
           .getAllServiceProviderLst; // provider.fetchAllServiceProviderData();
     }
 
     return RefreshIndicator(
       onRefresh: () => provider.fetchAllServiceProviderData(),
-      child: userDatils.isEmpty
+      child: userDetails.isEmpty
           ? const LoadingScreen()
           : Column(
               children: [
@@ -49,10 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.separated(
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 4),
-                    itemCount: userDatils.length,
+                    itemCount: userDetails.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
-                      final UserDetailsModel user = userDatils[index];
+                      final UserDetailsModel user = userDetails[index];
                       final ServicesProviderModel servicesProviderModel =
                           user.servicesProviderModel!;
                       return Column(
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           CardContentsWidget(
                             isAdmin: false,
                             backgroundImagePath: servicesProviderModel.image,
-                              yearsOfExperience:
+                            yearsOfExperience:
                                 servicesProviderModel.yearsOfExperience,
                             name: user.fullName,
                             price: servicesProviderModel.servicePrice,
