@@ -21,29 +21,28 @@ Future<void> alertDialog({
         title: title != null
             ? TextWidget(title: title, size: FontSize.headline(context))
             : null,
-        // content: Text(
-        //   content,
-
-        // ),
         content: widget ??
             TextWidget(title: content ?? '', size: FontSize.plainText(context)),
         actions: [
-          ButtonWidget(
-            context: context,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            title: 'الغاء',
-            backGroundColor: AppColor.buttonColorRed,
-            width: Dimensions.screenWidth(context) / 3.5,
-          ),
-          ButtonWidget(
-            context: context,
-            onPressed: onPressed,
-            title: acceptedTitle ?? 'نعم',
-            backGroundColor: AppColor.green,
-            width: Dimensions.screenWidth(context) / 3.5,
-          ),
+          Row(children: [
+            ButtonWidget(
+              context: context,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              title: 'الغاء',
+              backGroundColor: AppColor.buttonColorRed,
+              width: Dimensions.screenWidth(context) / 3.5,
+            ),
+            const SizedBox(width: 10.0),
+            ButtonWidget(
+              context: context,
+              onPressed: onPressed,
+              title: acceptedTitle ?? 'نعم',
+              backGroundColor: AppColor.green,
+              width: Dimensions.screenWidth(context) / 3.5,
+            ),
+          ]),
         ],
       );
     },
