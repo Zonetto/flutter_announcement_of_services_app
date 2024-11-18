@@ -6,6 +6,19 @@ This project not only simplifies access to services but also fosters job opportu
 
 ---
 
+## Techniques Used
+
+### Flutter   <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png" alt="Flutter Logo" width="50">
+A UI framework for building fast and beautiful multi-platform applications.
+
+### Figma   <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma Logo" width="10">
+A collaborative design tool for creating high-fidelity app prototypes and wireframes.
+
+### Firebase   <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" alt="Firebase Logo" width="50">
+A backend platform for authentication, database, cloud storage, and app hosting.
+
+---
+
 ## Features
 
 - **Wide Range of Services**: Book services such as car repairs, cleaning, plumbing, and more.
