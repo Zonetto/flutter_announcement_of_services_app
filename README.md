@@ -1,8 +1,10 @@
-> ## Advertise your services now
+# Advertise Your Services Now
 
-is an innovative platform designed to bridge the gap between service providers and users. It offers an easy-to-use interface for searching and booking a wide range of services, from car repairs to home maintenance, and much more. 
+Advertise Your Services Now is an innovative platform designed to bridge the gap between service providers and users. It offers an easy-to-use interface for searching and booking a wide range of services, from car repairs to home maintenance, and much more. 
 
 This project not only simplifies access to services but also fosters job opportunities, enhances the user experience, and promotes transparency and trust between parties. Additionally, it supports the local economy by empowering small and medium enterprises (SMEs) and encouraging local transactions.
+
+---
 
 ## Features
 
@@ -12,12 +14,15 @@ This project not only simplifies access to services but also fosters job opportu
 - **Trust & Transparency**: Builds trust through clear and transparent interactions.
 - **Support for Local Economy**: Empowers SMEs and encourages local business transactions.
 
+---
+
 ## Benefits
 
 - Simplifies the process of finding and booking reliable service providers.
 - Helps small businesses grow by connecting them with local customers.
 - Promotes transparency in pricing and service quality.
 - Provides a convenient and hassle-free experience for users.
+
 ---
 
 ## Screenshots
@@ -85,30 +90,19 @@ This project not only simplifies access to services but also fosters job opportu
 <img width="300" alt="Advertising Admin Panel" src="https://github.com/user-attachments/assets/b26032b2-7896-4d3c-be05-1b6bcff1cc70">
 
 </div>
----
-
-## Features
-
-- **User-Friendly Interface**: Simplifies browsing, booking, and managing services.
-- **Provider Profiles**: Detailed information about service providers for trust and transparency.
-- **Order Management**: Track and manage service requests effectively.
-- **Advanced Search and Filters**: Quickly find relevant services or providers.
-- **Support for Service Providers**: Tools for managing advertisements and requests.
 
 ---
 
-## flutter version
-flutter: 3.16.5
+## Flutter Version
 
-dart: 3.2.3
+- **Flutter**: 3.16.5
+- **Dart**: 3.2.3
+- **SDK**: `>=3.1.2 < 4.0.0`
 
-sdk: '>=3.1.2 < 4.0.0'
+---
 
 ## Installation
-1. create a file in the document as name **flutter_announcement_of_services_app**
-2. Go to file **flutter_announcement_of_services_app**
-3. git clone
-```
-git clone https://github.com/Zonetto/flutter_announcement_of_services_app.git
-```
 
+1. Create a directory named **flutter_announcement_of_services_app**:
+   ```bash
+   mkdir flutter_announcement_of_services_app
